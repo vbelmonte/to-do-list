@@ -47,11 +47,14 @@ table {
 	border-spacing: 0;
 }
 
+
+
 :root {
     --black: #222222;
     --white: #F2F2F2;
     --titanium: #EBEBEB;
     --gray: #7D7D7D;
+    --blue: #0062F4;
 }
 
 @font-face {
@@ -96,6 +99,10 @@ body {
     height: 100%;
 }
 
+
+
+/** SIDE COLUMN PROPERTIES **/
+
 #side-column {
     background-color: var(--titanium);
     color: var(--gray);
@@ -139,7 +146,18 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
+
+    transition: color 0.1s linear;
 }
+
+.nav-link:hover {
+    color: var(--black);
+    cursor: pointer;
+}
+
+
+
+/** GENERAL TEXT PROPERTIES **/
 
 h1 {
     font-family: 'Inter Black';

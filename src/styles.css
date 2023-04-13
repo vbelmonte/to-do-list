@@ -52,10 +52,14 @@ table {
 :root {
     --black: #222222;
     --white: #F2F2F2;
+    --ultra-white: #FFFFFF;
     --titanium: #EBEBEB;
     --gray: #7D7D7D;
     --blue: #0062F4;
     --dark-blue: #004ec4;
+    --dodger-blue: #379FFF;
+    --uranian-blue: #BDDFFF;
+    --green: #72B01D;
 
     --filter-white: invert(99%) sepia(13%) saturate(137%) hue-rotate(208deg) brightness(111%) contrast(90%);
 }
@@ -80,6 +84,11 @@ table {
 @font-face {
     font-family: 'Inter Bold';
     src: url('./assets/fonts/Inter-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter Extra Bold';
+    src: url('./assets/fonts/Inter-ExtraBold.ttf') format('truetype');
 }
 
 @font-face {
@@ -118,6 +127,16 @@ h1 {
 
 h3 {
     font-family: 'Inter Bold';
+}
+
+h4 {
+    font-family: 'Inter Extra Bold';
+    font-size: 1rem;
+}
+
+h5 {
+    font-family: 'Inter Medium';
+    font-size: 1rem;
 }
 
 h6 {
@@ -313,3 +332,86 @@ footer p {
    flex-direction: column;
    gap: 1.5rem;
 }
+
+
+
+
+/** TASK MODULE PROPERTIES **/
+
+.task, .task-info {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .task-info {
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .task {
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+  
+  .name-priority {
+    display: flex;
+  }
+  
+  .task-name {
+    flex: 1;
+  }
+  
+  .low-p {
+    background-color: var(--uranian-blue);
+  }
+
+  .edit-icon {
+    height: 1rem;
+  }
+
+
+
+  /** CHECKBOX PROPERTIES **/
+
+  .round {
+    position: relative;
+  }
+  
+  .round label {
+    background-color: var(--ultra-white);
+    border: 1px solid var(--gray);
+    border-radius: 50%;
+    cursor: pointer;
+    height: 1rem;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1rem;
+  }
+  
+  .round label:after {
+    border: 2px solid var(--white);
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 3px;
+    left: 4px;
+    opacity: 0;
+    position: absolute;
+    top: 5px;
+    transform: rotate(-45deg);
+    width: 7px;
+  }
+  
+  .round input[type="checkbox"] {
+    visibility: hidden;
+  }
+  
+  .round input[type="checkbox"]:checked + label {
+    background-color: var(--green);
+    border-color: var(--green);
+  }
+  
+  .round input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+  }

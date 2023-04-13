@@ -55,6 +55,9 @@ table {
     --titanium: #EBEBEB;
     --gray: #7D7D7D;
     --blue: #0062F4;
+    --dark-blue: #004ec4;
+
+    --filter-white: invert(99%) sepia(13%) saturate(137%) hue-rotate(208deg) brightness(111%) contrast(90%);
 }
 
 @font-face {
@@ -90,13 +93,140 @@ body {
     color: var(--black);
     background-color: var(--white);
 
-    height: 100vh;
+    min-height: 100vh;
 }
 
 #container {
     display: grid;
     grid-template-columns: 20rem 1fr;
     height: 100%;
+}
+
+
+
+/** GENERAL TEXT PROPERTIES **/
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Inter Black';
+    font-size: 3rem;
+}
+
+h3 {
+    font-family: 'Inter Bold';
+}
+
+h6 {
+    font-family: 'Inter Semibold';
+    font-size: 1rem;
+}
+
+
+
+/** BUTTON PROPERTIES **/
+
+button {
+    border-style: none;
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+
+    display: flex;
+    justify-content: center;
+
+    transition: 0.1s linear;
+    transition-property: background-color;
+}
+
+.btn-solid {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.btn-solid:hover {
+    background-color: var(--dark-blue);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--blue);
+
+    border-color: var(--blue);
+    border-width: 0.0625rem;
+}
+
+.btn-plus {
+    padding: 1rem;
+    width: 100%;
+}
+
+button img {
+    filter: var(--filter-white);
+    width: 0.75rem;
+}
+
+
+
+/** MAIN CONTAINER PROPERTIES **/
+
+main {
+    background-color: var(--white);
+    min-height: 100vh;
+    position: relative;
+}
+
+#main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    padding: 2rem;
+}
+
+
+
+
+/** EMPTY TASKS PROPERTIES **/
+
+#empty-list img {
+    height: 25rem;
+}
+
+#empty-list {
+    text-align: center;
+}
+
+
+
+/** FOOTER PROPERTIES **/
+
+footer {
+    background-color: var(--gray);
+    color: var(--white);
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+footer p {
+    font-family:'Inter Medium';
+    font-size: 0.75rem;
+}
+
+.footer-icon {
+    filter: invert(99%) sepia(13%) saturate(137%) hue-rotate(208deg) brightness(111%) contrast(90%);
+    width: 1.5rem;
 }
 
 
@@ -157,63 +287,29 @@ body {
 
 
 
-/** GENERAL TEXT PROPERTIES **/
-
-a {
-    color: var(--blue);
-    text-decoration: none;
-}
-
-h1 {
-    font-family: 'Inter Black';
-    font-size: 3rem;
-}
-
-h6 {
-    font-family: 'Inter Semibold';
-    font-size: 1rem;
-}
 
 
 
-/** MAIN CONTAINER PROPERTIES **/
+/** DONT KNOW WHAT TO DO WITH THIS YET **/
 
-main {
-    background-color: var(--white);
-    min-height: 100vh;
-    position: relative;
-}
-
-#main-content {
-    padding: 2rem;
-}
-
-
-
-/** FOOTER PROPERTIES **/
-
-footer {
-    background-color: var(--gray);
-    color: var(--white);
-    padding: 1rem;
-
+.module-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    gap: 2rem;
 
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    box-sizing: border-box;
+    max-width: 50rem;
 }
 
-footer p {
-    font-family:'Inter Medium';
-    font-size: 0.75rem;
+.task-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    margin-left: 2rem;
 }
 
-.footer-icon {
-    filter: invert(99%) sepia(13%) saturate(137%) hue-rotate(208deg) brightness(111%) contrast(90%);
-    width: 1.5rem;
+.task-list {
+   display: flex;
+   flex-direction: column;
+   gap: 1.5rem;
 }

@@ -201,16 +201,16 @@ input[type=text], select, input[type=date] {
     font-family: 'Inter Regular';
     font-size: 16px;
 }
-  
-  select {
-    padding: 0.5rem 1rem 0.5rem 0.5rem;
+
+input[type=date], select {
+    padding: 7px 0.5rem 7px 0.5rem;
 }
 
 .form {
     background-color: silver;
     border-radius: 1rem;
     padding: 2rem;
-  }
+}
   
   form {
     display: flex;

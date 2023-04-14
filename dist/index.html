@@ -94,23 +94,35 @@
                         <div class="form">
                             <form>
                               <div class="inputs">
-                                <div class="left">
-                                  <input type="text" placeholder="Task Name">
-                                  <input type="text" placeholder="Task Description">
-                                </div>
-                                <div class="right">
-                                  <input type="date">
-                                  <select name="cars" id="cars">
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
-                                  </select>
-                                </div>
+                                    <div class="left">
+                                        <div>
+                                            <label for="task-name" class="required">Task Name</label>
+                                            <input type="text" id="task-name" name="task-name" placeholder="Task Name" required>
+                                        </div>
+                                        <div>
+                                            <label for="task-description">Task Description</label>
+                                            <input type="text" id="task-description" name="task-description" maxlength="100" placeholder="Task Description">
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <div>
+                                            <label for="due-date" class="required">Due Date</label>
+                                            <input type="date" id="due-date" name="due-date" required>
+                                        </div>
+                                        <div>
+                                            <label for="priority" class="required">Priority Level</label>
+                                            <select name="priority" id="priority" required>
+                                                <option value="" disabled selected>Priority Level</option>
+                                                <option value="low">Low</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="high">High</option>
+                                            </select>
+                                        </div>
+                                    </div>
                               </div>
                               <div class="buttons">
-                                <button class="btn-outline">Cancel</button>
-                                <button class="btn-solid">Add</button>
+                                    <button class="btn-outline">Cancel</button>
+                                    <button class="btn-solid">Add</button>
                               </div>
                             </form>
                         </div>

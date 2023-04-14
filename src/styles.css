@@ -151,7 +151,7 @@ h6 {
 
 /** BUTTON PROPERTIES **/
 
-button {
+button, .button {
     border-style: none;
     border-radius: 2rem;
     padding: 0.5rem 1rem;
@@ -248,7 +248,7 @@ label {
     gap: 1rem;
   }
   
-  .buttons button {
+  .buttons button, .buttons .button {
     flex: 1;
   }
   

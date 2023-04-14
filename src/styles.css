@@ -1,0 +1,505 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+:root {
+    --black: #222222;
+    --white: #F2F2F2;
+    --ultra-white: #FFFFFF;
+    --titanium: #EBEBEB;
+    --gray: #7D7D7D;
+    --blue: #0062F4;
+    --dark-blue: #004ec4;
+    --dodger-blue: #379FFF;
+    --uranian-blue: #BDDFFF;
+    --green: #72B01D;
+    --light-green: #DFECD4;
+    --light-orange: #FFDCB8;
+    --light-red: #FFDDDD;
+
+    --filter-white: invert(99%) sepia(13%) saturate(137%) hue-rotate(208deg) brightness(111%) contrast(90%);
+}
+
+@font-face {
+    font-family: 'Inter Regular';
+    src: url('./assets/fonts/Inter-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter Medium';
+    src: url('./assets/fonts/Inter-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter Semibold';
+    src: url('./assets/fonts/Inter-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter Bold';
+    src: url('./assets/fonts/Inter-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter Extra Bold';
+    src: url('./assets/fonts/Inter-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter Black';
+    src: url('./assets/fonts/Inter-Black.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Inter Regular', 'Arial', sans-serif;
+    font-size: 16px;
+    color: var(--black);
+    background-color: var(--white);
+
+    min-height: 100vh;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    height: 100%;
+}
+
+
+
+/** GENERAL TEXT PROPERTIES **/
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Inter Black';
+    font-size: 3rem;
+}
+
+h3 {
+    font-family: 'Inter Bold';
+}
+
+h4 {
+    font-family: 'Inter Extra Bold';
+    font-size: 1rem;
+}
+
+h5 {
+    font-family: 'Inter Medium';
+    font-size: 1rem;
+}
+
+h6 {
+    font-family: 'Inter Semibold';
+    font-size: 1rem;
+}
+
+
+
+/** BUTTON PROPERTIES **/
+
+button, .button {
+    border-style: none;
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+
+    display: flex;
+    justify-content: center;
+
+    text-transform: uppercase;
+
+    transition: 0.1s linear;
+    transition-property: background-color, border, color;
+}
+
+.btn-solid {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.btn-solid:hover {
+    background-color: var(--dark-blue);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--blue);
+
+    border:1px solid var(--blue);
+    border-width: 0.0625rem;
+}
+
+.btn-outline:hover {
+    border: 1px solid var(--dark-blue);
+    color: var(--dark-blue);
+}
+
+.btn-plus {
+    padding: 1rem;
+    width: 100%;
+}
+
+button img {
+    filter: var(--filter-white);
+    width: 0.75rem;
+}
+
+
+
+/** INPUT FORM PROPERTIES **/
+
+input[type=text], select, input[type=date] {
+    border: 1px solid gray;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+
+    font-family: 'Inter Regular';
+    font-size: 16px;
+
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type=date], select {
+    padding: 7px 0.5rem 7px 0.5rem;
+}
+
+label {
+    font-family: 'Inter Medium';
+    font-size: 0.75rem;
+    text-transform: uppercase;
+
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.required:after {
+    content: '*';
+    color: red;
+}
+
+.form {
+    background-color: silver;
+    border-radius: 1rem;
+    padding: 2rem;
+}
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .inputs, .buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .buttons button, .buttons .button {
+    flex: 1;
+  }
+  
+  .left, .right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .left {
+    flex: 2;
+  }
+  
+  .right {
+    flex: 1;
+  }
+
+
+
+/** MAIN CONTAINER PROPERTIES **/
+
+main {
+    background-color: var(--white);
+    min-height: 100vh;
+    position: relative;
+}
+
+#main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    min-height: calc(100vh - 140px);
+    padding: 2rem;
+}
+
+
+
+
+/** EMPTY TASKS PROPERTIES **/
+
+#empty-list img {
+    height: 25rem;
+}
+
+#empty-list {
+    text-align: center;
+}
+
+
+
+/** FOOTER PROPERTIES **/
+
+footer {
+    background-color: var(--gray);
+    color: var(--white);
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+footer p {
+    font-family:'Inter Medium';
+    font-size: 0.75rem;
+}
+
+.footer-icon {
+    filter: invert(99%) sepia(13%) saturate(137%) hue-rotate(208deg) brightness(111%) contrast(90%);
+    width: 1.5rem;
+}
+
+
+
+/** SIDE COLUMN PROPERTIES **/
+
+#side-column {
+    background-color: var(--titanium);
+    color: var(--gray);
+    padding: 2rem;
+}
+
+#side-column {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+#side-column nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+#side-column nav div {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#side-column nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#side-column nav li {
+    padding: 0.5rem;
+}
+
+.nav-icon {
+    width: 1rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    transition: color 0.1s linear;
+}
+
+.nav-link:hover {
+    color: var(--black);
+    cursor: default;
+}
+
+
+
+
+
+
+/** DONT KNOW WHAT TO DO WITH THIS YET **/
+
+.module-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    max-width: 50rem;
+}
+
+.task-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    margin-left: 2rem;
+}
+
+.task-list {
+   display: flex;
+   flex-direction: column;
+   gap: 1.5rem;
+}
+
+
+
+
+/** TASK MODULE PROPERTIES **/
+
+.task, .task-info {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .task-info {
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .task {
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+  
+  .name-priority {
+    display: flex;
+  }
+  
+  .task-name {
+    flex: 1;
+  }
+  
+  .low-p {
+    background-color: var(--uranian-blue);
+  }
+
+  .med-p {
+    background-color: var(--light-orange);
+  }
+
+  .high-p {
+    background-color: var(--light-red);
+  }
+
+  .edit-icon {
+    height: 1rem;
+  }
+
+
+
+  /** CHECKBOX PROPERTIES **/
+
+  .round {
+    position: relative;
+  }
+  
+  .round label {
+    background-color: var(--ultra-white);
+    border: 1px solid var(--gray);
+    border-radius: 50%;
+    cursor: pointer;
+    height: 1rem;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1rem;
+  }
+  
+  .round label:after {
+    border: 2px solid var(--white);
+    border-top: none;
+    border-right: none;
+    content: "";
+    height: 3px;
+    left: 4px;
+    opacity: 0;
+    position: absolute;
+    top: 5px;
+    transform: rotate(-45deg);
+    width: 7px;
+  }
+  
+  .round input[type="checkbox"] {
+    visibility: hidden;
+  }
+  
+  .round input[type="checkbox"]:checked + label {
+    background-color: var(--green);
+    border-color: var(--green);
+  }
+  
+  .round input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+  }

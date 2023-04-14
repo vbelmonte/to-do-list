@@ -60,6 +60,9 @@ table {
     --dodger-blue: #379FFF;
     --uranian-blue: #BDDFFF;
     --green: #72B01D;
+    --light-green: #DFECD4;
+    --light-orange: #FFDCB8;
+    --light-red: #FFDDDD;
 
     --filter-white: invert(99%) sepia(13%) saturate(137%) hue-rotate(208deg) brightness(111%) contrast(90%);
 }
@@ -159,7 +162,7 @@ button {
     text-transform: uppercase;
 
     transition: 0.1s linear;
-    transition-property: background-color;
+    transition-property: background-color, border, color;
 }
 
 .btn-solid {
@@ -177,6 +180,11 @@ button {
 
     border:1px solid var(--blue);
     border-width: 0.0625rem;
+}
+
+.btn-outline:hover {
+    border: 1px solid var(--dark-blue);
+    color: var(--dark-blue);
 }
 
 .btn-plus {
@@ -372,7 +380,7 @@ footer p {
 
 .nav-link:hover {
     color: var(--black);
-    cursor: pointer;
+    cursor: default;
 }
 
 
@@ -434,6 +442,14 @@ footer p {
   
   .low-p {
     background-color: var(--uranian-blue);
+  }
+
+  .med-p {
+    background-color: var(--light-orange);
+  }
+
+  .high-p {
+    background-color: var(--light-red);
   }
 
   .edit-icon {

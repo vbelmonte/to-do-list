@@ -281,6 +281,7 @@ main {
     flex-direction: column;
     gap: 3rem;
 
+    min-height: calc(100vh - 140px);
     padding: 2rem;
 }
 

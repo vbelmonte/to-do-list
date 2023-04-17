@@ -41,6 +41,26 @@ function createTaskContainer() {
   return taskContainerDiv;
 }
 
+function createTaskList(taskArray) {
+  const taskListDiv = document.createElement('div');
+  taskListDiv.classList.add('task-list');
+
+  if (taskArray.length === 0) {
+    taskListDiv.id = 'empty-list';
+
+    const imgDiv = document.createElement('div');
+    const img = '<img src="../src/assets/img/no-tasks-yet.svg">';
+
+    imgDiv.innerHTML = `${img}`;
+
+    taskListDiv.appendChild(imgDiv);
+  }
+
+  return taskListDiv;
+}
+
+/** BUTTON TEMPLATES **/
+
 function createSolidTextButton(text) {
   const button = document.createElement('button');
 

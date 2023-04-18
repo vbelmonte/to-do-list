@@ -93,6 +93,36 @@ function createPriorityInput() {
   return priorityDiv;
 }
 
+function createCancelButton() {
+  const cancelButton = document.createElement('button');
+  cancelButton.classList.add('btn-outline');
+  cancelButton.innerHTML = 'Cancel';
+
+  return cancelButton;
+}
+
+function createAddButton() {
+  const addButton = document.createElement('input');
+  addButton.classList.add('button');
+  addButton.classList.add('btn-solid');
+  addButton.setAttribute('type', 'submit');
+  addButton.value = 'Add';
+
+  return addButton;
+}
+
+function createButtonsDiv() {
+  const div = document.createElement('div');
+  const cancel = createCancelButton();
+  const add = createAddButton();
+
+  div.classList.add('buttons');
+  div.appendChild(cancel);
+  div.appendChild(add);
+
+  return div;
+}
+
 export default function createForm() {
   const formDiv = document.createElement('div');
   formDiv.classList.add('form');
@@ -122,8 +152,11 @@ export default function createForm() {
 
   inputsDiv.appendChild(rightDiv);
 
+  const buttonsDiv = createButtonsDiv();
+
   const form = document.createElement('form');
   form.appendChild(inputsDiv);
+  form.appendChild(buttonsDiv);
 
   formDiv.appendChild(form);
 

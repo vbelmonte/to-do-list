@@ -15,7 +15,7 @@ export default function loadInbox() {
   const addTaskButton = createSolidPlusButton();
   const taskArray = [];
   const taskListDiv = createTaskList(taskArray);
-  const formDiv = createForm();
+  const formDiv = createForm('Task');
 
   moduleContainerDiv.appendChild(moduleTitleDiv);
   moduleContainerDiv.appendChild(taskContainerDiv);

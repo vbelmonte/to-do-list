@@ -1,16 +1,18 @@
-function createNameInput() {
+function createNameInput(type) {
   const nameDiv = document.createElement('div');
   const inputName = 'name';
 
   const nameLabel = document.createElement('label');
   nameLabel.classList.add('required');
   nameLabel.htmlFor = inputName;
+  nameLabel.innerHTML = `${type} Name`;
 
   const nameInput = document.createElement('input');
   nameInput.setAttribute('type', 'text');
   nameInput.name = inputName;
   nameInput.id = inputName;
   nameInput.required = true;
+  nameInput.placeholder = `${type} Name`;
 
   nameDiv.appendChild(nameLabel);
   nameDiv.appendChild(nameInput);
@@ -18,17 +20,19 @@ function createNameInput() {
   return nameDiv;
 }
 
-function createDescriptionInput() {
+function createDescriptionInput(type) {
   const descriptionDiv = document.createElement('div');
   const inputName = 'description';
 
   const descLabel = document.createElement('label');
   descLabel.htmlFor = inputName;
+  descLabel.innerHTML = `${type} Description`;
 
   const descInput = document.createElement('input');
   descInput.setAttribute('type', 'text');
   descInput.name = inputName;
   descInput.id = inputName;
+  descInput.placeholder = `${type} Description`;
 
   descriptionDiv.appendChild(descLabel);
   descriptionDiv.appendChild(descInput);
@@ -123,7 +127,7 @@ function createButtonsDiv() {
   return div;
 }
 
-export default function createForm() {
+export default function createForm(type) {
   const formDiv = document.createElement('div');
   formDiv.classList.add('form');
 
@@ -133,8 +137,8 @@ export default function createForm() {
   const leftDiv = document.createElement('div');
   leftDiv.classList.add('left');
 
-  const nameInput = createNameInput();
-  const descriptionInput = createDescriptionInput();
+  const nameInput = createNameInput(type);
+  const descriptionInput = createDescriptionInput(type);
 
   leftDiv.appendChild(nameInput);
   leftDiv.appendChild(descriptionInput);

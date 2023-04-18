@@ -20,15 +20,14 @@ export default function loadInbox() {
 
   formDiv.style.display = 'none';
 
+  addTaskButtonDiv.appendChild(addTaskButton);
   addTaskButton.id = 'add-button';
   addTaskButton.onclick = showForm;
-
-  addTaskButtonDiv.appendChild(addTaskButton);
 
   moduleContainerDiv.appendChild(moduleTitleDiv);
   moduleContainerDiv.appendChild(taskContainerDiv);
 
-  taskContainerDiv.appendChild(addTaskButton);
+  taskContainerDiv.appendChild(addTaskButtonDiv);
   taskContainerDiv.appendChild(formDiv);
   taskContainerDiv.appendChild(taskListDiv);
 

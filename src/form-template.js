@@ -1,3 +1,5 @@
+import { closeForm } from './templates';
+
 function createNameInput(type) {
   const nameDiv = document.createElement('div');
   const inputName = 'name';
@@ -101,6 +103,7 @@ function createCancelButton() {
   const cancelButton = document.createElement('button');
   cancelButton.classList.add('btn-outline');
   cancelButton.innerHTML = 'Cancel';
+  cancelButton.onclick = closeForm;
 
   return cancelButton;
 }

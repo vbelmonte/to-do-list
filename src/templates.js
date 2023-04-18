@@ -52,6 +52,7 @@ function createTaskList(taskArray) {
     const img = '<img src="../src/assets/img/no-tasks-yet.svg">';
 
     imgDiv.innerHTML = `${img}`;
+    imgDiv.id = 'empty-img';
 
     taskListDiv.appendChild(imgDiv);
   }
@@ -96,4 +97,24 @@ function clearMainContent() {
   mainContentDiv.innerHTML = '';
 }
 
-export { createPageHeadline, createProjectDescription, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList };
+function closeForm() {
+  const form = document.getElementsByClassName('form')[0];
+  const addButton = document.getElementById('add-button');
+  const emptyImgDiv = document.getElementById('empty-img');
+
+  addButton.style.display = 'block';
+  emptyImgDiv.style.display = 'block';
+  form.style.display = 'none';
+}
+
+function showForm() {
+  const form = document.getElementsByClassName('form')[0];
+  const addbutton = document.getElementById('add-button');
+  const emptyImgDiv = document.getElementById('empty-img');
+
+  addbutton.style.display = 'none';
+  emptyImgDiv.style.display = 'none';
+  form.style.display = 'block';
+}
+
+export { createPageHeadline, createProjectDescription, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, closeForm, showForm };

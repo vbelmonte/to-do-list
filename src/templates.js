@@ -96,4 +96,4 @@ function clearMainContent() {
   mainContentDiv.innerHTML = '';
 }
 
-export { createPageHeadline, createProjectDescription, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton };
+export { createPageHeadline, createProjectDescription, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList };

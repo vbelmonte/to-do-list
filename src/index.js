@@ -1,6 +1,6 @@
 import './styles.css';
 
-import { loadInbox } from './inbox';
+import loadInbox from './inbox';
 
 (function runPage() {
   const inboxDesktop = document.getElementById('inbox');

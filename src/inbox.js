@@ -18,8 +18,6 @@ export default function loadInbox() {
   const taskListDiv = createTaskList(taskArray);
   const formDiv = createForm('Task');
 
-  formDiv.style.display = 'none';
-
   addTaskButtonDiv.appendChild(addTaskButton);
   addTaskButton.id = 'add-button';
   addTaskButton.onclick = showForm;
@@ -29,6 +27,7 @@ export default function loadInbox() {
 
   taskContainerDiv.appendChild(addTaskButtonDiv);
   taskContainerDiv.appendChild(formDiv);
+  formDiv.style.display = 'none';
   taskContainerDiv.appendChild(taskListDiv);
 
   mainContentDiv.appendChild(pageHeadline);

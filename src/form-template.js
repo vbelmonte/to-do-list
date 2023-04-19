@@ -1,4 +1,5 @@
 import { closeForm } from './templates';
+import { processProjectForm, processTaskForm } from './form-processor';
 
 function createNameInput(type) {
   const nameDiv = document.createElement('div');
@@ -130,6 +131,18 @@ function createButtonsDiv() {
   return div;
 }
 
+function assignFormMethod(form, type) {
+  if (type === 'Task') {
+    form.onsubmit = processTaskForm;
+  } else {
+    form.onsubmit = processProjectForm;
+  }
+}
+
+function preventDefaultFunc(event) {
+  event.preventDefault();
+}
+
 export default function createForm(type) {
   const formDiv = document.createElement('div');
   formDiv.classList.add('form');
@@ -162,6 +175,8 @@ export default function createForm(type) {
   const buttonsDiv = createButtonsDiv();
 
   const form = document.createElement('form');
+  form.addEventListener('submit', preventDefaultFunc, false);
+  assignFormMethod(form, type);
   form.appendChild(inputsDiv);
   form.appendChild(buttonsDiv);
 

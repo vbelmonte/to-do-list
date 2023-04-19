@@ -344,6 +344,10 @@ footer p {
     gap: 3rem;
 }
 
+#side-column .logo {
+    width: 10rem;
+}
+
 #side-column nav {
     display: flex;
     flex-direction: column;

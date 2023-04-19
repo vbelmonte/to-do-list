@@ -1,3 +1,5 @@
+import createTaskDiv from './task-templates';
+
 function createPageHeadline(pageName) {
   const pageNameDiv = document.createElement('div');
 
@@ -56,8 +58,25 @@ function createTaskList(taskArray) {
 
     taskListDiv.appendChild(imgDiv);
   }
+  else {
+    for (let i = 0; i < taskArray.length; i += 1) {
+      const task = createTaskDiv(taskArray[i]);
+      taskListDiv.appendChild(task);
+    }
+  }
 
   return taskListDiv;
+}
+
+function updateTaskList(taskObj) {
+  const taskListDiv = document.getElementsByClassName('task-list')[0];
+  const task = createTaskDiv(taskObj);
+
+  if (taskListDiv.id === 'empty-list') {
+    taskListDiv.removeAttribute('id');
+  }
+
+  taskListDiv.appendChild(task);
 }
 
 /** BUTTON TEMPLATES **/
@@ -117,4 +136,4 @@ function showForm() {
   form.style.display = 'block';
 }
 
-export { createPageHeadline, createProjectDescription, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, closeForm, showForm };
+export { createPageHeadline, createProjectDescription, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, closeForm, showForm, updateTaskList };

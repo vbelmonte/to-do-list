@@ -1,3 +1,7 @@
+export const projectArray = [];
+export const inboxTaskArray = [];
+export const completedArray = [];
+
 function storageAvailable(type) {
   let storage;
   try {
@@ -40,5 +44,21 @@ export default function addItemToStorage(object) {
     localStorage.setItem(itemName, jsonObj);
   } else {
     console.log('Error! No local storage available.');
+  }
+}
+
+function fetchItemsFromLocalStorage() {
+  let keyName;
+  for (let i = 0; i < localStorage.length; i += 1) {
+    keyName = localStorage.key(i);
+    const item = JSON.parse(localStorage.getItem(keyName));
+
+    if (item.type === 'project') {
+      projectArray.push(item);
+    } else if (item.type === 'task') {
+      inboxTaskArray.push(item);
+    } else {
+      completedArray.push(item);
+    }
   }
 }

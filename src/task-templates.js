@@ -30,8 +30,9 @@ function createCheckBoxDiv() {
   label.setAttribute('for', 'checkbox');
 
   checkboxInput.id = 'checkbox';
-  checkboxInput.setAttribute('type', 'text');
+  checkboxInput.setAttribute('type', 'checkbox');
 
+  roundDiv.classList.add('round');
   roundDiv.appendChild(checkboxInput);
   roundDiv.appendChild(label);
 
@@ -45,7 +46,10 @@ function createCheckBoxDiv() {
 
 function createTaskInfoDiv(taskName, taskDesc, dueDate, priority) {
   const taskInfoDiv = document.createElement('div');
+  taskInfoDiv.classList.add('task-info');
+
   const namePriorityDiv = document.createElement('div');
+  namePriorityDiv.classList.add('name-priority');
 
   const taskNameDiv = document.createElement('div');
   taskNameDiv.classList.add('task-name');
@@ -53,8 +57,7 @@ function createTaskInfoDiv(taskName, taskDesc, dueDate, priority) {
 
   const taskPriorityImgDiv = document.createElement('div');
   const taskPriorityImg = assignPriorityImage(priority);
-
-  taskPriorityImgDiv.appendChild(taskPriorityImg);
+  taskPriorityImgDiv.innerHTML = taskPriorityImg;
 
   const deadlineDiv = document.createElement('div');
   deadlineDiv.classList.add('deadline');
@@ -76,6 +79,7 @@ function createTaskInfoDiv(taskName, taskDesc, dueDate, priority) {
 
 function createEditDiv() {
   const editDiv = document.createElement('div');
+  editDiv.classList.add('edit');
   const editSVG = '<img class=\'edit-icon\' src=\'../src/assets/img/ellipsis-vertical-solid.svg\'>';
 
   editDiv.innerHTML = `${editSVG}`;
@@ -83,14 +87,19 @@ function createEditDiv() {
   return editDiv;
 }
 
-export default function createTaskDiv(taskName, taskDesc, dueDate, priority) {
+export default function createTaskDiv(taskObject) {
+  const taskName = taskObject.name;
+  const taskDesc = taskObject.description;
+  const taskDueDate = taskObject.dueDate;
+  const taskPriority = taskObject.priority;
+
   const taskDiv = document.createElement('div');
   const checkBoxDiv = createCheckBoxDiv();
-  const taskInfoDiv = createTaskInfoDiv(taskName, taskDesc, dueDate, priority);
+  const taskInfoDiv = createTaskInfoDiv(taskName, taskDesc, taskDueDate, taskPriority);
   const editDiv = createEditDiv();
 
   taskDiv.classList.add('task');
-  taskDiv.classList.add(assignPriorityClass(priority));
+  taskDiv.classList.add(assignPriorityClass(taskPriority));
 
   taskDiv.appendChild(checkBoxDiv);
   taskDiv.appendChild(taskInfoDiv);

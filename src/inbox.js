@@ -4,6 +4,8 @@ import {
 
 import createForm from './form-template';
 
+import { inboxTaskArray } from './localstorage';
+
 export default function loadInbox() {
   clearMainContent();
 
@@ -14,8 +16,7 @@ export default function loadInbox() {
   const taskContainerDiv = createTaskContainer();
   const addTaskButtonDiv = document.createElement('div');
   const addTaskButton = createSolidPlusButton();
-  const taskArray = [];
-  const taskListDiv = createTaskList(taskArray);
+  const taskListDiv = createTaskList(inboxTaskArray);
   const formDiv = createForm('Task');
 
   addTaskButtonDiv.appendChild(addTaskButton);

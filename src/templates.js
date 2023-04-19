@@ -74,6 +74,8 @@ function updateTaskList(taskObj) {
 
   if (taskListDiv.id === 'empty-list') {
     taskListDiv.removeAttribute('id');
+    const emptyImg = document.getElementById('empty-img');
+    emptyImg.remove();
   }
 
   taskListDiv.appendChild(task);
@@ -121,8 +123,10 @@ function closeForm() {
   const addButton = document.getElementById('add-button');
   const emptyImgDiv = document.getElementById('empty-img');
 
+  if (emptyImgDiv !== null) {
+    emptyImgDiv.style.display = 'block';
+  }
   addButton.style.display = 'block';
-  emptyImgDiv.style.display = 'block';
   form.style.display = 'none';
 }
 
@@ -131,8 +135,10 @@ function showForm() {
   const addbutton = document.getElementById('add-button');
   const emptyImgDiv = document.getElementById('empty-img');
 
+  if (emptyImgDiv !== null) {
+    emptyImgDiv.style.display = 'none';
+  }
   addbutton.style.display = 'none';
-  emptyImgDiv.style.display = 'none';
   form.style.display = 'block';
 }
 

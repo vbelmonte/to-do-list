@@ -12,11 +12,8 @@ export function processTaskForm(event) {
 
   const taskObj = new Task(name.value, description.value, dueDate.value, priority.value);
 
-  /*console.log(taskObj);*/
-
   addItemToStorage(taskObj);
   updateTaskList(taskObj);
-  /** updateTaskList() */
 }
 
 export function processProjectForm(event) {

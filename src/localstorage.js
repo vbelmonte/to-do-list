@@ -56,6 +56,7 @@ function addItemToLocalStorage(object) {
 
     localStorage.setItem(itemName, jsonObj);
   } else {
+    // eslint-disable-next-line no-console
     console.log('Error! No local storage available.');
   }
 }

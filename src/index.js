@@ -5,6 +5,7 @@ import loadInbox from './inbox';
 
 (function runPage() {
   addItemsToLocalArrays();
+  loadInbox();
 
   const inboxDesktop = document.getElementById('inbox');
   const logo = document.getElementsByClassName('logo')[0];

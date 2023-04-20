@@ -57,8 +57,7 @@ function createTaskList(taskArray) {
     imgDiv.id = 'empty-img';
 
     taskListDiv.appendChild(imgDiv);
-  }
-  else {
+  } else {
     for (let i = 0; i < taskArray.length; i += 1) {
       const task = createTaskDiv(taskArray[i]);
       taskListDiv.appendChild(task);
@@ -81,7 +80,7 @@ function updateTaskList(taskObj) {
   taskListDiv.appendChild(task);
 }
 
-/** BUTTON TEMPLATES **/
+/** BUTTON TEMPLATES * */
 
 function createSolidTextButton(text) {
   const button = document.createElement('button');
@@ -118,7 +117,9 @@ function clearMainContent() {
   mainContentDiv.innerHTML = '';
 }
 
-function closeForm() {
+function closeForm(event) {
+  event.preventDefault();
+
   const form = document.getElementsByClassName('form')[0];
   const addButton = document.getElementById('add-button');
   const emptyImgDiv = document.getElementById('empty-img');
@@ -142,4 +143,6 @@ function showForm() {
   form.style.display = 'block';
 }
 
-export { createPageHeadline, createProjectDescription, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, closeForm, showForm, updateTaskList };
+export {
+  createPageHeadline, createProjectDescription, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, closeForm, showForm, updateTaskList,
+};

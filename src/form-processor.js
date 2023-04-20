@@ -3,7 +3,8 @@ import Project from './projects';
 import addItemToStorage from './localstorage';
 import { updateTaskList } from './templates';
 
-export function processTaskForm() {
+export function processTaskForm(event) {
+  event.preventDefault();
   const name = document.getElementById('name');
   const description = document.getElementById('description');
   const dueDate = document.getElementById('due-date');
@@ -16,7 +17,8 @@ export function processTaskForm() {
   /** updateTaskList() */
 }
 
-export function processProjectForm() {
+export function processProjectForm(event) {
+  event.preventDefault();
   const name = document.getElementById('name');
   const description = document.getElementById('description');
   const dueDate = document.getElementById('due-date');

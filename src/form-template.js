@@ -100,11 +100,27 @@ function createPriorityInput() {
   return priorityDiv;
 }
 
+function clearFormValues() {
+  const name = document.getElementById('name');
+  const description = document.getElementById('description');
+  const dueDate = document.getElementById('due-date');
+  const priority = document.getElementById('priority');
+  const blank = '';
+
+  name.value = blank;
+  description.value = blank;
+  dueDate.value = blank;
+  priority.value = 'low';
+}
+
 function createCancelButton() {
   const cancelButton = document.createElement('button');
   cancelButton.classList.add('btn-outline');
   cancelButton.innerHTML = 'Cancel';
-  cancelButton.onclick = closeForm;
+  cancelButton.onclick = function (event) {
+    closeForm(event);
+    clearFormValues();
+  };
 
   return cancelButton;
 }
@@ -133,14 +149,15 @@ function createButtonsDiv() {
 
 function assignFormMethod(form, type) {
   if (type === 'Task') {
-    form.onsubmit = processTaskForm;
+    form.onsubmit = function (event) {
+      processTaskForm(event);
+      clearFormValues();
+    };
   } else {
-    form.onsubmit = processProjectForm;
+    form.onsubmit = function (event) {
+      processProjectForm(event);
+    };
   }
-}
-
-function preventDefaultFunc(event) {
-  event.preventDefault();
 }
 
 export default function createForm(type) {
@@ -175,7 +192,6 @@ export default function createForm(type) {
   const buttonsDiv = createButtonsDiv();
 
   const form = document.createElement('form');
-  form.addEventListener('submit', preventDefaultFunc, false);
   assignFormMethod(form, type);
   form.appendChild(inputsDiv);
   form.appendChild(buttonsDiv);

@@ -3,6 +3,8 @@ import Project from './projects';
 
 export const projectArray = [];
 export const inboxTaskArray = [];
+export const dueTodayArray = [];
+export const dueThisWeekArray = [];
 export const completedArray = [];
 
 function storageAvailable(type) {

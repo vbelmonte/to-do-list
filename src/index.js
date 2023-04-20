@@ -1,8 +1,11 @@
 import './styles.css';
+import { addItemsToLocalArrays } from './localstorage';
 
 import loadInbox from './inbox';
 
 (function runPage() {
+  addItemsToLocalArrays();
+
   const inboxDesktop = document.getElementById('inbox');
   const logo = document.getElementsByClassName('logo')[0];
 

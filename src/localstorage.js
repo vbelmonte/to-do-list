@@ -1,3 +1,6 @@
+import Task from './tasks';
+import Project from './projects';
+
 export const projectArray = [];
 export const inboxTaskArray = [];
 export const completedArray = [];
@@ -29,6 +32,16 @@ function storageAvailable(type) {
   }
 }
 
+function deserialize(json) {
+  const obj = JSON.parse(json);
+
+  if (obj._classname === 'Task') {
+    return Object.assign(new Task(), obj);
+  }
+
+  return Object.assign(new Project(), obj);
+}
+
 function assignItemName() {
   const number = localStorage.length + 1;
   const itemName = `item-${number}`;
@@ -36,7 +49,7 @@ function assignItemName() {
   return itemName;
 }
 
-export default function addItemToStorage(object) {
+function addItemToLocalStorage(object) {
   if (storageAvailable('localStorage')) {
     const itemName = assignItemName();
     const jsonObj = JSON.stringify(object);
@@ -47,18 +60,24 @@ export default function addItemToStorage(object) {
   }
 }
 
-function fetchItemsFromLocalStorage() {
+export function addItemsToLocalArrays() {
   let keyName;
   for (let i = 0; i < localStorage.length; i += 1) {
     keyName = localStorage.key(i);
-    const item = JSON.parse(localStorage.getItem(keyName));
+    const item = localStorage.getItem(keyName);
+    const convertedObj = deserialize(item);
 
-    if (item.type === 'project') {
-      projectArray.push(item);
-    } else if (item.type === 'task') {
-      inboxTaskArray.push(item);
+    if (convertedObj.classname === 'Project') {
+      projectArray.push(convertedObj);
+    } else if (convertedObj.classname === 'Task') {
+      inboxTaskArray.push(convertedObj);
     } else {
-      completedArray.push(item);
+      completedArray.push(convertedObj);
     }
   }
+}
+
+export default function addItemToStorage(object) {
+  addItemToLocalStorage(object);
+  addItemsToLocalArrays();
 }

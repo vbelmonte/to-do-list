@@ -88,6 +88,7 @@ function createEditDiv() {
 }
 
 export default function createTaskDiv(taskObject) {
+  console.log(taskObject);
   const taskName = taskObject.name;
   const taskDesc = taskObject.description;
   const taskDueDate = taskObject.dueDate;

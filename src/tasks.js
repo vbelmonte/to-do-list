@@ -1,11 +1,18 @@
 export default class Task {
-  type = 'task';
-
   constructor(taskName, taskDescription, dueDate, priority) {
+    this.classname = this.constructor.name;
     this.name = taskName;
     this.description = taskDescription;
     this.dueDate = dueDate;
     this.priority = priority;
+  }
+
+  get classname() {
+    return this._classname;
+  }
+
+  set classname(value) {
+    this._classname = value;
   }
 
   get name() {

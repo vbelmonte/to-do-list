@@ -348,6 +348,10 @@ footer p {
     width: 10rem;
 }
 
+#side-column .logo:hover {
+    cursor: pointer;
+}
+
 #side-column nav {
     display: flex;
     flex-direction: column;

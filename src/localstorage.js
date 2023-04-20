@@ -6,6 +6,7 @@ export const inboxTaskArray = [];
 export const dueTodayArray = [];
 export const dueThisWeekArray = [];
 export const completedArray = [];
+export const allItemsArray = [];
 
 function storageAvailable(type) {
   let storage;
@@ -70,6 +71,8 @@ export function addItemsToLocalArrays() {
     const item = localStorage.getItem(keyName);
     const convertedObj = deserialize(item);
 
+    allItemsArray.push(convertedObj);
+
     if (convertedObj.classname === 'Project') {
       projectArray.push(convertedObj);
     } else if (convertedObj.classname === 'Task') {
@@ -80,7 +83,24 @@ export function addItemsToLocalArrays() {
   }
 }
 
+function addItemToLocalArray(object) {
+  if (storageAvailable('localStorage')) {
+    allItemsArray.push(object);
+
+    if (object.classname === 'Project') {
+      projectArray.push(object);
+    } else if (object.classname === 'Task') {
+      inboxTaskArray.push(object);
+    } else {
+      completedArray.push(object);
+    }
+  } else {
+    // eslint-disable-next-line no-console
+    console.log('Error! No local storage available.');
+  }
+}
+
 export default function addItemToStorage(object) {
   addItemToLocalStorage(object);
-  addItemsToLocalArrays();
+  addItemToLocalArray(object);
 }

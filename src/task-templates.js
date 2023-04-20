@@ -1,3 +1,5 @@
+import { allItemsArray } from './localstorage';
+
 function assignPriorityClass(priority) {
   if (priority === 'low') {
     return 'low-p';
@@ -20,16 +22,26 @@ function assignPriorityImage(priority) {
   return '<img src=\'../src/assets/img/priority-high.svg\'>';
 }
 
+function assignCheckBoxID() {
+  const num = allItemsArray.length;
+  const checkboxID = `checkbox-${num}`;
+
+  return checkboxID;
+}
+
 function createCheckBoxDiv() {
   const div = document.createElement('div');
   const checkboxDiv = document.createElement('div');
   const roundDiv = document.createElement('div');
   const checkboxInput = document.createElement('input');
   const label = document.createElement('label');
+  const checkboxID = assignCheckBoxID();
 
-  label.setAttribute('for', 'checkbox');
+  /*label.setAttribute('for', 'checkbox');*/
+  label.setAttribute('for', checkboxID);
 
-  checkboxInput.id = 'checkbox';
+  /*checkboxInput.id = 'checkbox';*/
+  checkboxInput.id = checkboxID;
   checkboxInput.setAttribute('type', 'checkbox');
 
   roundDiv.classList.add('round');

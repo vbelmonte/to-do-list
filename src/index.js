@@ -11,6 +11,23 @@ import loadProjects from './projectsfolder';
   addItemsToLocalArrays();
   loadInbox();
 
+  function toggleActiveOff() {
+    const navLinks = document.getElementsByClassName('nav-link');
+    for (let i = 0; i < navLinks.length; i += 1) {
+      navLinks[i].classList.remove('active');
+    }
+  }
+
+  (function toggleActiveClass() {
+    const navLinks = document.getElementsByClassName('nav-link');
+    for (let i = 0; i < navLinks.length; i += 1) {
+      navLinks[i].addEventListener('click', () => {
+        toggleActiveOff();
+        navLinks[i].classList.add('active');
+      });
+    }
+  }());
+
   const inboxDesktop = document.getElementById('inbox');
   const today = document.getElementById('today');
   const week = document.getElementById('week');

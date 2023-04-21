@@ -392,6 +392,10 @@ footer p {
     cursor: default;
 }
 
+.nav-link.active {
+    color: var(--blue);
+}
+
 
 
 

@@ -5,6 +5,7 @@ import loadInbox from './inbox';
 import loadToday from './today';
 import loadWeek from './week';
 import loadCompleted from './completed';
+import loadProjects from './projectsfolder';
 
 (function runPage() {
   addItemsToLocalArrays();
@@ -14,6 +15,7 @@ import loadCompleted from './completed';
   const today = document.getElementById('today');
   const week = document.getElementById('week');
   const completed = document.getElementById('completed');
+  const projects = document.getElementById('projects');
   const logo = document.getElementsByClassName('logo')[0];
 
   logo.addEventListener('click', loadInbox);
@@ -21,4 +23,5 @@ import loadCompleted from './completed';
   today.addEventListener('click', loadToday);
   week.addEventListener('click', loadWeek);
   completed.addEventListener('click', loadCompleted);
+  projects.addEventListener('click', loadProjects);
 }());

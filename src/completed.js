@@ -12,7 +12,7 @@ export default function loadCompleted() {
   const moduleContainerDiv = createModuleContainer('completed');
   const moduleTitleDiv = createModuleTitle('My Completed Tasks');
   const taskContainerDiv = createTaskContainer();
-  const taskListDiv = createTaskList(completedArray);
+  const taskListDiv = createTaskList(completedArray, 'completed');
 
   moduleContainerDiv.appendChild(moduleTitleDiv);
   moduleContainerDiv.appendChild(taskContainerDiv);

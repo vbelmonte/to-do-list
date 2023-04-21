@@ -1,12 +1,12 @@
 import {
-  createPageHeadline, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, showForm
+  createPageHeadline, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, showForm,
 } from './templates';
 
 import createForm from './form-template';
 
-import { inboxTaskArray } from './localstorage';
+import { projectArray } from './localstorage';
 
-export default function loadInbox() {
+export default function loadProjects() {
   clearMainContent();
 
   const mainContentDiv = document.getElementById('main-content');
@@ -16,8 +16,8 @@ export default function loadInbox() {
   const taskContainerDiv = createTaskContainer();
   const addTaskButtonDiv = document.createElement('div');
   const addTaskButton = createSolidPlusButton();
-  const taskListDiv = createTaskList(inboxTaskArray, 'inbox');
-  const formDiv = createForm('Task');
+  const taskListDiv = createTaskList(projectArray, 'projects');
+  const formDiv = createForm('Project');
 
   addTaskButtonDiv.appendChild(addTaskButton);
   addTaskButton.id = 'add-button';

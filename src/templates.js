@@ -43,7 +43,21 @@ function createTaskContainer() {
   return taskContainerDiv;
 }
 
-function createTaskList(taskArray) {
+function assignTaskListImg(page) {
+  if (page === 'inbox') {
+    return '<img src="../src/assets/img/no-tasks-yet.svg">';
+  }
+  if (page === 'today' || page === 'week') {
+    return '<img src="../src/assets/img/nothing-due.svg">';
+  }
+  if (page === 'completed') {
+    return '<img src="../src/assets/img/no-tasks-projects-completed.svg">';
+  }
+
+  return '<img src="../src/assets/img/no-projects-yet.svg">';
+}
+
+function createTaskList(taskArray, page) {
   const taskListDiv = document.createElement('div');
   taskListDiv.classList.add('task-list');
 
@@ -51,7 +65,8 @@ function createTaskList(taskArray) {
     taskListDiv.id = 'empty-list';
 
     const imgDiv = document.createElement('div');
-    const img = '<img src="../src/assets/img/no-tasks-yet.svg">';
+    const img = assignTaskListImg(page);
+    /*const img = '<img src="../src/assets/img/no-tasks-yet.svg">';*/
 
     imgDiv.innerHTML = `${img}`;
     imgDiv.id = 'empty-img';

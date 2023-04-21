@@ -12,7 +12,7 @@ export default function loadToday() {
   const moduleContainerDiv = createModuleContainer('today');
   const moduleTitleDiv = createModuleTitle('Due Today');
   const taskContainerDiv = createTaskContainer();
-  const taskListDiv = createTaskList(dueTodayArray);
+  const taskListDiv = createTaskList(dueTodayArray, 'today');
 
   moduleContainerDiv.appendChild(moduleTitleDiv);
   moduleContainerDiv.appendChild(taskContainerDiv);

@@ -12,7 +12,7 @@ export default function loadWeek() {
   const moduleContainerDiv = createModuleContainer('week');
   const moduleTitleDiv = createModuleTitle('Due This Week');
   const taskContainerDiv = createTaskContainer();
-  const taskListDiv = createTaskList(dueThisWeekArray);
+  const taskListDiv = createTaskList(dueThisWeekArray, 'week');
 
   moduleContainerDiv.appendChild(moduleTitleDiv);
   moduleContainerDiv.appendChild(taskContainerDiv);

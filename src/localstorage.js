@@ -1,5 +1,6 @@
 import Task from './tasks';
 import Project from './projects';
+import { removeItemFromTaskList } from './templates';
 
 export const projectArray = [];
 export const inboxTaskArray = [];
@@ -43,6 +44,23 @@ function deserialize(json) {
   }
 
   return Object.assign(new Project(), obj);
+}
+
+function removeItemFromInbox(tag) {
+  const index = inboxTaskArray.map((i) => i.itemTag).indexOf(tag);
+
+  return inboxTaskArray.splice(index, 1)[0];
+}
+
+function moveItemToCompletedArray(obj) {
+  completedArray.push(obj);
+}
+
+export function markAsComplete(event) {
+  const tagID = event.target.id;
+  const obj = removeItemFromInbox(tagID);
+  moveItemToCompletedArray(obj);
+  removeItemFromTaskList(obj);
 }
 
 function assignItemName() {

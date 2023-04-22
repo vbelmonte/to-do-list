@@ -95,6 +95,13 @@ function updateTaskList(taskObj) {
   taskListDiv.appendChild(task);
 }
 
+export function removeItemFromTaskList(obj) {
+  const task = document.getElementsByClassName(obj.itemTag)[0];
+  const taskListDiv = document.getElementsByClassName('task-list')[0];
+
+  taskListDiv.removeChild(task);
+}
+
 /** BUTTON TEMPLATES * */
 
 function createSolidTextButton(text) {

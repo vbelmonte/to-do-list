@@ -1,4 +1,4 @@
-import { allItemsArray } from './localstorage';
+import { markAsComplete } from './localstorage';
 
 function assignPriorityClass(priority) {
   if (priority === 'low') {
@@ -38,12 +38,11 @@ function createCheckBoxDiv(obj) {
 
   /*label.setAttribute('for', 'checkbox');*/
   label.setAttribute('for', checkboxID);
-  /* marking as complete, should move to the completedArray */
-  /*label.addEventListener('click', markAsComplete);*/
 
   /*checkboxInput.id = 'checkbox';*/
   checkboxInput.id = checkboxID;
   checkboxInput.setAttribute('type', 'checkbox');
+  checkboxInput.addEventListener('click', markAsComplete);
 
   roundDiv.classList.add('round');
   roundDiv.appendChild(checkboxInput);
@@ -101,12 +100,11 @@ function createEditDiv() {
 }
 
 export default function createTaskDiv(taskObject) {
-  console.log(taskObject);
-  console.log(taskObject.itemTag);
   const taskName = taskObject.name;
   const taskDesc = taskObject.description;
   const taskDueDate = taskObject.dueDate;
   const taskPriority = taskObject.priority;
+  const taskTag = taskObject.itemTag;
 
   const taskDiv = document.createElement('div');
   const checkBoxDiv = createCheckBoxDiv(taskObject);
@@ -114,6 +112,7 @@ export default function createTaskDiv(taskObject) {
   const editDiv = createEditDiv();
 
   taskDiv.classList.add('task');
+  taskDiv.classList.add(taskTag);
   taskDiv.classList.add(assignPriorityClass(taskPriority));
 
   taskDiv.appendChild(checkBoxDiv);

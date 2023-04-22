@@ -22,20 +22,19 @@ function assignPriorityImage(priority) {
   return '<img src=\'../src/assets/img/priority-high.svg\'>';
 }  
 
-function assignCheckBoxID() {
-  const num = allItemsArray.length;
-  const checkboxID = `item-${num}`;
+function assignCheckBoxID(obj) {
+  const checkboxID = obj.itemTag;
 
   return checkboxID;
 }
 
-function createCheckBoxDiv() {
+function createCheckBoxDiv(obj) {
   const div = document.createElement('div');
   const checkboxDiv = document.createElement('div');
   const roundDiv = document.createElement('div');
   const checkboxInput = document.createElement('input');
   const label = document.createElement('label');
-  const checkboxID = assignCheckBoxID();
+  const checkboxID = assignCheckBoxID(obj);
 
   /*label.setAttribute('for', 'checkbox');*/
   label.setAttribute('for', checkboxID);
@@ -103,13 +102,14 @@ function createEditDiv() {
 
 export default function createTaskDiv(taskObject) {
   console.log(taskObject);
+  console.log(taskObject.itemTag);
   const taskName = taskObject.name;
   const taskDesc = taskObject.description;
   const taskDueDate = taskObject.dueDate;
   const taskPriority = taskObject.priority;
 
   const taskDiv = document.createElement('div');
-  const checkBoxDiv = createCheckBoxDiv();
+  const checkBoxDiv = createCheckBoxDiv(taskObject);
   const taskInfoDiv = createTaskInfoDiv(taskName, taskDesc, taskDueDate, taskPriority);
   const editDiv = createEditDiv();
 

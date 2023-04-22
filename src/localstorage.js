@@ -77,8 +77,6 @@ export function addItemsToLocalArrays() {
       projectArray.push(convertedObj);
     } else if (convertedObj.classname === 'Task') {
       inboxTaskArray.push(convertedObj);
-    } else {
-      completedArray.push(convertedObj);
     }
   }
 }
@@ -103,4 +101,6 @@ function addItemToLocalArray(object) {
 export default function addItemToStorage(object) {
   addItemToLocalStorage(object);
   addItemToLocalArray(object);
+
+  console.log('inboxTaskArray: ', inboxTaskArray);
 }

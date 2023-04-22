@@ -1,10 +1,11 @@
 export default class Task {
-  constructor(taskName, taskDescription, dueDate, priority) {
+  constructor(taskName, taskDescription, dueDate, priority, itemTag) {
     this.classname = this.constructor.name;
     this.name = taskName;
     this.description = taskDescription;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.itemTag = itemTag;
   }
 
   get classname() {
@@ -45,5 +46,13 @@ export default class Task {
 
   set priority(value) {
     this._priority = value;
+  }
+
+  get itemTag() {
+    return this._itemTag;
+  }
+
+  set itemTag(value) {
+    this._itemTag = value;
   }
 }

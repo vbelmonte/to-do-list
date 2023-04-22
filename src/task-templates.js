@@ -20,11 +20,11 @@ function assignPriorityImage(priority) {
   }
 
   return '<img src=\'../src/assets/img/priority-high.svg\'>';
-}
+}  
 
 function assignCheckBoxID() {
   const num = allItemsArray.length;
-  const checkboxID = `checkbox-${num}`;
+  const checkboxID = `item-${num}`;
 
   return checkboxID;
 }
@@ -39,6 +39,8 @@ function createCheckBoxDiv() {
 
   /*label.setAttribute('for', 'checkbox');*/
   label.setAttribute('for', checkboxID);
+  /* marking as complete, should move to the completedArray */
+  /*label.addEventListener('click', markAsComplete);*/
 
   /*checkboxInput.id = 'checkbox';*/
   checkboxInput.id = checkboxID;

@@ -1,6 +1,6 @@
 import Task from './tasks';
 import Project from './projects';
-import addItemToStorage from './localstorage';
+import addItemToStorage, { allItemsArray } from './localstorage';
 import { updateTaskList } from './templates';
 
 export function processTaskForm(event) {
@@ -9,8 +9,10 @@ export function processTaskForm(event) {
   const description = document.getElementById('description');
   const dueDate = document.getElementById('due-date');
   const priority = document.getElementById('priority');
+  const tagNumber = allItemsArray.length + 1;
+  const itemTag = `tag-${tagNumber.toString()}`;
 
-  const taskObj = new Task(name.value, description.value, dueDate.value, priority.value);
+  const taskObj = new Task(name.value, description.value, dueDate.value, priority.value, itemTag);
 
   addItemToStorage(taskObj);
   updateTaskList(taskObj);

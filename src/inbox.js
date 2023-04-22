@@ -8,6 +8,7 @@ import { inboxTaskArray } from './localstorage';
 
 export default function loadInbox() {
   clearMainContent();
+  console.log(inboxTaskArray);
 
   const mainContentDiv = document.getElementById('main-content');
   const pageHeadline = createPageHeadline('Inbox');

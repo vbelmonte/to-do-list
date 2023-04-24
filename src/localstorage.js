@@ -58,16 +58,17 @@ function moveItemToCompletedArray(obj) {
   }
 }
 
+function markItemAsComplete(obj) {
+  obj.status = 'completed';
+  return obj;
+}
+
 function updateLocalStorage(obj) {
   const itemName = obj.name;
   const keyName = `item-${itemName}`;
-  const item = localStorage.getItem(keyName);
   localStorage.removeItem(keyName);
 
-  const convertedObj = deserialize(item);
-  convertedObj.status = 'complete';
-
-  const jsonObj = JSON.stringify(convertedObj);
+  const jsonObj = JSON.stringify(obj);
 
   localStorage.setItem(keyName, jsonObj);
 }
@@ -75,10 +76,11 @@ function updateLocalStorage(obj) {
 export function markAsComplete(event) {
   const tagID = event.target.id;
   const obj = removeItemFromInbox(tagID);
-  obj.status = 'completed';
-  moveItemToCompletedArray(obj);
+
+  const updatedObj = markItemAsComplete(obj);
+  moveItemToCompletedArray(updatedObj);
   removeItemFromTaskList(obj);
-  updateLocalStorage(obj);
+  updateLocalStorage(updatedObj);
 }
 
 function assignItemName() {

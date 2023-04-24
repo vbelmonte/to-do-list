@@ -11,8 +11,9 @@ export function processTaskForm(event) {
   const priority = document.getElementById('priority');
   const tagNumber = allItemsArray.length + 1;
   const itemTag = `tag-${tagNumber.toString()}`;
+  const status = 'in-progress';
 
-  const taskObj = new Task(name.value, description.value, dueDate.value, priority.value, itemTag);
+  const taskObj = new Task(name.value, description.value, dueDate.value, priority.value, itemTag, status);
 
   addItemToStorage(taskObj);
   updateTaskList(taskObj);

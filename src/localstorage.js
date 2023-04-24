@@ -53,14 +53,32 @@ function removeItemFromInbox(tag) {
 }
 
 function moveItemToCompletedArray(obj) {
-  completedArray.push(obj);
+  if (obj.status === 'completed') {
+    completedArray.push(obj);
+  }
+}
+
+function updateLocalStorage(obj) {
+  const itemName = obj.name;
+  const keyName = `item-${itemName}`;
+  const item = localStorage.getItem(keyName);
+  localStorage.removeItem(keyName);
+
+  const convertedObj = deserialize(item);
+  convertedObj.status = 'complete';
+
+  const jsonObj = JSON.stringify(convertedObj);
+
+  localStorage.setItem(keyName, jsonObj);
 }
 
 export function markAsComplete(event) {
   const tagID = event.target.id;
   const obj = removeItemFromInbox(tagID);
+  obj.status = 'completed';
   moveItemToCompletedArray(obj);
   removeItemFromTaskList(obj);
+  updateLocalStorage(obj);
 }
 
 function assignItemName() {
@@ -94,7 +112,11 @@ export function addItemsToLocalArrays() {
     if (convertedObj.classname === 'Project') {
       projectArray.push(convertedObj);
     } else if (convertedObj.classname === 'Task') {
-      inboxTaskArray.push(convertedObj);
+      if (convertedObj.status === 'in-progress') {
+        inboxTaskArray.push(convertedObj);
+      } else {
+        completedArray.push(convertedObj);
+      }
     }
   }
 }

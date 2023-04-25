@@ -1,3 +1,4 @@
+import { isToday, isThisWeek, parseISO } from 'date-fns';
 import Task from './tasks';
 import Project from './projects';
 import { removeItemFromTaskList } from './templates';
@@ -52,6 +53,29 @@ function removeItemFromInbox(tag) {
   return inboxTaskArray.splice(index, 1)[0];
 }
 
+function removeItemFromTodayArray(tag) {
+  const index = dueTodayArray.map((i) => i.itemTag).indexOf(tag);
+
+  if (index !== -1) {
+    dueTodayArray.splice(index, 1)[0];
+  }
+}
+
+function removeItemFromWeekArray(tag) {
+  const index = dueThisWeekArray.map((i) => i.itemTag).indexOf(tag);
+
+  if (index !== -1) {
+    dueThisWeekArray.splice(index, 1)[0];
+  }
+}
+
+function removeItemFromAllArrays(tag) {
+  removeItemFromTodayArray(tag);
+  removeItemFromWeekArray(tag);
+
+  return removeItemFromInbox(tag);
+}
+
 function moveItemToCompletedArray(obj) {
   if (obj.status === 'completed') {
     completedArray.push(obj);
@@ -75,7 +99,7 @@ function updateLocalStorage(obj) {
 
 export function markAsComplete(event) {
   const tagID = event.target.id;
-  const obj = removeItemFromInbox(tagID);
+  const obj = removeItemFromAllArrays(tagID);
 
   const updatedObj = markItemAsComplete(obj);
   moveItemToCompletedArray(updatedObj);
@@ -102,6 +126,22 @@ function addItemToLocalStorage(object) {
   }
 }
 
+function addItemToDayArray(object) {
+  dueTodayArray.push(object);
+}
+
+function addItemToWeekArray(object) {
+  dueThisWeekArray.push(object);
+}
+
+function addItemToWeekOrDay(object) {
+  if (isToday(parseISO(object.dueDate))) {
+    addItemToDayArray(object);
+  } else if (isThisWeek(parseISO(object.dueDate))) {
+    addItemToWeekArray(object);
+  }
+}
+
 export function addItemsToLocalArrays() {
   let keyName;
   for (let i = 0; i < localStorage.length; i += 1) {
@@ -116,6 +156,7 @@ export function addItemsToLocalArrays() {
     } else if (convertedObj.classname === 'Task') {
       if (convertedObj.status === 'in-progress') {
         inboxTaskArray.push(convertedObj);
+        addItemToWeekOrDay(convertedObj);
       } else {
         completedArray.push(convertedObj);
       }
@@ -143,6 +184,5 @@ function addItemToLocalArray(object) {
 export default function addItemToStorage(object) {
   addItemToLocalStorage(object);
   addItemToLocalArray(object);
-
-  console.log('inboxTaskArray: ', inboxTaskArray);
+  addItemToWeekOrDay(object);
 }

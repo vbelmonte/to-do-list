@@ -1,3 +1,4 @@
+import { format, parseISO } from 'date-fns';
 import { markAsComplete } from './localstorage';
 
 function assignPriorityClass(priority) {
@@ -102,7 +103,7 @@ function createEditDiv() {
 export default function createTaskDiv(taskObject) {
   const taskName = taskObject.name;
   const taskDesc = taskObject.description;
-  const taskDueDate = taskObject.dueDate;
+  const taskDueDate = format(parseISO(taskObject.dueDate), 'MM/dd/yyyy');
   const taskPriority = taskObject.priority;
   const taskTag = taskObject.itemTag;
 

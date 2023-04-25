@@ -1,4 +1,3 @@
-import { format, parseISO } from 'date-fns';
 import Task from './tasks';
 import Project from './projects';
 import addItemToStorage, { allItemsArray } from './localstorage';
@@ -14,8 +13,7 @@ export function processTaskForm(event) {
   const itemTag = `tag-${tagNumber.toString()}`;
   const status = 'in-progress';
 
-  const formattedDueDate = format(parseISO(dueDate), 'MM/dd/yyyy');
-  const taskObj = new Task(name, description, formattedDueDate, priority, itemTag, status);
+  const taskObj = new Task(name, description, dueDate, priority, itemTag, status);
 
   addItemToStorage(taskObj);
   updateTaskList(taskObj);

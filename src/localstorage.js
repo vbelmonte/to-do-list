@@ -137,6 +137,7 @@ function addItemToWeekArray(object) {
 function addItemToWeekOrDay(object) {
   if (isToday(parseISO(object.dueDate))) {
     addItemToDayArray(object);
+    addItemToWeekArray(object);
   } else if (isThisWeek(parseISO(object.dueDate))) {
     addItemToWeekArray(object);
   }

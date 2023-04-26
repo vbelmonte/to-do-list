@@ -102,6 +102,19 @@ export function removeItemFromTaskList(obj) {
   taskListDiv.removeChild(task);
 }
 
+export function updateProjectList(projectObj) {
+  const taskListDiv = document.getElementsByClassName('task-list')[0];
+  const project = createTaskDiv(projectObj);
+
+  if (taskListDiv.id === 'empty-list') {
+    taskListDiv.removeAttribute('id');
+    const emptyImg = document.getElementById('empty-img');
+    emptyImg.remove();
+  }
+
+  taskListDiv.appendChild(project);
+}
+
 /** BUTTON TEMPLATES * */
 
 function createSolidTextButton(text) {

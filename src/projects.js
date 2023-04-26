@@ -1,10 +1,12 @@
 export default class Project {
-  constructor(projectName, projectDescription, dueDate, priority) {
+  constructor(projectName, projectDescription, dueDate, priority, itemTag, status) {
     this.classname = this.constructor.name;
     this.name = projectName;
     this.description = projectDescription;
     this.dueDate = dueDate;
     this.priority = priority;
+    this.itemTag = itemTag;
+    this.status = status;
     this.inProgressTaskArray = [];
     this.completedTaskArray = [];
   }
@@ -47,5 +49,21 @@ export default class Project {
 
   set priority(value) {
     this._priority = value;
+  }
+
+  get itemTag() {
+    return this._itemTag;
+  }
+
+  set itemTag(value) {
+    this._itemTag = value;
+  }
+
+  get status() {
+    return this._status;
+  }
+
+  set status(value) {
+    this._status = value;
   }
 }

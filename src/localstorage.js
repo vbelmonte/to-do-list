@@ -50,13 +50,23 @@ function deserialize(json) {
 function removeItemFromInbox(tag) {
   const index = inboxTaskArray.map((i) => i.itemTag).indexOf(tag);
 
-  return inboxTaskArray.splice(index, 1)[0];
+  if (index >= 0) {
+    return inboxTaskArray.splice(index, 1)[0];
+  }
+}
+
+function removeItemFromProjects(tag) {
+  const index = projectArray.map((i) => i.itemTag).indexOf(tag);
+
+  if (index >= 0) {
+    return projectArray.splice(index, 1)[0];
+  }
 }
 
 function removeItemFromTodayArray(tag) {
   const index = dueTodayArray.map((i) => i.itemTag).indexOf(tag);
 
-  if (index !== -1) {
+  if (index >= 0) {
     dueTodayArray.splice(index, 1)[0];
   }
 }
@@ -64,8 +74,17 @@ function removeItemFromTodayArray(tag) {
 function removeItemFromWeekArray(tag) {
   const index = dueThisWeekArray.map((i) => i.itemTag).indexOf(tag);
 
-  if (index !== -1) {
+  if (index >= 0) {
     dueThisWeekArray.splice(index, 1)[0];
+  }
+}
+
+function determineTaskType(tag) {
+  if (inboxTaskArray.map((i) => i.itemTag).indexOf(tag) >= 0 && inboxTaskArray.length >= 1) {
+    return 'inbox';
+  }
+  if (projectArray.map((i) => i.itemTag).indexOf(tag) >= 0 && projectArray.length >= 1) {
+    return 'project';
   }
 }
 
@@ -73,7 +92,15 @@ function removeItemFromAllArrays(tag) {
   removeItemFromTodayArray(tag);
   removeItemFromWeekArray(tag);
 
-  return removeItemFromInbox(tag);
+  const taskType = determineTaskType(tag);
+
+  if (taskType === 'inbox') {
+    return removeItemFromInbox(tag);
+  }
+
+  return removeItemFromProjects(tag);
+
+  /* return removeItemFromInbox(tag); */
 }
 
 function moveItemToCompletedArray(obj) {
@@ -88,8 +115,9 @@ function markItemAsComplete(obj) {
 }
 
 function updateLocalStorage(obj) {
-  const itemName = obj.name;
-  const keyName = `item-${itemName}`;
+  /*const itemName = obj.name;
+  const keyName = `item-${itemName}`;*/
+  const keyName = obj.itemTag;
   localStorage.removeItem(keyName);
 
   const jsonObj = JSON.stringify(obj);
@@ -100,14 +128,14 @@ function updateLocalStorage(obj) {
 export function markAsComplete(event) {
   const tagID = event.target.id;
   const obj = removeItemFromAllArrays(tagID);
-
   const updatedObj = markItemAsComplete(obj);
+
   moveItemToCompletedArray(updatedObj);
   removeItemFromTaskList(obj);
   updateLocalStorage(updatedObj);
 }
 
-function assignItemName() {
+export function assignItemName() {
   const number = localStorage.length + 1;
   const itemName = `item-${number}`;
 
@@ -116,10 +144,10 @@ function assignItemName() {
 
 function addItemToLocalStorage(object) {
   if (storageAvailable('localStorage')) {
-    const itemName = assignItemName();
+    /*const itemName = assignItemName();*/
     const jsonObj = JSON.stringify(object);
 
-    localStorage.setItem(itemName, jsonObj);
+    localStorage.setItem(object.itemTag, jsonObj);
   } else {
     // eslint-disable-next-line no-console
     console.log('Error! No local storage available.');
@@ -153,7 +181,12 @@ export function addItemsToLocalArrays() {
     allItemsArray.push(convertedObj);
 
     if (convertedObj.classname === 'Project') {
-      projectArray.push(convertedObj);
+      if (convertedObj.status === 'in-progress') {
+        projectArray.push(convertedObj);
+        addItemToWeekOrDay(convertedObj);
+      } else {
+        completedArray.push(convertedObj);
+      }
     } else if (convertedObj.classname === 'Task') {
       if (convertedObj.status === 'in-progress') {
         inboxTaskArray.push(convertedObj);
@@ -171,6 +204,7 @@ function addItemToLocalArray(object) {
 
     if (object.classname === 'Project') {
       projectArray.push(object);
+      console.log(`projectArray: ${projectArray}`);
     } else if (object.classname === 'Task') {
       inboxTaskArray.push(object);
     } else {

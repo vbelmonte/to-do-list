@@ -10,9 +10,9 @@ export default function loadProjects() {
   clearMainContent();
 
   const mainContentDiv = document.getElementById('main-content');
-  const pageHeadline = createPageHeadline('Inbox');
-  const moduleContainerDiv = createModuleContainer('my-tasks');
-  const moduleTitleDiv = createModuleTitle('My Tasks');
+  const pageHeadline = createPageHeadline('Projects');
+  const moduleContainerDiv = createModuleContainer('my-projects');
+  const moduleTitleDiv = createModuleTitle('My Projects');
   const taskContainerDiv = createTaskContainer();
   const addTaskButtonDiv = document.createElement('div');
   const addTaskButton = createSolidPlusButton();

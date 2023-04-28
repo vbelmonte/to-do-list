@@ -1,7 +1,7 @@
 import Task from './tasks';
 import Project from './projects';
 import addItemToStorage, { allItemsArray, assignItemName } from './localstorage';
-import { updateTaskList, updateProjectList } from './templates';
+import { updateTaskList, updateProjectList, updateProjectNavColumn } from './templates';
 
 export function processTaskForm(event) {
   event.preventDefault();
@@ -35,4 +35,5 @@ export function processProjectForm(event) {
 
   addItemToStorage(projectObj);
   updateProjectList(projectObj);
+  updateProjectNavColumn(projectObj);
 }

@@ -1,10 +1,16 @@
 import {
-  createPageHeadline, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, showForm,
+  createPageHeadline, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, showForm, clearProjectsNavList, populateProjectsNavList,
 } from './templates';
 
 import createForm from './form-template';
 
 import { projectArray } from './localstorage';
+
+export function loadProjectsNavList() {
+  clearProjectsNavList();
+
+  populateProjectsNavList(projectArray);
+}
 
 export default function loadProjects() {
   clearMainContent();

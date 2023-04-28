@@ -5,11 +5,12 @@ import loadInbox from './inbox';
 import loadToday from './today';
 import loadWeek from './week';
 import loadCompleted from './completed';
-import loadProjects from './projectsfolder';
+import loadProjects, { loadProjectsNavList } from './projectsfolder';
 
 (function runPage() {
   addItemsToLocalArrays();
   loadInbox();
+  loadProjectsNavList();
 
   function toggleActiveOff() {
     const navLinks = document.getElementsByClassName('nav-link');

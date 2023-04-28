@@ -82,6 +82,35 @@ function createTaskList(taskArray, page) {
   return taskListDiv;
 }
 
+function createProjectListItem(taskObj) {
+  const li = document.createElement('li');
+  li.classList.add('nav-link');
+
+  const svgDiv = document.createElement('div');
+  svgDiv.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="nav-icon"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M234.5 5.7c13.9-5 29.1-5 43.1 0l192 68.6C495 83.4 512 107.5 512 134.6V377.4c0 27-17 51.2-42.5 60.3l-192 68.6c-13.9 5-29.1 5-43.1 0l-192-68.6C17 428.6 0 404.5 0 377.4V134.6c0-27 17-51.2 42.5-60.3l192-68.6zM256 66L82.3 128 256 190l173.7-62L256 66zm32 368.6l160-57.1v-188L288 246.6v188z"></path></svg>';
+  li.appendChild(svgDiv);
+
+  const projectNameDiv = document.createElement('div');
+  const h6 = document.createElement('h6');
+
+  h6.innerHTML = taskObj.name;
+  projectNameDiv.appendChild(h6);
+  li.appendChild(projectNameDiv);
+
+  return li;
+}
+
+export function populateProjectsNavList(projectsArray) {
+  const projectsNavList = document.getElementById('projects-list');
+
+  if (projectsArray.length > 0) {
+    for (let i = 0; i < projectsArray.length; i += 1) {
+      const project = createProjectListItem(projectsArray[i]);
+      projectsNavList.appendChild(project);
+    }
+  }
+}
+
 function updateTaskList(taskObj) {
   const taskListDiv = document.getElementsByClassName('task-list')[0];
   const task = createTaskDiv(taskObj);
@@ -113,6 +142,13 @@ export function updateProjectList(projectObj) {
   }
 
   taskListDiv.appendChild(project);
+}
+
+export function updateProjectNavColumn(projectObj) {
+  const projectItem = createProjectListItem(projectObj);
+  const projectsList = document.getElementById('projects-list');
+
+  projectsList.appendChild(projectItem);
 }
 
 /** BUTTON TEMPLATES * */
@@ -150,6 +186,12 @@ function clearMainContent() {
   const mainContentDiv = document.getElementById('main-content');
 
   mainContentDiv.innerHTML = '';
+}
+
+export function clearProjectsNavList() {
+  const projectsList = document.getElementById('projects-list');
+
+  projectsList.innerHTML = '';
 }
 
 function closeForm(event) {

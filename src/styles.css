@@ -390,6 +390,19 @@ footer p {
     padding: 0.5rem;
 }
 
+#side-column .projects-link {
+    flex-direction: row;
+    align-items: center;
+}
+
+#side-column #projects {
+    flex: 1;
+}
+
+#side-column #projects-list {
+    margin-left: 2rem;
+}
+
 .nav-icon {
     width: 1rem;
 }

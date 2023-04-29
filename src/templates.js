@@ -1,4 +1,5 @@
 import createTaskDiv from './task-templates';
+import loadProjectPage from './project-page';
 
 function createPageHeadline(pageName) {
   const pageNameDiv = document.createElement('div');
@@ -66,7 +67,7 @@ function createTaskList(taskArray, page) {
 
     const imgDiv = document.createElement('div');
     const img = assignTaskListImg(page);
-    /*const img = '<img src="../src/assets/img/no-tasks-yet.svg">';*/
+    /* const img = '<img src="../src/assets/img/no-tasks-yet.svg">'; */
 
     imgDiv.innerHTML = `${img}`;
     imgDiv.id = 'empty-img';
@@ -105,8 +106,12 @@ export function populateProjectsNavList(projectsArray) {
 
   if (projectsArray.length > 0) {
     for (let i = 0; i < projectsArray.length; i += 1) {
-      const project = createProjectListItem(projectsArray[i]);
-      projectsNavList.appendChild(project);
+      const projectListItem = createProjectListItem(projectsArray[i]);
+
+      projectsNavList.appendChild(projectListItem);
+      projectListItem.addEventListener('click', () => {
+        loadProjectPage(projectsArray[i]);
+      });
     }
   }
 }
@@ -147,6 +152,11 @@ export function updateProjectList(projectObj) {
 export function updateProjectNavColumn(projectObj) {
   const projectItem = createProjectListItem(projectObj);
   const projectsList = document.getElementById('projects-list');
+
+  projectItem.addEventListener('click', () => {
+    console.log('click!');
+    loadProjectPage(projectObj);
+  });
 
   projectsList.appendChild(projectItem);
 }

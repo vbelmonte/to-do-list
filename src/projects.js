@@ -66,4 +66,20 @@ export default class Project {
   set status(value) {
     this._status = value;
   }
+
+  get inProgressTaskArray() {
+    return this._inProgressTaskArray;
+  }
+
+  set inProgressTaskArray(value) {
+    this._inProgressTaskArray = value;
+  }
+
+  get completedTaskArray() {
+    return this._completedTaskArray;
+  }
+
+  set completedTaskArray(value) {
+    this._completedTaskArray = value;
+  }
 }

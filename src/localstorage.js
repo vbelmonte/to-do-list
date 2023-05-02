@@ -37,6 +37,25 @@ function storageAvailable(type) {
   }
 }
 
+function reassignProjectTaskClass(obj) {
+  const { inProgressTaskArray } = obj;
+  const { completedTaskArray } = obj;
+  const newInProgressTaskArray = [];
+  const newCompletedTaskArray = [];
+
+  for (let i = 0; i < inProgressTaskArray.length; i += 1) {
+    newInProgressTaskArray.push(Object.assign(new Task(), inProgressTaskArray[i]));
+  }
+  for (let k = 0; k < completedTaskArray.length; k += 1) {
+    newCompletedTaskArray.push(Object.assign(new Task(), completedTaskArray[k]));
+  }
+
+  obj.inProgressTaskArray = newInProgressTaskArray;
+  obj.completedTaskArray = newCompletedTaskArray;
+
+  return obj;
+}
+
 function deserialize(json) {
   const obj = JSON.parse(json);
 
@@ -44,7 +63,9 @@ function deserialize(json) {
     return Object.assign(new Task(), obj);
   }
 
-  return Object.assign(new Project(), obj);
+  const newObj = Object.assign(new Project(), obj);
+
+  return reassignProjectTaskClass(newObj);
 }
 
 function removeItemFromInbox(tag) {
@@ -115,14 +136,18 @@ function markItemAsComplete(obj) {
 }
 
 function updateLocalStorage(obj) {
-  /*const itemName = obj.name;
-  const keyName = `item-${itemName}`;*/
+  /* const itemName = obj.name;
+  const keyName = `item-${itemName}`; */
   const keyName = obj.itemTag;
   localStorage.removeItem(keyName);
 
   const jsonObj = JSON.stringify(obj);
 
   localStorage.setItem(keyName, jsonObj);
+}
+
+export function updateProjectItem(obj) {
+  updateLocalStorage(obj);
 }
 
 export function markAsComplete(event) {
@@ -144,7 +169,7 @@ export function assignItemName() {
 
 function addItemToLocalStorage(object) {
   if (storageAvailable('localStorage')) {
-    /*const itemName = assignItemName();*/
+    /* const itemName = assignItemName(); */
     const jsonObj = JSON.stringify(object);
 
     localStorage.setItem(object.itemTag, jsonObj);

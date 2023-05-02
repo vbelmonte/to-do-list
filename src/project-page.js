@@ -17,8 +17,8 @@ export default function loadProjectPage(projectObj) {
   const taskContainerDiv = createTaskContainer();
   const addTaskButtonDiv = document.createElement('div');
   const addTaskButton = createSolidPlusButton();
-  const taskListDiv = createTaskList(projectInProgressTasks, 'project');
-  const formDiv = createForm('Task');
+  const taskListDiv = createTaskList(projectInProgressTasks, 'project-tasks');
+  const formDiv = createForm('Project Task', projectObj);
 
   addTaskButtonDiv.appendChild(addTaskButton);
   addTaskButton.id = 'add-button';

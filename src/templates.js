@@ -45,7 +45,7 @@ function createTaskContainer() {
 }
 
 function assignTaskListImg(page) {
-  if (page === 'inbox') {
+  if (page === 'inbox' || page === 'project-tasks') {
     return '<img src="../src/assets/img/no-tasks-yet.svg">';
   }
   if (page === 'today' || page === 'week') {
@@ -154,7 +154,6 @@ export function updateProjectNavColumn(projectObj) {
   const projectsList = document.getElementById('projects-list');
 
   projectItem.addEventListener('click', () => {
-    console.log('click!');
     loadProjectPage(projectObj);
   });
 

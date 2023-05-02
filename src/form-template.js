@@ -1,5 +1,5 @@
 import { closeForm } from './templates';
-import { processProjectForm, processTaskForm } from './form-processor';
+import { processProjectForm, processProjectTaskForm, processTaskForm } from './form-processor';
 
 function createNameInput(type) {
   const nameDiv = document.createElement('div');
@@ -147,20 +147,24 @@ function createButtonsDiv() {
   return div;
 }
 
-function assignFormMethod(form, type) {
+function assignFormMethod(form, type, projectObj) {
   if (type === 'Task') {
     form.onsubmit = function (event) {
       processTaskForm(event);
       clearFormValues();
     };
-  } else {
+  } else if (type === 'Project') {
     form.onsubmit = function (event) {
       processProjectForm(event);
+    };
+  } else {
+    form.onsubmit = function (event) {
+      processProjectTaskForm(event, projectObj);
     };
   }
 }
 
-export default function createForm(type) {
+export default function createForm(type, projectObj) {
   const formDiv = document.createElement('div');
   formDiv.classList.add('form');
 
@@ -192,7 +196,7 @@ export default function createForm(type) {
   const buttonsDiv = createButtonsDiv();
 
   const form = document.createElement('form');
-  assignFormMethod(form, type);
+  assignFormMethod(form, type, projectObj);
   form.appendChild(inputsDiv);
   form.appendChild(buttonsDiv);
 

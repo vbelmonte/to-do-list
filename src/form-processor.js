@@ -46,8 +46,9 @@ export function processProjectTaskForm(event, projectObj) {
   const priority = document.getElementById('priority').value;
   const itemTag = assignItemName();
   const status = 'in-progress';
+  const associatedProject = projectObj.itemTag;
 
-  const taskObj = new Task(name, description, dueDate, priority, itemTag, status);
+  const taskObj = new Task(name, description, dueDate, priority, itemTag, status, associatedProject);
 
   //push item to the project object's task array
   projectObj.inProgressTaskArray.push(taskObj);

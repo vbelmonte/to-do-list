@@ -152,14 +152,19 @@ function assignFormMethod(form, type, projectObj) {
     form.onsubmit = function (event) {
       processTaskForm(event);
       clearFormValues();
+      closeForm(event);
     };
   } else if (type === 'Project') {
     form.onsubmit = function (event) {
       processProjectForm(event);
+      clearFormValues();
+      closeForm(event);
     };
   } else {
     form.onsubmit = function (event) {
       processProjectTaskForm(event, projectObj);
+      clearFormValues();
+      closeForm(event);
     };
   }
 }

@@ -100,7 +100,7 @@ function removeItemFromWeekArray(tag) {
   }
 }
 
-function removeItemFromAssociatedProject(tag) {
+/*function removeItemFromAssociatedProject(tag) {
   const index = inboxTaskArray.map((i) => i.itemTag).indexOf(tag);
 
   if (index >= 0) {
@@ -115,7 +115,7 @@ function removeItemFromAssociatedProject(tag) {
 
     projectArray.push(projectItem);
   }
-}
+}*/
 
 function determineTaskType(tag) {
   if (inboxTaskArray.map((i) => i.itemTag).indexOf(tag) >= 0 && inboxTaskArray.length >= 1) {
@@ -133,7 +133,7 @@ function removeItemFromAllArrays(tag) {
   const taskType = determineTaskType(tag);
 
   if (taskType === 'inbox') {
-    removeItemFromAssociatedProject(tag);
+    /*removeItemFromAssociatedProject(tag);*/
     return removeItemFromInbox(tag);
   }
 
@@ -164,11 +164,21 @@ function updateLocalStorage(obj) {
   localStorage.setItem(keyName, jsonObj);
 }
 
+function removeItemFromProjectInProgressArray(obj) {
+  const associatedProjectTag = obj.associatedProject;
+  const indexOfProject = projectArray.map((i) => i.itemTag).indexOf(associatedProjectTag);
+  const inProgressTaskArray = projectArray[indexOfProject].inProgressTaskArray;
+
+  const indexOfTask = inProgressTaskArray.map((i) => i.itemTag).indexOf(obj.itemTag);
+  projectArray[indexOfProject].inProgressTaskArray.splice(indexOfTask, 1);
+}
+
 function moveItemToProjectCompletedArray(obj) {
   if (obj.associatedProject !== undefined) {
     const associatedProjectTag = obj.associatedProject;
     const indexOfProject = projectArray.map((i) => i.itemTag).indexOf(associatedProjectTag);
 
+    removeItemFromProjectInProgressArray(obj);
     projectArray[indexOfProject].completedTaskArray.push(obj);
     updateLocalStorage(projectArray[indexOfProject]);
   }

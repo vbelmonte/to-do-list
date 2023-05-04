@@ -101,12 +101,17 @@ function createProjectListItem(taskObj) {
   return li;
 }
 
+function assignProjectIDName(projectObj) {
+  return `nav-${projectObj.itemTag}`;
+}
+
 export function populateProjectsNavList(projectsArray) {
   const projectsNavList = document.getElementById('projects-list');
 
   if (projectsArray.length > 0) {
     for (let i = 0; i < projectsArray.length; i += 1) {
       const projectListItem = createProjectListItem(projectsArray[i]);
+      projectListItem.id = assignProjectIDName(projectsArray[i]);
 
       projectsNavList.appendChild(projectListItem);
       projectListItem.addEventListener('click', () => {
@@ -157,7 +162,17 @@ export function updateProjectNavColumn(projectObj) {
     loadProjectPage(projectObj);
   });
 
+  projectItem.id = assignProjectIDName(projectObj);
   projectsList.appendChild(projectItem);
+}
+
+export function removeItemFromProjectNavColumn(obj) {
+  if (obj.classname === 'Project') {
+    const projectsList = document.getElementById('projects-list');
+    const projectItem = document.getElementById(assignProjectIDName(obj));
+
+    projectsList.removeChild(projectItem);
+  }
 }
 
 /** BUTTON TEMPLATES * */

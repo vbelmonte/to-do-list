@@ -1,7 +1,7 @@
 import { isToday, isThisWeek, parseISO } from 'date-fns';
 import Task from './tasks';
 import Project from './projects';
-import { removeItemFromTaskList } from './templates';
+import { removeItemFromTaskList, removeItemFromProjectNavColumn } from './templates';
 
 export const projectArray = [];
 export const inboxTaskArray = [];
@@ -100,23 +100,6 @@ function removeItemFromWeekArray(tag) {
   }
 }
 
-/*function removeItemFromAssociatedProject(tag) {
-  const index = inboxTaskArray.map((i) => i.itemTag).indexOf(tag);
-
-  if (index >= 0) {
-    const item = inboxTaskArray[index];
-    const projectTag = item.associatedProject;
-    const indexOfProject = projectArray.map((i) => i.itemTag).indexOf(projectTag);
-    const projectItem = projectArray.splice(indexOfProject, 1)[0];
-    const { inProgressTaskArray } = projectItem;
-
-    const taskIndex = inProgressTaskArray.map((i) => i.itemTag).indexOf(tag);
-    projectItem.inProgressTaskArray.splice(taskIndex, 1);
-
-    projectArray.push(projectItem);
-  }
-}*/
-
 function determineTaskType(tag) {
   if (inboxTaskArray.map((i) => i.itemTag).indexOf(tag) >= 0 && inboxTaskArray.length >= 1) {
     return 'inbox';
@@ -133,13 +116,10 @@ function removeItemFromAllArrays(tag) {
   const taskType = determineTaskType(tag);
 
   if (taskType === 'inbox') {
-    /*removeItemFromAssociatedProject(tag);*/
     return removeItemFromInbox(tag);
   }
 
   return removeItemFromProjects(tag);
-
-  /* return removeItemFromInbox(tag); */
 }
 
 function moveItemToCompletedArray(obj) {
@@ -154,8 +134,6 @@ function markItemAsComplete(obj) {
 }
 
 function updateLocalStorage(obj) {
-  /* const itemName = obj.name;
-  const keyName = `item-${itemName}`; */
   const keyName = obj.itemTag;
   localStorage.removeItem(keyName);
 
@@ -196,6 +174,7 @@ export function markAsComplete(event) {
   moveItemToCompletedArray(updatedObj);
   moveItemToProjectCompletedArray(updatedObj);
   removeItemFromTaskList(obj);
+  removeItemFromProjectNavColumn(updatedObj);
   updateLocalStorage(updatedObj);
 }
 

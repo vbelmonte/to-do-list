@@ -21,7 +21,17 @@ function assignPriorityImage(priority) {
   }
 
   return '<img src=\'../src/assets/img/priority-high.svg\'>';
-}  
+}
+
+function assignPriorityColorClass(priority) {
+  if (priority === 'low') {
+    return 'task-blue';
+  }
+  if (priority === 'medium') {
+    return 'task-orange';
+  }
+  return 'task-red';
+}
 
 function assignCheckBoxID(obj) {
   const checkboxID = obj.itemTag;
@@ -37,10 +47,8 @@ function createCheckBoxDiv(obj) {
   const label = document.createElement('label');
   const checkboxID = assignCheckBoxID(obj);
 
-  /*label.setAttribute('for', 'checkbox');*/
   label.setAttribute('for', checkboxID);
 
-  /*checkboxInput.id = 'checkbox';*/
   checkboxInput.id = checkboxID;
   checkboxInput.setAttribute('type', 'checkbox');
   checkboxInput.addEventListener('click', markAsComplete);
@@ -57,68 +65,149 @@ function createCheckBoxDiv(obj) {
   return div;
 }
 
-function createTaskInfoDiv(taskName, taskDesc, dueDate, priority) {
-  const taskInfoDiv = document.createElement('div');
-  taskInfoDiv.classList.add('task-info');
+function createTaskIconsDiv(colorClass) {
+  const iconsDiv = document.createElement('div');
+  const trashIconDiv = document.createElement('div');
+  const trashIconImg = document.createElement('img');
+  trashIconImg.src = '../src/assets/img/trash-can-solid.svg';
+  trashIconImg.classList.add('task-icon');
+  trashIconImg.classList.add(colorClass);
+  trashIconDiv.appendChild(trashIconImg);
 
-  const namePriorityDiv = document.createElement('div');
-  namePriorityDiv.classList.add('name-priority');
+  const editIconDiv = document.createElement('div');
+  const editIconImg = document.createElement('img');
+  editIconImg.src = '../src/assets/img/pen-to-square-solid.svg';
+  editIconImg.classList.add('task-icon');
+  editIconImg.classList.add(colorClass);
+  editIconDiv.appendChild(editIconImg);
 
+  iconsDiv.appendChild(trashIconDiv);
+  iconsDiv.appendChild(editIconDiv);
+  iconsDiv.classList.add('icons');
+
+  return iconsDiv;
+}
+
+function createTaskName(taskName) {
   const taskNameDiv = document.createElement('div');
-  taskNameDiv.classList.add('task-name');
   taskNameDiv.innerHTML = `<h4>${taskName}</h4>`;
 
-  const taskPriorityImgDiv = document.createElement('div');
-  const taskPriorityImg = assignPriorityImage(priority);
-  taskPriorityImgDiv.innerHTML = taskPriorityImg;
+  return taskNameDiv;
+}
 
-  const deadlineDiv = document.createElement('div');
-  deadlineDiv.classList.add('deadline');
-  deadlineDiv.innerHTML = `<h5>${dueDate}</h5>`;
+function createPriority(taskPriority) {
+  const priorityDiv = document.createElement('div');
+  const priorityImg = assignPriorityImage(taskPriority);
+  priorityDiv.innerHTML = `${priorityImg}`;
+
+  return priorityDiv;
+}
+
+function createChevron(colorClass) {
+  const chevronDiv = document.createElement('div');
+  const chevronImg = document.createElement('img');
+  chevronImg.src = '../src/assets/img/chevron-up-solid.svg';
+  chevronImg.classList.add('task-icon');
+  chevronImg.classList.add(colorClass);
+  chevronDiv.appendChild(chevronImg);
+
+  return chevronDiv;
+}
+
+function createDueDate(dueDate, colorClass) {
+  const div = document.createElement('div');
+
+  const dueDateTitle = document.createElement('div');
+  dueDateTitle.classList.add('uppercase');
+  dueDateTitle.classList.add(colorClass);
+  dueDateTitle.innerHTML = '<h5>Due Date</h5>';
+  div.appendChild(dueDateTitle);
+
+  const dueDateDiv = document.createElement('div');
+  const taskDueDate = format(parseISO(dueDate), 'MM/dd/yyyy');
+  dueDateDiv.innerHTML = `<p>${taskDueDate}</p>`;
+  dueDateDiv.classList.add('deadline');
+  div.appendChild(dueDateDiv);
+
+  return div;
+}
+
+function createTaskDescription(description, colorClass) {
+  const div = document.createElement('div');
+
+  const descriptionTitle = document.createElement('div');
+  descriptionTitle.classList.add('uppercase');
+  descriptionTitle.classList.add(colorClass);
+  descriptionTitle.innerHTML = '<h5>Description</h5>';
+  div.appendChild(descriptionTitle);
 
   const taskDescDiv = document.createElement('div');
   taskDescDiv.classList.add('description');
-  taskDescDiv.innerHTML = `<p>${taskDesc}</p>`;
+  taskDescDiv.innerHTML = `<p>${description}</p>`;
+  div.appendChild(taskDescDiv);
 
-  namePriorityDiv.appendChild(taskNameDiv);
-  namePriorityDiv.appendChild(taskPriorityImgDiv);
-
-  taskInfoDiv.appendChild(namePriorityDiv);
-  taskInfoDiv.appendChild(deadlineDiv);
-  taskInfoDiv.appendChild(taskDescDiv);
-
-  return taskInfoDiv;
+  return div;
 }
 
-function createEditDiv() {
-  const editDiv = document.createElement('div');
-  editDiv.classList.add('edit');
-  const editSVG = '<img class=\'edit-icon\' src=\'../src/assets/img/ellipsis-vertical-solid.svg\'>';
+function createTopRowTaskDiv(taskObject, colorClass) {
+  const topRowDiv = document.createElement('div');
 
-  editDiv.innerHTML = `${editSVG}`;
+  const checkBoxDiv = createCheckBoxDiv(taskObject);
+  topRowDiv.appendChild(checkBoxDiv);
 
-  return editDiv;
+  const rightDiv = document.createElement('div');
+  rightDiv.classList.add('top-row-right');
+
+  const nameAndPriorityDiv = document.createElement('div');
+  nameAndPriorityDiv.classList.add('name-priority');
+
+  const taskNameDiv = createTaskName(taskObject.name);
+  nameAndPriorityDiv.appendChild(taskNameDiv);
+
+  const priorityDiv = createPriority(taskObject.priority);
+  nameAndPriorityDiv.appendChild(priorityDiv);
+
+  rightDiv.appendChild(nameAndPriorityDiv);
+
+  const iconsDiv = createTaskIconsDiv(colorClass);
+  rightDiv.appendChild(iconsDiv);
+
+  const chevronDiv = createChevron(colorClass);
+  rightDiv.appendChild(chevronDiv);
+
+  topRowDiv.appendChild(rightDiv);
+  topRowDiv.classList.add('task-top-row');
+
+  return topRowDiv;
+}
+
+function createBottomRowTaskDiv(taskObject, colorClass) {
+  const bottomDiv = document.createElement('div');
+  bottomDiv.classList.add('task-bottom-row');
+
+  const dueDateDiv = createDueDate(taskObject.dueDate, colorClass);
+  bottomDiv.appendChild(dueDateDiv);
+
+  const taskDescriptionDiv = createTaskDescription(taskObject.description, colorClass);
+  bottomDiv.appendChild(taskDescriptionDiv);
+
+  return bottomDiv;
 }
 
 export default function createTaskDiv(taskObject) {
-  const taskName = taskObject.name;
-  const taskDesc = taskObject.description;
-  const taskDueDate = format(parseISO(taskObject.dueDate), 'MM/dd/yyyy');
-  const taskPriority = taskObject.priority;
-  const taskTag = taskObject.itemTag;
-
   const taskDiv = document.createElement('div');
-  const checkBoxDiv = createCheckBoxDiv(taskObject);
-  const taskInfoDiv = createTaskInfoDiv(taskName, taskDesc, taskDueDate, taskPriority);
-  const editDiv = createEditDiv();
-
+  const taskTag = taskObject.itemTag;
   taskDiv.classList.add('task');
+  taskDiv.classList.add(assignPriorityClass(taskObject.priority));
   taskDiv.classList.add(taskTag);
-  taskDiv.classList.add(assignPriorityClass(taskPriority));
 
-  taskDiv.appendChild(checkBoxDiv);
-  taskDiv.appendChild(taskInfoDiv);
-  taskDiv.appendChild(editDiv);
+  const colorClass = assignPriorityColorClass(taskObject.priority);
+
+  const topRow = createTopRowTaskDiv(taskObject, colorClass);
+  taskDiv.appendChild(topRow);
+
+  const bottomRow = createBottomRowTaskDiv(taskObject, colorClass);
+  taskDiv.appendChild(bottomRow);
 
   return taskDiv;
 }

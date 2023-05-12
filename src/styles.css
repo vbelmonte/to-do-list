@@ -63,6 +63,10 @@ table {
     --light-green: #DFECD4;
     --light-orange: #FFDCB8;
     --light-red: #FFDDDD;
+    --task-icon-blue: #7B98B2;
+    --task-icon-orange: #C09365;
+    --task-icon-red: #D38989;
+    --task-icon-green: #99A98C;
 
     --filter-white: invert(99%) sepia(13%) saturate(137%) hue-rotate(208deg) brightness(111%) contrast(90%);
 }
@@ -141,12 +145,20 @@ h4 {
 
 h5 {
     font-family: 'Inter Medium';
-    font-size: 1rem;
+    font-size: 0.75rem;
 }
 
 h6 {
     font-family: 'Inter Semibold';
     font-size: 1rem;
+}
+
+p {
+    line-height: 2rem;
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
 
 
@@ -469,12 +481,17 @@ footer p {
   }
   
   .task {
-    border-radius: 1rem;
+    border-radius: 0.25rem;
     padding: 1rem;
+
+    flex-direction: column;
   }
   
   .name-priority {
     display: flex;
+
+    flex: 1;
+    justify-content: space-between;
   }
   
   .task-name {
@@ -493,8 +510,52 @@ footer p {
     background-color: var(--light-red);
   }
 
+  .task-blue {
+    /*color: var(--task-icon-blue);*/
+    filter: invert(60%) sepia(29%) saturate(357%) hue-rotate(167deg) brightness(93%) contrast(86%);
+  }
+
+  .task-orange {
+    /*color: var(--task-icon-orange);*/
+    filter: invert(59%) sepia(47%) saturate(345%) hue-rotate(349deg) brightness(94%) contrast(92%);
+  }
+
+  .task-red {
+    /*color: var(--task-icon-red);*/
+    filter: invert(59%) sepia(10%) saturate(1620%) hue-rotate(314deg) brightness(108%) contrast(75%);
+  }
+
   .edit-icon {
     height: 1rem;
+  }
+
+  .task-top-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .top-row-right {
+    display: flex;
+    gap: 2rem;
+    flex: 1;
+    align-items: center;
+  }
+
+  .task-bottom-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-left: 2.25rem;
+  }
+
+  .task-icon {
+    height: 1rem;
+  }
+
+  .icons {
+    display: flex;
+    gap: 1rem;
   }
 
 

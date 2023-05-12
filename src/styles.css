@@ -55,6 +55,7 @@ table {
     --ultra-white: #FFFFFF;
     --titanium: #EBEBEB;
     --gray: #7D7D7D;
+    --lightest-gray: #EBEBEB;
     --blue: #0062F4;
     --dark-blue: #004ec4;
     --dodger-blue: #379FFF;
@@ -167,8 +168,8 @@ p {
 
 button, .button {
     border-style: none;
-    border-radius: 2rem;
-    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    padding: 1rem;
 
     display: flex;
     justify-content: center;
@@ -216,7 +217,7 @@ button img {
 /** INPUT FORM PROPERTIES **/
 
 input[type=text], select, input[type=date] {
-    border: 1px solid gray;
+    border: 1px solid var(--gray);
     border-radius: 0.25rem;
     padding: 0.5rem;
 
@@ -229,6 +230,10 @@ input[type=text], select, input[type=date] {
 
 input[type=date], select {
     padding: 7px 0.5rem 7px 0.5rem;
+}
+
+input[type=date]:invalid {
+    color: var(--gray);
 }
 
 label {
@@ -246,8 +251,8 @@ label {
 }
 
 .form {
-    background-color: silver;
-    border-radius: 1rem;
+    background-color: var(--lightest-gray);
+    border-radius: 0.25rem;
     padding: 2rem;
 }
   

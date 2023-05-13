@@ -103,13 +103,40 @@ function createPriority(taskPriority) {
   return priorityDiv;
 }
 
-function createChevron(colorClass) {
+function rotateChevron(itemTag, chevron) {
+  const bottomClassName = `bottom-${itemTag}`;
+  const taskModuleBottom = document.getElementsByClassName(bottomClassName)[0];
+
+  if (taskModuleBottom.style.display === 'none' || taskModuleBottom.style.display === '') {
+    chevron.style.transform = 'rotate(0)';
+  } else {
+    chevron.style.transform = 'rotate(180deg)';
+  }
+}
+
+function collapseExpandModule(itemTag) {
+  const bottomClassName = `bottom-${itemTag}`;
+  const taskModuleBottom = document.getElementsByClassName(bottomClassName)[0];
+
+  if (taskModuleBottom.style.display === 'none' || taskModuleBottom.style.display === '') {
+    taskModuleBottom.style.display = 'flex';
+  } else {
+    taskModuleBottom.style.display = 'none';
+  }
+}
+
+function createChevron(colorClass, itemTag) {
   const chevronDiv = document.createElement('div');
   const chevronImg = document.createElement('img');
   chevronImg.src = '../src/assets/img/chevron-up-solid.svg';
   chevronImg.classList.add('task-icon');
   chevronImg.classList.add(colorClass);
   chevronDiv.appendChild(chevronImg);
+  chevronDiv.classList.add(itemTag);
+  chevronDiv.addEventListener('click', () => {
+    collapseExpandModule(itemTag);
+    rotateChevron(itemTag, chevronImg);
+  });
 
   return chevronDiv;
 }
@@ -172,7 +199,7 @@ function createTopRowTaskDiv(taskObject, colorClass) {
   const iconsDiv = createTaskIconsDiv(colorClass);
   rightDiv.appendChild(iconsDiv);
 
-  const chevronDiv = createChevron(colorClass);
+  const chevronDiv = createChevron(colorClass, taskObject.itemTag);
   rightDiv.appendChild(chevronDiv);
 
   topRowDiv.appendChild(rightDiv);
@@ -184,6 +211,7 @@ function createTopRowTaskDiv(taskObject, colorClass) {
 function createBottomRowTaskDiv(taskObject, colorClass) {
   const bottomDiv = document.createElement('div');
   bottomDiv.classList.add('task-bottom-row');
+  bottomDiv.classList.add(`bottom-${taskObject.itemTag}`);
 
   const dueDateDiv = createDueDate(taskObject.dueDate, colorClass);
   bottomDiv.appendChild(dueDateDiv);

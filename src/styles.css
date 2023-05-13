@@ -60,6 +60,7 @@ table {
     --dark-blue: #004ec4;
     --dodger-blue: #379FFF;
     --uranian-blue: #BDDFFF;
+    --light-blue: #D0E0EF;
     --green: #72B01D;
     --light-green: #DFECD4;
     --light-orange: #FFDCB8;
@@ -504,7 +505,7 @@ footer p {
   }
   
   .low-p {
-    background-color: var(--uranian-blue);
+    background-color: var(--light-blue);
   }
 
   .med-p {
@@ -548,7 +549,7 @@ footer p {
   }
 
   .task-bottom-row {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 2rem;
     margin-left: 2.25rem;

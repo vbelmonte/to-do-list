@@ -144,6 +144,7 @@ h2 {
 
 h3 {
     font-family: 'Inter Bold';
+    line-height: 1.5rem;
 }
 
 h4 {
@@ -217,6 +218,35 @@ button, .button {
 button img {
     filter: var(--filter-white);
     width: 0.75rem;
+}
+
+
+
+/** CATEGORY PROPERTIES **/
+.category {
+  border-radius: 2rem;
+  padding: 0.25rem 0.5rem;
+  color: var(--gray);
+}
+
+.category:hover {
+  color: var(--blue);
+  cursor: default;
+}
+
+.category.active {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.category.active:hover {
+  color: var(--white);
+  cursor: default;
+}
+
+.categories {
+  display: flex;
+  gap: 1rem;
 }
 
 

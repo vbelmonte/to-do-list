@@ -6,7 +6,11 @@ import { removeItemFromTaskList, removeItemFromProjectNavColumn } from './templa
 export const projectArray = [];
 export const inboxTaskArray = [];
 export const dueTodayArray = [];
+export const tasksDueTodayArray = [];
+export const projectsDueTodayArray = [];
 export const dueThisWeekArray = [];
+export const tasksDueThisWeekArray = [];
+export const projectsDueThisWeekArray = [];
 export const completedArray = [];
 export const allItemsArray = [];
 
@@ -84,20 +88,37 @@ function removeItemFromProjects(tag) {
   }
 }
 
-function removeItemFromTodayArray(tag) {
-  const index = dueTodayArray.map((i) => i.itemTag).indexOf(tag);
+function removeItemFromAssociatedProject(tag) {
+  const indexA = allItemsArray.map((i) => i.itemTag).indexOf(tag);
+  const taskObject = allItemsArray[indexA];
 
-  if (index >= 0) {
-    dueTodayArray.splice(index, 1)[0];
-  }
+  const associatedProjectTag = taskObject.associatedProject;
+
+  const indexB = projectArray.map((i) => i.itemTag).indexOf(associatedProjectTag);
 }
 
-function removeItemFromWeekArray(tag) {
-  const index = dueThisWeekArray.map((i) => i.itemTag).indexOf(tag);
+function removeItemFromTodayArrays(tag) {
+  const todayArrays = [projectsDueTodayArray, tasksDueTodayArray, dueTodayArray];
 
-  if (index >= 0) {
-    dueThisWeekArray.splice(index, 1)[0];
-  }
+  todayArrays.forEach((array) => {
+    const index = array.map((i) => i.itemTag).indexOf(tag);
+
+    if (index >= 0) {
+      array.splice(index, 1)[0];
+    }
+  });
+}
+
+function removeItemFromWeekArrays(tag) {
+  const weekArrays = [projectsDueThisWeekArray, tasksDueThisWeekArray, dueThisWeekArray];
+
+  weekArrays.forEach((array) => {
+    const index = array.map((i) => i.itemTag).indexOf(tag);
+
+    if (index >= 0) {
+      array.splice(index, 1)[0];
+    }
+  });
 }
 
 function determineTaskType(tag) {
@@ -107,19 +128,24 @@ function determineTaskType(tag) {
   if (projectArray.map((i) => i.itemTag).indexOf(tag) >= 0 && projectArray.length >= 1) {
     return 'project';
   }
+  return 'project-task';
 }
 
 function removeItemFromAllArrays(tag) {
-  removeItemFromTodayArray(tag);
-  removeItemFromWeekArray(tag);
+  removeItemFromTodayArrays(tag);
+  removeItemFromWeekArrays(tag);
 
   const taskType = determineTaskType(tag);
 
   if (taskType === 'inbox') {
-    return removeItemFromInbox(tag);
+    /* return removeItemFromInbox(tag); */
+    removeItemFromInbox(tag);
+  } else if (taskType === 'project') {
+    /* return removeItemFromProjects(tag); */
+    removeItemFromProjects(tag);
+  } else {
+    removeItemFromAssociatedProject(tag);
   }
-
-  return removeItemFromProjects(tag);
 }
 
 function moveItemToCompletedArray(obj) {
@@ -145,7 +171,7 @@ function updateLocalStorage(obj) {
 function removeItemFromProjectInProgressArray(obj) {
   const associatedProjectTag = obj.associatedProject;
   const indexOfProject = projectArray.map((i) => i.itemTag).indexOf(associatedProjectTag);
-  const inProgressTaskArray = projectArray[indexOfProject].inProgressTaskArray;
+  const { inProgressTaskArray } = projectArray[indexOfProject];
 
   const indexOfTask = inProgressTaskArray.map((i) => i.itemTag).indexOf(obj.itemTag);
   projectArray[indexOfProject].inProgressTaskArray.splice(indexOfTask, 1);
@@ -162,13 +188,19 @@ function moveItemToProjectCompletedArray(obj) {
   }
 }
 
+function retrieveObj(tag) {
+  const index = allItemsArray.map((i) => i.itemTag).indexOf(tag);
+  return allItemsArray[index];
+}
+
 export function updateProjectItem(obj) {
   updateLocalStorage(obj);
 }
 
 export function markAsComplete(event) {
   const tagID = event.target.id;
-  const obj = removeItemFromAllArrays(tagID);
+  removeItemFromAllArrays(tagID);
+  const obj = retrieveObj(tagID);
   const updatedObj = markItemAsComplete(obj);
 
   moveItemToCompletedArray(updatedObj);
@@ -199,10 +231,20 @@ function addItemToLocalStorage(object) {
 
 function addItemToDayArray(object) {
   dueTodayArray.push(object);
+  if (object.classname === 'Task') {
+    tasksDueTodayArray.push(object);
+  } else {
+    projectsDueTodayArray.push(object);
+  }
 }
 
 function addItemToWeekArray(object) {
   dueThisWeekArray.push(object);
+  if (object.classname === 'Task') {
+    tasksDueThisWeekArray.push(object);
+  } else {
+    projectsDueThisWeekArray.push(object);
+  }
 }
 
 function addItemToWeekOrDay(object) {
@@ -251,7 +293,7 @@ function addItemToLocalArray(object) {
       projectArray.push(object);
       console.log(`projectArray: ${projectArray}`);
     } else if (object.classname === 'Task') {
-      /*inboxTaskArray.push(object);*/
+      /* inboxTaskArray.push(object); */
       if (object.associatedProject === undefined) {
         inboxTaskArray.push(object);
       }

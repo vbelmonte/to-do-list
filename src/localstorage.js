@@ -232,8 +232,10 @@ export function addItemsToLocalArrays() {
       }
     } else if (convertedObj.classname === 'Task') {
       if (convertedObj.status === 'in-progress') {
-        inboxTaskArray.push(convertedObj);
         addItemToWeekOrDay(convertedObj);
+        if (convertedObj.associatedProject === undefined) {
+          inboxTaskArray.push(convertedObj);
+        }
       } else {
         completedArray.push(convertedObj);
       }
@@ -249,7 +251,10 @@ function addItemToLocalArray(object) {
       projectArray.push(object);
       console.log(`projectArray: ${projectArray}`);
     } else if (object.classname === 'Task') {
-      inboxTaskArray.push(object);
+      /*inboxTaskArray.push(object);*/
+      if (object.associatedProject === undefined) {
+        inboxTaskArray.push(object);
+      }
     } else {
       completedArray.push(object);
     }

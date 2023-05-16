@@ -11,12 +11,12 @@ function createPageHeadline(pageName) {
   return pageNameDiv;
 }
 
-function createProjectDescription(projDescription) {
-  const projectDescH2 = document.createElement('h2');
+export function createPageDescription(description) {
+  const descriptionDiv = document.createElement('div');
 
-  projectDescH2.innerHTML = `${projDescription}`;
+  descriptionDiv.innerHTML = `<h2>${description}</h2>`;
 
-  return projectDescH2;
+  return descriptionDiv;
 }
 
 function createModuleTitle(moduleTitle) {
@@ -245,5 +245,5 @@ function showForm() {
 }
 
 export {
-  createPageHeadline, createProjectDescription, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, closeForm, showForm, updateTaskList,
+  createPageHeadline, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, closeForm, showForm, updateTaskList,
 };

@@ -136,6 +136,12 @@ h1 {
     font-size: 3rem;
 }
 
+h2 {
+  font-family: 'Inter Regular';
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
 h3 {
     font-family: 'Inter Bold';
 }
@@ -308,6 +314,15 @@ main {
     padding: 2rem;
 }
 
+
+
+/** INDIVIDUAL PAGE PROPERTIES **/
+
+.title-description {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
 
 

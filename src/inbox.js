@@ -1,5 +1,5 @@
 import {
-  createPageHeadline, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, showForm
+  createPageHeadline, clearMainContent, createModuleTitle, createPageDescription, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, showForm
 } from './templates';
 
 import createForm from './form-template';
@@ -11,6 +11,7 @@ export default function loadInbox() {
 
   const mainContentDiv = document.getElementById('main-content');
   const pageHeadline = createPageHeadline('Inbox');
+  const pageDescription = createPageDescription('General list of tasks not belonging to any category or project.');
   const moduleContainerDiv = createModuleContainer('my-tasks');
   const moduleTitleDiv = createModuleTitle('My Tasks');
   const taskContainerDiv = createTaskContainer();
@@ -31,6 +32,11 @@ export default function loadInbox() {
   formDiv.style.display = 'none';
   taskContainerDiv.appendChild(taskListDiv);
 
-  mainContentDiv.appendChild(pageHeadline);
+  const titleAndDescription = document.createElement('div');
+  titleAndDescription.appendChild(pageHeadline);
+  titleAndDescription.appendChild(pageDescription);
+  titleAndDescription.classList.add('title-description');
+
+  mainContentDiv.appendChild(titleAndDescription);
   mainContentDiv.appendChild(moduleContainerDiv);
 }

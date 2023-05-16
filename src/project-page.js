@@ -1,5 +1,5 @@
 import {
-  createModuleTitle, createPageHeadline, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, showForm, clearMainContent,
+  createModuleTitle, createPageHeadline, createPageDescription, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, showForm, clearMainContent,
 } from './templates';
 
 import createForm from './form-template';
@@ -12,6 +12,7 @@ export default function loadProjectPage(projectObj) {
 
   const mainContentDiv = document.getElementById('main-content');
   const pageHeadline = createPageHeadline(projectName);
+  const pageDescription = createPageDescription(projectObj.description);
   const moduleContainerDiv = createModuleContainer('my-tasks');
   const moduleTitleDiv = createModuleTitle('My Tasks');
   const taskContainerDiv = createTaskContainer();
@@ -32,6 +33,11 @@ export default function loadProjectPage(projectObj) {
   formDiv.style.display = 'none';
   taskContainerDiv.appendChild(taskListDiv);
 
-  mainContentDiv.appendChild(pageHeadline);
+  const titleAndDescription = document.createElement('div');
+  titleAndDescription.appendChild(pageHeadline);
+  titleAndDescription.appendChild(pageDescription);
+  titleAndDescription.classList.add('title-description');
+
+  mainContentDiv.appendChild(titleAndDescription);
   mainContentDiv.appendChild(moduleContainerDiv);
 }

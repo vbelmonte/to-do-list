@@ -2,7 +2,23 @@ import {
   createPageHeadline, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, showForm,
 } from './templates';
 
-import { dueTodayArray } from './localstorage';
+import { dueTodayArray, projectsDueTodayArray, tasksDueTodayArray } from './localstorage';
+
+function loadProjectsToday() {
+  const projectsListDiv = createTaskList(projectsDueTodayArray, 'today');
+  const taskContainerDiv = document.getElementsByClassName('task-container')[0];
+
+  taskContainerDiv.innerHTML = '';
+  taskContainerDiv.appendChild(projectsListDiv);
+}
+
+function loadTasksToday() {
+  const tasksListDiv = createTaskList(tasksDueTodayArray, 'today');
+  const taskContainerDiv = document.getElementsByClassName('task-container')[0];
+
+  taskContainerDiv.innerHTML = '';
+  taskContainerDiv.appendChild(tasksListDiv);
+}
 
 export default function loadToday() {
   clearMainContent();
@@ -10,15 +26,43 @@ export default function loadToday() {
   const mainContentDiv = document.getElementById('main-content');
   const pageHeadline = createPageHeadline('Today');
   const moduleContainerDiv = createModuleContainer('today');
-  const moduleTitleDiv = createModuleTitle('Due Today');
+  const projectsDiv = createModuleTitle('Projects');
+  const tasksDiv = createModuleTitle('Tasks');
   const taskContainerDiv = createTaskContainer();
   const taskListDiv = createTaskList(dueTodayArray, 'today');
 
-  moduleContainerDiv.appendChild(moduleTitleDiv);
+  projectsDiv.classList.add('category');
+  tasksDiv.classList.add('category');
+
+  projectsDiv.addEventListener('click', loadProjectsToday);
+  tasksDiv.addEventListener('click', loadTasksToday);
+
+  const categoriesDiv = document.createElement('div');
+  categoriesDiv.classList.add('categories');
+  categoriesDiv.appendChild(projectsDiv);
+  categoriesDiv.appendChild(tasksDiv);
+  moduleContainerDiv.appendChild(categoriesDiv);
   moduleContainerDiv.appendChild(taskContainerDiv);
 
   taskContainerDiv.appendChild(taskListDiv);
 
   mainContentDiv.appendChild(pageHeadline);
   mainContentDiv.appendChild(moduleContainerDiv);
+
+  function toggleActiveOff() {
+    const categories = document.getElementsByClassName('category');
+    for (let i = 0; i < categories.length; i += 1) {
+      categories[i].classList.remove('active');
+    }
+  }
+
+  (function toggleActiveClass() {
+    const categories = document.getElementsByClassName('category');
+    for (let i = 0; i < categories.length; i += 1) {
+      categories[i].addEventListener('click', () => {
+        toggleActiveOff();
+        categories[i].classList.add('active');
+      });
+    }
+  }());
 }

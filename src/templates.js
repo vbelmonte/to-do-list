@@ -1,5 +1,6 @@
 import createTaskDiv from './task-templates';
 import loadProjectPage from './project-page';
+import { inboxTaskArray } from './localstorage';
 
 function createPageHeadline(pageName) {
   const pageNameDiv = document.createElement('div');
@@ -205,6 +206,45 @@ function createSolidPlusButton() {
 
   return button;
 }
+
+/** NOTIFICATION TEMPLATES * */
+
+function createTaskCounterButton(type, number) {
+  const notification = document.createElement('div');
+  notification.classList.add('notification');
+  const counter = document.createElement('h5');
+  counter.id = `${type}-counter`;
+
+  counter.innerHTML = number;
+  notification.appendChild(counter);
+
+  const typeDiv = document.getElementById(type);
+  typeDiv.appendChild(notification);
+}
+
+export function updateTaskCounterButton(type, number) {
+  if (document.getElementById(`${type}-counter`) === null || document.getElementById(`${type}-counter`) === undefined) {
+    createTaskCounterButton(type, number);
+  }
+
+  const counter = document.getElementById(`${type}-counter`);
+
+  switch (type) {
+    case 'today':
+      counter.innerHTML = number;
+      break;
+    case 'week':
+      counter.innerHTML = number;
+      break;
+    case 'inbox':
+      counter.innerHTML = number;
+      break;
+    default:
+      break;
+  }
+}
+
+/** BACK-END FUNCTIONS * */
 
 function clearMainContent() {
   const mainContentDiv = document.getElementById('main-content');

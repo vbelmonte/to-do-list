@@ -2,6 +2,7 @@ import Task from './tasks';
 import Project from './projects';
 import addItemToStorage, { allItemsArray, assignItemName, updateProjectItem } from './localstorage';
 import { updateTaskList, updateProjectList, updateProjectNavColumn } from './templates';
+import taskSubject from './task-subject';
 
 export function processTaskForm(event) {
   event.preventDefault();
@@ -18,6 +19,7 @@ export function processTaskForm(event) {
 
   addItemToStorage(taskObj);
   updateTaskList(taskObj);
+  taskSubject.updateIncrement('inbox');
 }
 
 export function processProjectForm(event) {

@@ -1,6 +1,7 @@
 import { isToday, isThisWeek, parseISO } from 'date-fns';
 import Task from './tasks';
 import Project from './projects';
+import taskSubject from './task-subject';
 import { removeItemFromTaskList, removeItemFromProjectNavColumn } from './templates';
 
 export const projectArray = [];
@@ -13,6 +14,10 @@ export const tasksDueThisWeekArray = [];
 export const projectsDueThisWeekArray = [];
 export const completedArray = [];
 export const allItemsArray = [];
+
+taskSubject.taskArraysMap.set('today', dueTodayArray);
+taskSubject.taskArraysMap.set('week', dueThisWeekArray);
+taskSubject.taskArraysMap.set('inbox', inboxTaskArray);
 
 function storageAvailable(type) {
   let storage;
@@ -231,6 +236,7 @@ function addItemToLocalStorage(object) {
 
 function addItemToDayArray(object) {
   dueTodayArray.push(object);
+  taskSubject.updateIncrement('today');
   if (object.classname === 'Task') {
     tasksDueTodayArray.push(object);
   } else {
@@ -240,6 +246,7 @@ function addItemToDayArray(object) {
 
 function addItemToWeekArray(object) {
   dueThisWeekArray.push(object);
+  taskSubject.updateIncrement('week');
   if (object.classname === 'Task') {
     tasksDueThisWeekArray.push(object);
   } else {
@@ -277,6 +284,7 @@ export function addItemsToLocalArrays() {
         addItemToWeekOrDay(convertedObj);
         if (convertedObj.associatedProject === undefined) {
           inboxTaskArray.push(convertedObj);
+          taskSubject.updateIncrement('inbox');
         }
       } else {
         completedArray.push(convertedObj);

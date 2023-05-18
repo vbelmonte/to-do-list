@@ -437,7 +437,7 @@ footer p {
     height: 100%;
 }
 
-#side-column nav div {
+#side-column nav div.top {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -454,6 +454,7 @@ footer p {
 }
 
 #side-column .projects-link {
+  display: flex;
     flex-direction: row;
     align-items: center;
 }
@@ -474,6 +475,7 @@ footer p {
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex: 1;
 
     transition: color 0.1s linear;
 }
@@ -485,6 +487,11 @@ footer p {
 
 .nav-link.active {
     color: var(--blue);
+}
+
+.link {
+  display: flex;
+  gap: 1rem;
 }
 
 
@@ -655,3 +662,18 @@ footer p {
   .round input[type="checkbox"]:checked + label:after {
     opacity: 1;
   }
+
+
+
+/** NOTIFICATION PROPERTIES **/
+
+.notification {
+  border-radius: 2rem;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--gray);
+  color: var(--white);
+}
+
+#urgent {
+  background-color: red;
+}

@@ -550,11 +550,14 @@ footer p {
     flex-direction: column;
   }
   
-  .name-priority {
-    display: flex;
-
+  .task-name {
     flex: 1;
-    justify-content: space-between;
+  }
+
+  .priority-due-date {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
   }
   
   .task-name {
@@ -574,17 +577,19 @@ footer p {
   }
 
   .task-blue {
-    /*color: var(--task-icon-blue);*/
     filter: invert(60%) sepia(29%) saturate(357%) hue-rotate(167deg) brightness(93%) contrast(86%);
   }
 
   .task-orange {
-    /*color: var(--task-icon-orange);*/
     filter: invert(59%) sepia(47%) saturate(345%) hue-rotate(349deg) brightness(94%) contrast(92%);
+    transition: 0.1s linear;
+  }
+
+  .task-orange:hover {
+    filter: invert(50%) sepia(42%) saturate(465%) hue-rotate(349deg) brightness(100%) contrast(89%);
   }
 
   .task-red {
-    /*color: var(--task-icon-red);*/
     filter: invert(59%) sepia(10%) saturate(1620%) hue-rotate(314deg) brightness(108%) contrast(75%);
   }
 

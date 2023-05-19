@@ -80,6 +80,9 @@ function createTaskIconsDiv(colorClass) {
   editIconImg.classList.add('task-icon');
   editIconImg.classList.add(colorClass);
   editIconDiv.appendChild(editIconImg);
+  editIconDiv.addEventListener('click', () => {
+    console.log('you click the edit button!');
+  });
 
   iconsDiv.appendChild(trashIconDiv);
   iconsDiv.appendChild(editIconDiv);
@@ -90,6 +93,7 @@ function createTaskIconsDiv(colorClass) {
 
 function createTaskName(taskName) {
   const taskNameDiv = document.createElement('div');
+  taskNameDiv.classList.add('task-name');
   taskNameDiv.innerHTML = `<h4>${taskName}</h4>`;
 
   return taskNameDiv;
@@ -141,22 +145,13 @@ function createChevron(colorClass, itemTag) {
   return chevronDiv;
 }
 
-function createDueDate(dueDate, colorClass) {
-  const div = document.createElement('div');
-
-  const dueDateTitle = document.createElement('div');
-  dueDateTitle.classList.add('uppercase');
-  dueDateTitle.classList.add(colorClass);
-  dueDateTitle.innerHTML = '<h5>Due Date</h5>';
-  div.appendChild(dueDateTitle);
-
+function createDueDate(dueDate) {
   const dueDateDiv = document.createElement('div');
   const taskDueDate = format(parseISO(dueDate), 'MM/dd/yyyy');
   dueDateDiv.innerHTML = `<p>${taskDueDate}</p>`;
   dueDateDiv.classList.add('deadline');
-  div.appendChild(dueDateDiv);
 
-  return div;
+  return dueDateDiv;
 }
 
 function createTaskDescription(description, colorClass) {
@@ -185,16 +180,19 @@ function createTopRowTaskDiv(taskObject, colorClass) {
   const rightDiv = document.createElement('div');
   rightDiv.classList.add('top-row-right');
 
-  const nameAndPriorityDiv = document.createElement('div');
-  nameAndPriorityDiv.classList.add('name-priority');
-
   const taskNameDiv = createTaskName(taskObject.name);
-  nameAndPriorityDiv.appendChild(taskNameDiv);
+  rightDiv.appendChild(taskNameDiv);
+
+  const priorityAndDateDiv = document.createElement('div');
+  priorityAndDateDiv.classList.add('priority-due-date');
 
   const priorityDiv = createPriority(taskObject.priority);
-  nameAndPriorityDiv.appendChild(priorityDiv);
+  const dueDateDiv = createDueDate(taskObject.dueDate, colorClass);
 
-  rightDiv.appendChild(nameAndPriorityDiv);
+  priorityAndDateDiv.appendChild(dueDateDiv);
+  priorityAndDateDiv.appendChild(priorityDiv);
+
+  rightDiv.appendChild(priorityAndDateDiv);
 
   const iconsDiv = createTaskIconsDiv(colorClass);
   rightDiv.appendChild(iconsDiv);
@@ -212,9 +210,6 @@ function createBottomRowTaskDiv(taskObject, colorClass) {
   const bottomDiv = document.createElement('div');
   bottomDiv.classList.add('task-bottom-row');
   bottomDiv.classList.add(`bottom-${taskObject.itemTag}`);
-
-  const dueDateDiv = createDueDate(taskObject.dueDate, colorClass);
-  bottomDiv.appendChild(dueDateDiv);
 
   const taskDescriptionDiv = createTaskDescription(taskObject.description, colorClass);
   bottomDiv.appendChild(taskDescriptionDiv);

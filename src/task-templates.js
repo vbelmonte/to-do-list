@@ -147,9 +147,14 @@ function createChevron(colorClass, itemTag) {
 
 function createDueDate(dueDate) {
   const dueDateDiv = document.createElement('div');
-  const taskDueDate = format(parseISO(dueDate), 'MM/dd/yyyy');
-  dueDateDiv.innerHTML = `<p>${taskDueDate}</p>`;
   dueDateDiv.classList.add('deadline');
+
+  const p = document.createElement('p');
+  p.classList.add('date');
+
+  const taskDueDate = format(parseISO(dueDate), 'MM/dd/yyyy');
+  p.innerText = taskDueDate;
+  dueDateDiv.appendChild(p);
 
   return dueDateDiv;
 }

@@ -626,6 +626,10 @@ footer p {
     gap: 1rem;
   }
 
+  p.date {
+    font-size: 0.75rem;
+  }
+
 
 
   /** CHECKBOX PROPERTIES **/

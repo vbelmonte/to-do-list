@@ -212,7 +212,14 @@ function createSolidPlusButton() {
 function createTaskCounterButton(type, number) {
   const notification = document.createElement('div');
   notification.classList.add('notification');
+  notification.id = `${type}-notification`;
+
+  if (type === 'today') {
+    notification.classList.add('urgent');
+  }
+
   const counter = document.createElement('h5');
+  counter.classList.add('counter');
   counter.id = `${type}-counter`;
 
   counter.innerHTML = number;
@@ -222,11 +229,12 @@ function createTaskCounterButton(type, number) {
   typeDiv.appendChild(notification);
 }
 
-export function updateTaskCounterButton(type, number) {
-  if (document.getElementById(`${type}-counter`) === null || document.getElementById(`${type}-counter`) === undefined) {
-    createTaskCounterButton(type, number);
-  }
+function removeTaskCounterButton(type) {
+  const notification = document.getElementById(`${type}-notification`);
+  notification.remove();
+}
 
+function incrementCounterButton(type, number) {
   const counter = document.getElementById(`${type}-counter`);
 
   switch (type) {
@@ -241,6 +249,17 @@ export function updateTaskCounterButton(type, number) {
       break;
     default:
       break;
+  }
+}
+
+export function updateTaskCounterButton(type, number) {
+  if (document.getElementById(`${type}-counter`) === null || document.getElementById(`${type}-counter`) === undefined) {
+    createTaskCounterButton(type, number);
+  } else if (number === 0) {
+    // remove the counter
+    removeTaskCounterButton(type);
+  } else {
+    incrementCounterButton(type, number);
   }
 }
 

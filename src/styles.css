@@ -55,6 +55,7 @@ table {
     --ultra-white: #FFFFFF;
     --titanium: #EBEBEB;
     --gray: #7D7D7D;
+    --mid-gray: #BDBDBD;
     --lightest-gray: #EBEBEB;
     --blue: #0062F4;
     --dark-blue: #004ec4;
@@ -168,6 +169,10 @@ p {
 
 .uppercase {
     text-transform: uppercase;
+}
+
+h5.counter {
+  font-size: 0.625rem;
 }
 
 
@@ -669,11 +674,11 @@ footer p {
 
 .notification {
   border-radius: 2rem;
-  padding: 0.25rem 0.75rem;
-  background-color: var(--gray);
+  padding: 0.25rem 0.5rem;
+  background-color: var(--mid-gray);
   color: var(--white);
 }
 
-#urgent {
+.urgent {
   background-color: red;
 }

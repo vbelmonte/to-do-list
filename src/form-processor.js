@@ -19,7 +19,6 @@ export function processTaskForm(event) {
 
   addItemToStorage(taskObj);
   updateTaskList(taskObj);
-  taskSubject.updateIncrement('inbox');
 }
 
 export function processProjectForm(event) {

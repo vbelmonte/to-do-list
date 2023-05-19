@@ -112,6 +112,7 @@ function removeItemFromTodayArrays(tag) {
       array.splice(index, 1)[0];
     }
   });
+  taskSubject.updateDecrement('today', dueTodayArray);
 }
 
 function removeItemFromWeekArrays(tag) {
@@ -124,6 +125,7 @@ function removeItemFromWeekArrays(tag) {
       array.splice(index, 1)[0];
     }
   });
+  taskSubject.updateDecrement('week', dueThisWeekArray);
 }
 
 function determineTaskType(tag) {
@@ -145,6 +147,7 @@ function removeItemFromAllArrays(tag) {
   if (taskType === 'inbox') {
     /* return removeItemFromInbox(tag); */
     removeItemFromInbox(tag);
+    taskSubject.updateDecrement('inbox', inboxTaskArray);
   } else if (taskType === 'project') {
     /* return removeItemFromProjects(tag); */
     removeItemFromProjects(tag);
@@ -236,7 +239,7 @@ function addItemToLocalStorage(object) {
 
 function addItemToDayArray(object) {
   dueTodayArray.push(object);
-  taskSubject.updateIncrement('today');
+  taskSubject.updateIncrement('today', dueTodayArray);
   if (object.classname === 'Task') {
     tasksDueTodayArray.push(object);
   } else {
@@ -246,7 +249,7 @@ function addItemToDayArray(object) {
 
 function addItemToWeekArray(object) {
   dueThisWeekArray.push(object);
-  taskSubject.updateIncrement('week');
+  taskSubject.updateIncrement('week', dueThisWeekArray);
   if (object.classname === 'Task') {
     tasksDueThisWeekArray.push(object);
   } else {
@@ -284,7 +287,7 @@ export function addItemsToLocalArrays() {
         addItemToWeekOrDay(convertedObj);
         if (convertedObj.associatedProject === undefined) {
           inboxTaskArray.push(convertedObj);
-          taskSubject.updateIncrement('inbox');
+          taskSubject.updateIncrement('inbox', inboxTaskArray);
         }
       } else {
         completedArray.push(convertedObj);
@@ -304,6 +307,7 @@ function addItemToLocalArray(object) {
       /* inboxTaskArray.push(object); */
       if (object.associatedProject === undefined) {
         inboxTaskArray.push(object);
+        taskSubject.updateIncrement('inbox', inboxTaskArray);
       }
     } else {
       completedArray.push(object);

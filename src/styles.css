@@ -580,9 +580,12 @@ footer p {
     filter: invert(60%) sepia(29%) saturate(357%) hue-rotate(167deg) brightness(93%) contrast(86%);
   }
 
+  .task-blue:hover {
+    filter: invert(53%) sepia(17%) saturate(846%) hue-rotate(167deg) brightness(90%) contrast(86%);
+  }
+
   .task-orange {
     filter: invert(59%) sepia(47%) saturate(345%) hue-rotate(349deg) brightness(94%) contrast(92%);
-    transition: 0.1s linear;
   }
 
   .task-orange:hover {
@@ -591,6 +594,10 @@ footer p {
 
   .task-red {
     filter: invert(59%) sepia(10%) saturate(1620%) hue-rotate(314deg) brightness(108%) contrast(75%);
+  }
+
+  .task-red:hover {
+    filter: invert(47%) sepia(12%) saturate(1858%) hue-rotate(314deg) brightness(99%) contrast(75%);
   }
 
   .edit-icon {
@@ -619,6 +626,7 @@ footer p {
 
   .task-icon {
     height: 1rem;
+    transition: 0.1s linear;
   }
 
   .icons {

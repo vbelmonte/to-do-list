@@ -12,6 +12,7 @@ function createNameInput(type) {
 
   const nameInput = document.createElement('input');
   nameInput.setAttribute('type', 'text');
+  nameInput.maxLength = 50;
   nameInput.name = inputName;
   nameInput.id = inputName;
   nameInput.required = true;
@@ -33,6 +34,7 @@ function createDescriptionInput(type) {
 
   const descInput = document.createElement('input');
   descInput.setAttribute('type', 'text');
+  descInput.maxLength = 140;
   descInput.name = inputName;
   descInput.id = inputName;
   descInput.placeholder = `${type} Description`;

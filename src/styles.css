@@ -51,6 +51,7 @@ table {
 
 :root {
     --black: #222222;
+    --modal-black: rgba(0,0,0,0.4);
     --white: #F2F2F2;
     --ultra-white: #FFFFFF;
     --titanium: #EBEBEB;
@@ -258,7 +259,7 @@ button img {
 
 /** INPUT FORM PROPERTIES **/
 
-input[type=text], select, input[type=date] {
+input[type=text], select, input[type=date], textarea {
     border: 1px solid var(--gray);
     border-radius: 0.25rem;
     padding: 0.5rem;
@@ -276,6 +277,11 @@ input[type=date], select {
 
 input[type=date]:invalid {
     color: var(--gray);
+}
+
+textarea {
+  resize: none;
+  line-height: 1.5rem;
 }
 
 label {
@@ -308,22 +314,21 @@ label {
     display: flex;
     gap: 1rem;
   }
+
+  .inputs {
+    flex-direction: column;
+  }
   
   .buttons button, .buttons .button {
     flex: 1;
   }
   
-  .left, .right {
+  form .bottom {
     display: flex;
-    flex-direction: column;
     gap: 1rem;
   }
-  
-  .left {
-    flex: 2;
-  }
-  
-  .right {
+
+  form .bottom div {
     flex: 1;
   }
 
@@ -698,4 +703,20 @@ footer p {
 
 .urgent {
   background-color: red;
+}
+
+
+
+/** EDIT MODAL PROPERTIES **/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: var(--black); /* Fallback color */
+  background-color: var(--modal-black);
 }

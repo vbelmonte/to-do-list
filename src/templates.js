@@ -291,6 +291,15 @@ function closeForm(event) {
   form.style.display = 'none';
 }
 
+export function closeFormModal(event) {
+  event.preventDefault();
+
+  const modalForm = document.getElementsByClassName('modal-form')[0];
+  modalForm.remove();
+  const modal = document.getElementsByClassName('modal')[0];
+  modal.style.display = 'none';
+}
+
 function showForm() {
   const form = document.getElementsByClassName('form')[0];
   const addbutton = document.getElementById('add-button');

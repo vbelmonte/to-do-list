@@ -1,4 +1,4 @@
-import { closeForm } from './templates';
+import { closeForm, closeFormModal } from './templates';
 import {
   processModifyProjectForm, processModifyTaskForm, processProjectForm, processProjectTaskForm, processTaskForm,
 } from './form-processor';
@@ -28,7 +28,7 @@ function createNameInput(type) {
 
 function createNameInputEdit(type, taskObj) {
   const nameDiv = document.createElement('div');
-  const inputName = 'name';
+  const inputName = 'name-edit';
 
   const nameLabel = document.createElement('label');
   nameLabel.classList.add('required');
@@ -41,7 +41,7 @@ function createNameInputEdit(type, taskObj) {
   nameInput.name = inputName;
   nameInput.id = inputName;
   nameInput.required = true;
-  nameInput.placeholder = taskObj.name;
+  nameInput.value = taskObj.name;
 
   nameDiv.appendChild(nameLabel);
   nameDiv.appendChild(nameInput);
@@ -71,18 +71,17 @@ function createDescriptionInput(type) {
 
 function createDescriptionInputEdit(type, taskObj) {
   const descriptionDiv = document.createElement('div');
-  const inputName = 'description';
+  const inputName = 'description-edit';
 
   const descLabel = document.createElement('label');
   descLabel.htmlFor = inputName;
   descLabel.innerHTML = `${type} Description`;
 
-  const descInput = document.createElement('input');
-  descInput.setAttribute('type', 'text');
+  const descInput = document.createElement('textarea');
   descInput.maxLength = 140;
   descInput.name = inputName;
   descInput.id = inputName;
-  descInput.placeholder = taskObj.description;
+  descInput.value = taskObj.description;
 
   descriptionDiv.appendChild(descLabel);
   descriptionDiv.appendChild(descInput);
@@ -116,7 +115,7 @@ function createDueDateInput() {
 
 function createDueDateInputEdit(taskObj) {
   const dueDateDiv = document.createElement('div');
-  const inputName = 'due-date';
+  const inputName = 'due-date-edit';
 
   const dueDateLabel = document.createElement('label');
   dueDateLabel.classList.add('required');
@@ -125,6 +124,9 @@ function createDueDateInputEdit(taskObj) {
 
   const dueDateInput = document.createElement('input');
   dueDateInput.setAttribute('type', 'date');
+
+  const minDate = new Date().toLocaleDateString('fr-ca');
+  dueDateInput.min = minDate;
   dueDateInput.name = inputName;
   dueDateInput.id = inputName;
   dueDateInput.required = true;
@@ -174,7 +176,7 @@ function createPriorityInput() {
 
 function createPriorityInputEdit(taskObj) {
   const priorityDiv = document.createElement('div');
-  const inputName = 'priority';
+  const inputName = 'priority-edit';
 
   const priorityLabel = document.createElement('label');
   priorityLabel.classList.add('required');
@@ -185,7 +187,6 @@ function createPriorityInputEdit(taskObj) {
   priorityInput.name = inputName;
   priorityInput.id = inputName;
   priorityInput.required = true;
-  priorityInput.value = taskObj.priority;
 
   const low = document.createElement('option');
   low.value = 'low';
@@ -202,6 +203,8 @@ function createPriorityInputEdit(taskObj) {
   priorityInput.appendChild(low);
   priorityInput.appendChild(medium);
   priorityInput.appendChild(high);
+
+  priorityInput.value = taskObj.priority;
 
   priorityDiv.appendChild(priorityLabel);
   priorityDiv.appendChild(priorityInput);
@@ -229,6 +232,17 @@ function createCancelButton() {
   cancelButton.onclick = function (event) {
     closeForm(event);
     clearFormValues();
+  };
+
+  return cancelButton;
+}
+
+function createCancelButtonEdit() {
+  const cancelButton = document.createElement('button');
+  cancelButton.classList.add('btn-outline');
+  cancelButton.innerHTML = 'Cancel';
+  cancelButton.onclick = function (event) {
+    closeFormModal(event);
   };
 
   return cancelButton;
@@ -268,7 +282,7 @@ function createButtonsDiv() {
 
 function createButtonsEditDiv() {
   const div = document.createElement('div');
-  const cancel = createCancelButton();
+  const cancel = createCancelButtonEdit();
   const modify = createModifyButton();
 
   div.classList.add('buttons');
@@ -350,34 +364,29 @@ export default function createForm(type, projectObj) {
 
 export function createEditForm(type, projectObj) {
   const formDiv = document.createElement('div');
-  formDiv.classList.add('form');
+  formDiv.classList.add('modal-form');
 
   const inputsDiv = document.createElement('div');
   inputsDiv.classList.add('inputs');
 
-  const leftDiv = document.createElement('div');
-  leftDiv.classList.add('left');
+  const nameInput = createNameInputEdit(type, projectObj);
+  const descriptionInput = createDescriptionInputEdit(type, projectObj);
 
-  const nameInput = createNameInput(type);
-  const descriptionInput = createDescriptionInput(type);
-
-  leftDiv.appendChild(nameInput);
-  leftDiv.appendChild(descriptionInput);
-
-  inputsDiv.appendChild(leftDiv);
+  inputsDiv.appendChild(nameInput);
+  inputsDiv.appendChild(descriptionInput);
 
   const rightDiv = document.createElement('div');
-  rightDiv.classList.add('right');
+  rightDiv.classList.add('bottom');
 
-  const priorityInput = createPriorityInput();
-  const dueDateInput = createDueDateInput();
+  const priorityInput = createPriorityInputEdit(projectObj);
+  const dueDateInput = createDueDateInputEdit(projectObj);
 
   rightDiv.appendChild(dueDateInput);
   rightDiv.appendChild(priorityInput);
 
   inputsDiv.appendChild(rightDiv);
 
-  const buttonsDiv = createButtonsDiv();
+  const buttonsDiv = createButtonsEditDiv();
 
   const form = document.createElement('form');
   assignFormMethod(form, type, projectObj);

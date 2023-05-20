@@ -282,6 +282,7 @@ input[type=date]:invalid {
 textarea {
   resize: none;
   line-height: 1.5rem;
+  height: 5.75rem;
 }
 
 label {
@@ -710,6 +711,8 @@ footer p {
 /** EDIT MODAL PROPERTIES **/
 .modal {
   display: none;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -719,4 +722,19 @@ footer p {
   overflow: auto; /* Enable scroll if needed */
   background-color: var(--black); /* Fallback color */
   background-color: var(--modal-black);
+}
+
+.modal-form {
+  background-color: var(--lightest-gray);
+  border-radius: 0.25rem;
+  padding: 2rem;
+  flex-basis: 20rem;
+}
+
+.modal-form .bottom {
+  flex-direction: column;
+}
+
+.modal-form textarea {
+
 }

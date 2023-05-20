@@ -1,5 +1,6 @@
 import { format, parseISO } from 'date-fns';
 import { markAsComplete } from './localstorage';
+import { createEditForm } from './form-template';
 
 function assignPriorityClass(priority) {
   if (priority === 'low') {
@@ -65,7 +66,7 @@ function createCheckBoxDiv(obj) {
   return div;
 }
 
-function createTaskIconsDiv(colorClass) {
+function createTaskIconsDiv(colorClass, taskObj) {
   const iconsDiv = document.createElement('div');
   const trashIconDiv = document.createElement('div');
   const trashIconImg = document.createElement('img');
@@ -75,12 +76,17 @@ function createTaskIconsDiv(colorClass) {
   trashIconDiv.appendChild(trashIconImg);
 
   const editIconDiv = document.createElement('div');
+  editIconDiv.classList.add(taskObj.itemTag);
   const editIconImg = document.createElement('img');
   editIconImg.src = '../src/assets/img/pen-to-square-solid.svg';
   editIconImg.classList.add('task-icon');
   editIconImg.classList.add(colorClass);
   editIconDiv.appendChild(editIconImg);
   editIconDiv.addEventListener('click', () => {
+    const modal = document.getElementsByClassName('modal')[0];
+    modal.style.display = 'flex';
+    const editModal = createEditForm(taskObj.classname, taskObj);
+    modal.appendChild(editModal);
     console.log('you click the edit button!');
   });
 
@@ -199,7 +205,7 @@ function createTopRowTaskDiv(taskObject, colorClass) {
 
   rightDiv.appendChild(priorityAndDateDiv);
 
-  const iconsDiv = createTaskIconsDiv(colorClass);
+  const iconsDiv = createTaskIconsDiv(colorClass, taskObject);
   rightDiv.appendChild(iconsDiv);
 
   const chevronDiv = createChevron(colorClass, taskObject.itemTag);

@@ -1,5 +1,7 @@
 import { closeForm } from './templates';
-import { processModifyProjectForm, processModifyTaskForm, processProjectForm, processProjectTaskForm, processTaskForm } from './form-processor';
+import {
+  processModifyProjectForm, processModifyTaskForm, processProjectForm, processProjectTaskForm, processTaskForm,
+} from './form-processor';
 
 function createNameInput(type) {
   const nameDiv = document.createElement('div');
@@ -55,8 +57,6 @@ function createDescriptionInput(type) {
   descLabel.htmlFor = inputName;
   descLabel.innerHTML = `${type} Description`;
 
-  /*const descInput = document.createElement('input');
-  descInput.setAttribute('type', 'text');*/
   const descInput = document.createElement('textarea');
   descInput.maxLength = 140;
   descInput.name = inputName;
@@ -101,6 +101,9 @@ function createDueDateInput() {
 
   const dueDateInput = document.createElement('input');
   dueDateInput.setAttribute('type', 'date');
+
+  const minDate = new Date().toLocaleDateString('fr-ca');
+  dueDateInput.min = minDate;
   dueDateInput.name = inputName;
   dueDateInput.id = inputName;
   dueDateInput.required = true;

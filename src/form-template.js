@@ -363,6 +363,12 @@ export default function createForm(type, projectObj) {
 }
 
 export function createEditForm(type, projectObj) {
+  const fieldset = document.createElement('fieldset');
+
+  const legend = document.createElement('legend');
+  legend.innerHTML = '<h3>Edit Task</h3>';
+  fieldset.appendChild(legend);
+
   const formDiv = document.createElement('div');
   formDiv.classList.add('modal-form');
 
@@ -390,9 +396,10 @@ export function createEditForm(type, projectObj) {
 
   const form = document.createElement('form');
   assignFormMethod(form, type, projectObj);
-  form.appendChild(inputsDiv);
-  form.appendChild(buttonsDiv);
+  fieldset.appendChild(inputsDiv);
+  fieldset.appendChild(buttonsDiv);
 
+  form.appendChild(fieldset);
   formDiv.appendChild(form);
 
   return formDiv;

@@ -289,6 +289,7 @@ label {
     font-family: 'Inter Medium';
     font-size: 0.75rem;
     text-transform: uppercase;
+    color: var(--gray);
 
     display: block;
     margin-bottom: 0.25rem;
@@ -735,6 +736,17 @@ footer p {
   flex-direction: column;
 }
 
-.modal-form textarea {
+.modal-form fieldset {
+ display: flex;
+ flex-direction: column;
+ gap: 2rem;
+}
 
+.modal-form legend {
+  margin-bottom: 2rem;
+}
+
+.modal-form h3 {
+  font-size: 1.5rem;
+  color: var(--blue)
 }

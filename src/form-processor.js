@@ -1,7 +1,7 @@
 import Task from './tasks';
 import Project from './projects';
-import addItemToStorage, { allItemsArray, assignItemName, updateProjectItem } from './localstorage';
-import { updateTaskList, updateProjectList, updateProjectNavColumn } from './templates';
+import addItemToStorage, { assignItemName, updateProjectItem, updateItemToStorage } from './localstorage';
+import { updateTaskList, updateProjectList, updateProjectNavColumn, removeItemFromTaskList } from './templates';
 import taskSubject from './task-subject';
 
 export function processTaskForm(event) {
@@ -59,4 +59,27 @@ export function processProjectTaskForm(event, projectObj) {
 
   addItemToStorage(taskObj);
   updateTaskList(taskObj);
+}
+
+export function processModifyTaskForm(event, taskObj) {
+  event.preventDefault();
+  const name = document.getElementById('name-edit').value;
+  const description = document.getElementById('description-edit').value;
+  const dueDate = document.getElementById('due-date-edit').value;
+  const priority = document.getElementById('priority-edit').value;
+  const itemTag = taskObj.itemTag;
+  const status = taskObj.status;
+  const associatedProject = taskObj.associatedProject;
+
+  const editedTaskObj = new Task(name, description, dueDate, priority, itemTag, status, associatedProject);
+
+  updateItemToStorage(editedTaskObj);
+
+  // then update the task list with the edited task object
+  removeItemFromTaskList(taskObj);
+  updateTaskList(editedTaskObj);
+}
+
+export function processModifyProjectForm(event, projObj) {
+  
 }

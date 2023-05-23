@@ -85,7 +85,7 @@ function createTaskIconsDiv(colorClass, taskObj) {
   editIconDiv.addEventListener('click', () => {
     const modal = document.getElementsByClassName('modal')[0];
     modal.style.display = 'flex';
-    const editModal = createEditForm(taskObj.classname, taskObj);
+    const editModal = createEditForm(`Edit ${taskObj.classname}`, taskObj);
     modal.appendChild(editModal);
     console.log('you click the edit button!');
   });

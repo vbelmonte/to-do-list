@@ -201,6 +201,18 @@ function retrieveObj(tag) {
   return allItemsArray[index];
 }
 
+function updateProjectArray(object) {
+  const index = projectArray.map((i) => i.itemTag).indexOf(object.itemTag);
+
+  projectArray[index] = object;
+}
+
+function updateInboxTaskArray(object) {
+  const index = inboxTaskArray.map((i) => i.itemTag).indexOf(object.itemTag);
+
+  inboxTaskArray[index] = object;
+}
+
 export function updateProjectItem(obj) {
   updateLocalStorage(obj);
 }
@@ -266,6 +278,55 @@ function addItemToWeekOrDay(object) {
   }
 }
 
+function updateWeek(object) {
+  if (isThisWeek(parseISO(object.dueDate))) {
+    const index = dueThisWeekArray.map((i) => i.itemTag).indexOf(object.itemTag);
+
+    if (index >= 0) {
+      dueThisWeekArray[index] = object;
+      if (object.classname === 'Task') {
+        const indexT = tasksDueThisWeekArray.map((i) => i.itemTag).indexOf(object.itemTag);
+        tasksDueThisWeekArray[indexT] = object;
+      } else {
+        const indexP = projectsDueThisWeekArray.map((i) => i.itemTag).indexOf(object.itemTag);
+        projectsDueThisWeekArray[indexP] = object;
+      }
+    } else {
+      addItemToWeekArray(object);
+    }
+  } else {
+    removeItemFromWeekArrays(object.itemTag);
+  }
+}
+
+function updateDay(object) {
+  updateWeek(object);
+
+  if (isToday(parseISO(object.dueDate))) {
+    const index = dueTodayArray.map((i) => i.itemTag).indexOf(object.itemTag);
+
+    if (index >= 0) {
+      dueTodayArray[index] = object;
+      if (object.classname === 'Task') {
+        const indexT = tasksDueTodayArray.map((i) => i.itemTag).indexOf(object.itemTag);
+        tasksDueTodayArray[indexT] = object;
+      } else {
+        const indexP = projectsDueTodayArray.map((i) => i.itemTag).indexOf(object.itemTag);
+        projectsDueTodayArray[indexP] = object;
+      }
+    } else {
+      addItemToDayArray(object);
+    }
+  } else {
+    removeItemFromTodayArrays(object.itemTag);
+  }
+}
+
+function updateWeekOrDay(object) {
+  updateWeek(object);
+  updateDay(object);
+}
+
 export function addItemsToLocalArrays() {
   let keyName;
   for (let i = 0; i < localStorage.length; i += 1) {
@@ -296,6 +357,13 @@ export function addItemsToLocalArrays() {
   }
 }
 
+function updateAllItemsArray(object) {
+  const tag = object.itemTag;
+  const index = allItemsArray.map((i) => i.itemTag).indexOf(tag);
+
+  allItemsArray[index] = object;
+}
+
 function addItemToLocalArray(object) {
   if (storageAvailable('localStorage')) {
     allItemsArray.push(object);
@@ -316,6 +384,24 @@ function addItemToLocalArray(object) {
     // eslint-disable-next-line no-console
     console.log('Error! No local storage available.');
   }
+}
+
+function updateLocalArray(object) {
+  updateAllItemsArray(object);
+
+  if (object.classname === 'Project') {
+    updateProjectArray(object);
+  } else if (object.classname === 'Task') {
+    if (object.associatedProject === undefined) {
+      updateInboxTaskArray(object);
+    }
+  }
+}
+
+export function updateItemToStorage(object) {
+  updateLocalStorage(object);
+  updateLocalArray(object);
+  updateWeekOrDay(object);
 }
 
 export default function addItemToStorage(object) {

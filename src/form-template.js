@@ -313,15 +313,15 @@ function assignFormMethod(form, type, projectObj) {
     };
   } else if (type === 'Edit Task') {
     form.onsubmit = function (event) {
-      processModifyTaskForm(event, taskObj);
+      processModifyTaskForm(event, projectObj);
       clearFormValues();
-      closeForm(event);
+      closeFormModal(event);
     };
   } else {
     form.onsubmit = function (event) {
-      processModifyProjectForm(event, projObj);
+      processModifyProjectForm(event, projectObj);
       clearFormValues();
-      closeForm(event);
+      closeFormModal(event);
     };
   }
 }

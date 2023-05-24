@@ -1,8 +1,7 @@
 import Task from './tasks';
 import Project from './projects';
 import addItemToStorage, { assignItemName, updateProjectItem, updateItemToStorage } from './localstorage';
-import { updateTaskList, updateProjectList, updateProjectNavColumn, removeItemFromTaskList } from './templates';
-import taskSubject from './task-subject';
+import { updateTaskList, updateTaskListEdit, updateProjectList, updateProjectNavColumn, removeItemFromTaskList } from './templates';
 
 export function processTaskForm(event) {
   event.preventDefault();
@@ -10,8 +9,6 @@ export function processTaskForm(event) {
   const description = document.getElementById('description').value;
   const dueDate = document.getElementById('due-date').value;
   const priority = document.getElementById('priority').value;
-  /*const tagNumber = allItemsArray.length + 1;
-  const itemTag = `tag-${tagNumber.toString()}`;*/
   const itemTag = assignItemName();
   const status = 'in-progress';
 
@@ -27,8 +24,6 @@ export function processProjectForm(event) {
   const description = document.getElementById('description').value;
   const dueDate = document.getElementById('due-date').value;
   const priority = document.getElementById('priority').value;
-  /*const tagNumber = allItemsArray.length + 1;
-  const itemTag = `tag-${tagNumber.toString()}`;*/
   const itemTag = assignItemName();
   const status = 'in-progress';
 
@@ -73,11 +68,10 @@ export function processModifyTaskForm(event, taskObj) {
 
   const editedTaskObj = new Task(name, description, dueDate, priority, itemTag, status, associatedProject);
 
-  updateItemToStorage(editedTaskObj);
+  const updateResultArray = updateItemToStorage(editedTaskObj);
 
   // then update the task list with the edited task object
-  removeItemFromTaskList(taskObj);
-  updateTaskList(editedTaskObj);
+  updateTaskListEdit(editedTaskObj, updateResultArray);
 }
 
 export function processModifyProjectForm(event, projObj) {

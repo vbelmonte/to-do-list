@@ -291,12 +291,16 @@ function updateWeek(object) {
         const indexP = projectsDueThisWeekArray.map((i) => i.itemTag).indexOf(object.itemTag);
         projectsDueThisWeekArray[indexP] = object;
       }
-    } else {
-      addItemToWeekArray(object);
+
+      return 'modify week';
     }
-  } else {
-    removeItemFromWeekArrays(object.itemTag);
+    addItemToWeekArray(object);
+
+    return 'add week';
   }
+  removeItemFromWeekArrays(object.itemTag);
+
+  return 'remove week';
 }
 
 function updateDay(object) {
@@ -314,17 +318,21 @@ function updateDay(object) {
         const indexP = projectsDueTodayArray.map((i) => i.itemTag).indexOf(object.itemTag);
         projectsDueTodayArray[indexP] = object;
       }
-    } else {
-      addItemToDayArray(object);
+      return 'modify day';
     }
-  } else {
-    removeItemFromTodayArrays(object.itemTag);
+    addItemToDayArray(object);
+    return 'add day';
   }
+  removeItemFromTodayArrays(object.itemTag);
+
+  return 'remove day';
 }
 
 function updateWeekOrDay(object) {
-  updateWeek(object);
-  updateDay(object);
+  const updateWeekResult = updateWeek(object);
+  const updateDayResult = updateDay(object);
+
+  return [updateDayResult, updateWeekResult];
 }
 
 export function addItemsToLocalArrays() {
@@ -401,7 +409,9 @@ function updateLocalArray(object) {
 export function updateItemToStorage(object) {
   updateLocalStorage(object);
   updateLocalArray(object);
-  updateWeekOrDay(object);
+  const updateResultArray = updateWeekOrDay(object);
+
+  return updateResultArray;
 }
 
 export default function addItemToStorage(object) {

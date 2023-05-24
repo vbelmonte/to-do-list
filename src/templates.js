@@ -1,6 +1,5 @@
 import createTaskDiv from './task-templates';
 import loadProjectPage from './project-page';
-import { inboxTaskArray } from './localstorage';
 
 function createPageHeadline(pageName) {
   const pageNameDiv = document.createElement('div');
@@ -142,6 +141,32 @@ export function removeItemFromTaskList(obj) {
   taskListDiv.removeChild(task);
 }
 
+export function updateTaskListEdit(obj, array) {
+  const currentPage = document.getElementsByClassName('module-container')[0].id;
+
+  if (currentPage === 'inbox' || currentPage === 'projects' || currentPage === 'project task') {
+    // dont remove or add, just modify
+    removeItemFromTaskList(obj);
+    updateTaskList(obj);
+  } else if (currentPage === 'day') {
+    const dayResult = array[0];
+    if (dayResult === 'remove day') {
+      removeItemFromTaskList(obj);
+    } else {
+      removeItemFromTaskList(obj);
+      updateTaskList(obj);
+    }
+  } else if (currentPage === 'week') {
+    const weekResult = array[1];
+    if (weekResult === 'remove week') {
+      removeItemFromTaskList(obj);
+    } else {
+      removeItemFromTaskList(obj);
+      updateTaskList(obj);
+    }
+  }
+}
+
 export function updateProjectList(projectObj) {
   const taskListDiv = document.getElementsByClassName('task-list')[0];
   const project = createTaskDiv(projectObj);
@@ -256,12 +281,15 @@ export function updateTaskCounterButton(type, number) {
   if (document.getElementById(`${type}-counter`) === null || document.getElementById(`${type}-counter`) === undefined) {
     if (number !== 0) {
       createTaskCounterButton(type, number);
+      return 'increment';
     }
   } else if (number === 0) {
     // remove the counter
     removeTaskCounterButton(type);
+    return 'decrement';
   } else {
     incrementCounterButton(type, number);
+    return 'increment';
   }
 }
 

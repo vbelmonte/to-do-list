@@ -67,17 +67,11 @@ const taskSubject = {
   },
 
   updateIncrement(key, array) {
-    /*const value = this.taskArraysMap.get(key);
-    this.taskArraysMap.set(array, value);
-    this.notify(array, value);*/
     this.taskArraysMap.set(key, array);
     this.notify(key, array.length);
   },
 
   updateDecrement(key, array) {
-    /*const value = this.taskArraysMap.get(array) - 1;
-    this.taskArraysMap.set(array, value);
-    this.notify(array, value);*/
     this.taskArraysMap.set(key, array);
     this.notify(key, array.length);
   },

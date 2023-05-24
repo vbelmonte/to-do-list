@@ -254,7 +254,9 @@ function incrementCounterButton(type, number) {
 
 export function updateTaskCounterButton(type, number) {
   if (document.getElementById(`${type}-counter`) === null || document.getElementById(`${type}-counter`) === undefined) {
-    createTaskCounterButton(type, number);
+    if (number !== 0) {
+      createTaskCounterButton(type, number);
+    }
   } else if (number === 0) {
     // remove the counter
     removeTaskCounterButton(type);

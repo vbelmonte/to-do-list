@@ -314,7 +314,6 @@ function assignFormMethod(form, type, projectObj) {
   } else if (type === 'Edit Task') {
     form.onsubmit = function (event) {
       processModifyTaskForm(event, projectObj);
-      clearFormValues();
       closeFormModal(event);
     };
   } else {

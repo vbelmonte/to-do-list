@@ -12,7 +12,7 @@ export default function loadInbox() {
   const mainContentDiv = document.getElementById('main-content');
   const pageHeadline = createPageHeadline('Inbox');
   const pageDescription = createPageDescription('General list of tasks not belonging to any category or project.');
-  const moduleContainerDiv = createModuleContainer('my-tasks');
+  const moduleContainerDiv = createModuleContainer('inbox');
   const moduleTitleDiv = createModuleTitle('My Tasks');
   const taskContainerDiv = createTaskContainer();
   const addTaskButtonDiv = document.createElement('div');

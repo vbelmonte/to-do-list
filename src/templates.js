@@ -67,7 +67,6 @@ function createTaskList(taskArray, page) {
 
     const imgDiv = document.createElement('div');
     const img = assignTaskListImg(page);
-    /* const img = '<img src="../src/assets/img/no-tasks-yet.svg">'; */
 
     imgDiv.innerHTML = `${img}`;
     imgDiv.id = 'empty-img';
@@ -121,17 +120,34 @@ export function populateProjectsNavList(projectsArray) {
   }
 }
 
+function addOrRemoveEmptyImg() {
+  const currentPage = document.getElementsByClassName('module-container')[0].id;
+  const taskList = document.getElementsByClassName('task-list')[0];
+  const task = document.getElementsByClassName('task')[0];
+
+  if (!taskList.contains(task) && taskList.id !== 'empty-list') {
+    const imgDiv = document.createElement('div');
+    const img = assignTaskListImg(currentPage);
+
+    imgDiv.innerHTML = `${img}`;
+    imgDiv.id = 'empty-img';
+
+    taskList.appendChild(imgDiv);
+    taskList.id = 'empty-list';
+  } else if (taskList.contains(task) && taskList.id === 'empty-list') {
+    taskList.removeAttribute('id');
+    const emptyImg = document.getElementById('empty-img');
+    emptyImg.remove();
+  }
+}
+
 function updateTaskList(taskObj) {
   const taskListDiv = document.getElementsByClassName('task-list')[0];
   const task = createTaskDiv(taskObj);
 
-  if (taskListDiv.id === 'empty-list') {
-    taskListDiv.removeAttribute('id');
-    const emptyImg = document.getElementById('empty-img');
-    emptyImg.remove();
-  }
-
   taskListDiv.appendChild(task);
+
+  addOrRemoveEmptyImg();
 }
 
 export function removeItemFromTaskList(obj) {
@@ -148,7 +164,7 @@ export function updateTaskListEdit(obj, array) {
     // dont remove or add, just modify
     removeItemFromTaskList(obj);
     updateTaskList(obj);
-  } else if (currentPage === 'day') {
+  } else if (currentPage === 'today') {
     const dayResult = array[0];
     if (dayResult === 'remove day') {
       removeItemFromTaskList(obj);
@@ -165,6 +181,7 @@ export function updateTaskListEdit(obj, array) {
       updateTaskList(obj);
     }
   }
+  addOrRemoveEmptyImg();
 }
 
 export function updateProjectList(projectObj) {

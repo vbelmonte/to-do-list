@@ -319,7 +319,6 @@ function assignFormMethod(form, type, projectObj) {
   } else {
     form.onsubmit = function (event) {
       processModifyProjectForm(event, projectObj);
-      clearFormValues();
       closeFormModal(event);
     };
   }
@@ -365,7 +364,7 @@ export function createEditForm(type, projectObj) {
   const fieldset = document.createElement('fieldset');
 
   const legend = document.createElement('legend');
-  legend.innerHTML = '<h3>Edit Task</h3>';
+  legend.innerHTML = `<h3>${type}</h3>`;
   fieldset.appendChild(legend);
 
   const formDiv = document.createElement('div');

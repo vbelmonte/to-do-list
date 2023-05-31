@@ -77,6 +77,13 @@ function deserialize(json) {
   return reassignProjectTaskClass(newObj);
 }
 
+function retrieveProject(tag) {
+  const index = projectArray.map((i) => i.itemTag).indexOf(tag);
+  if (index >= 0) {
+    return projectArray[index];
+  }
+}
+
 function removeItemFromInbox(tag) {
   const index = inboxTaskArray.map((i) => i.itemTag).indexOf(tag);
 
@@ -211,6 +218,15 @@ function updateInboxTaskArray(object) {
   const index = inboxTaskArray.map((i) => i.itemTag).indexOf(object.itemTag);
 
   inboxTaskArray[index] = object;
+}
+
+function updateProjectSubTask(object) {
+  const projectObj = retrieveProject(object.associatedProject);
+  const index = projectObj.inProgressTaskArray.map((i) => i.itemTag).indexOf(object.itemTag);
+
+  projectObj.inProgressTaskArray[index] = object;
+
+  return projectObj;
 }
 
 export function updateProjectItem(obj) {
@@ -402,6 +418,9 @@ function updateLocalArray(object) {
   } else if (object.classname === 'Task') {
     if (object.associatedProject === undefined) {
       updateInboxTaskArray(object);
+    } else {
+      const updatedProject = updateProjectSubTask(object);
+      updateProjectArray(updatedProject);
     }
   }
 }

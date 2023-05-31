@@ -89,3 +89,21 @@ export function processModifyProjectForm(event, projObj) {
 
   updateTaskListEdit(editedProjectObj, updateResultArray);
 }
+
+export function processModifyProjectTaskForm(event, taskObj) {
+  event.preventDefault();
+
+  const name = document.getElementById('name-edit').value;
+  const description = document.getElementById('description-edit').value;
+  const dueDate = document.getElementById('due-date-edit').value;
+  const priority = document.getElementById('priority-edit').value;
+  const itemTag = taskObj.itemTag;
+  const status = taskObj.status;
+  const associatedProject = taskObj.associatedProject;
+
+  const editedSubTask = new Task(name, description, dueDate, priority, itemTag, status, associatedProject);
+
+  const updateResultArray = updateItemToStorage(editedSubTask);
+
+  updateTaskListEdit(editedSubTask, updateResultArray);
+}

@@ -18,7 +18,7 @@ export default class Project {
   set classname(value) {
     this._classname = value;
   }
-
+ 
   get name() {
     return this._name;
   }
@@ -81,5 +81,14 @@ export default class Project {
 
   set completedTaskArray(value) {
     this._completedTaskArray = value;
+  }
+
+  updateInProgressTaskArray(task) {
+    const index = this.inProgressTaskArray.map().indexOf(task.itemTag);
+    this.inProgressTaskArray[index] = task;
+  }
+
+  retrieveProjectSubTask(itemTag) {
+    
   }
 }

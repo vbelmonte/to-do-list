@@ -13,7 +13,7 @@ export default function loadProjectPage(projectObj) {
   const mainContentDiv = document.getElementById('main-content');
   const pageHeadline = createPageHeadline(projectName);
   const pageDescription = createPageDescription(projectObj.description);
-  const moduleContainerDiv = createModuleContainer('my-tasks');
+  const moduleContainerDiv = createModuleContainer('project-page');
   const moduleTitleDiv = createModuleTitle('My Tasks');
   const taskContainerDiv = createTaskContainer();
   const addTaskButtonDiv = document.createElement('div');

@@ -1,6 +1,6 @@
 import { closeForm, closeFormModal } from './templates';
 import {
-  processModifyProjectForm, processModifyTaskForm, processProjectForm, processProjectTaskForm, processTaskForm,
+  processModifyProjectForm, processModifyProjectTaskForm, processModifyTaskForm, processProjectForm, processProjectTaskForm, processTaskForm,
 } from './form-processor';
 
 function createNameInput(type) {
@@ -316,9 +316,14 @@ function assignFormMethod(form, type, projectObj) {
       processModifyTaskForm(event, projectObj);
       closeFormModal(event);
     };
-  } else {
+  } else if (type === 'Edit Project') {
     form.onsubmit = function (event) {
       processModifyProjectForm(event, projectObj);
+      closeFormModal(event);
+    };
+  } else {
+    form.onsubmit = function (event) {
+      processModifyProjectTaskForm(event, projectObj);
       closeFormModal(event);
     };
   }

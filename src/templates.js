@@ -160,7 +160,7 @@ export function removeItemFromTaskList(obj) {
 export function updateTaskListEdit(obj, array) {
   const currentPage = document.getElementsByClassName('module-container')[0].id;
 
-  if (currentPage === 'inbox' || currentPage === 'my-projects' || currentPage === 'project task') {
+  if (currentPage === 'inbox' || currentPage === 'my-projects' || currentPage === 'project-page') {
     // dont remove or add, just modify
     removeItemFromTaskList(obj);
     updateTaskList(obj);

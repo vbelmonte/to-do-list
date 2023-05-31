@@ -3,14 +3,37 @@ import {
   processModifyProjectForm, processModifyProjectTaskForm, processModifyTaskForm, processProjectForm, processProjectTaskForm, processTaskForm,
 } from './form-processor';
 
+function createCounter(input, maxLength) {
+  const span = document.createElement('span');
+
+  const counter = document.createElement('span');
+  counter.id = 'counter';
+  counter.innerHTML = maxLength;
+
+  const max = document.createElement('span');
+  max.innerHTML = `/${maxLength}`;
+
+  span.appendChild(counter);
+  span.appendChild(max);
+
+  input.addEventListener('input', () => {
+    counter.innerHTML = input.maxLength - input.value.length;
+  });
+
+  return span;
+}
+
 function createNameInput(type) {
   const nameDiv = document.createElement('div');
   const inputName = 'name';
 
+  const nameSpan = document.createElement('span');
+  nameSpan.classList.add('required');
+  nameSpan.innerHTML = `${type} Name`;
+
   const nameLabel = document.createElement('label');
-  nameLabel.classList.add('required');
   nameLabel.htmlFor = inputName;
-  nameLabel.innerHTML = `${type} Name`;
+  nameLabel.appendChild(nameSpan);
 
   const nameInput = document.createElement('input');
   nameInput.setAttribute('type', 'text');
@@ -19,6 +42,9 @@ function createNameInput(type) {
   nameInput.id = inputName;
   nameInput.required = true;
   nameInput.placeholder = `${type} Name`;
+
+  const nameCounter = createCounter(nameInput, nameInput.maxLength);
+  nameLabel.appendChild(nameCounter);
 
   nameDiv.appendChild(nameLabel);
   nameDiv.appendChild(nameInput);
@@ -30,10 +56,13 @@ function createNameInputEdit(type, taskObj) {
   const nameDiv = document.createElement('div');
   const inputName = 'name-edit';
 
+  const nameSpan = document.createElement('span');
+  nameSpan.classList.add('required');
+  nameSpan.innerHTML = `${type} Name`;
+
   const nameLabel = document.createElement('label');
-  nameLabel.classList.add('required');
   nameLabel.htmlFor = inputName;
-  nameLabel.innerHTML = `${type} Name`;
+  nameLabel.appendChild(nameSpan);
 
   const nameInput = document.createElement('input');
   nameInput.setAttribute('type', 'text');
@@ -42,6 +71,9 @@ function createNameInputEdit(type, taskObj) {
   nameInput.id = inputName;
   nameInput.required = true;
   nameInput.value = taskObj.name;
+
+  const nameCounter = createCounter(nameInput, nameInput.maxLength);
+  nameLabel.appendChild(nameCounter);
 
   nameDiv.appendChild(nameLabel);
   nameDiv.appendChild(nameInput);
@@ -63,6 +95,9 @@ function createDescriptionInput(type) {
   descInput.id = inputName;
   descInput.placeholder = `${type} Description`;
 
+  const descCounter = createCounter(descInput, descInput.maxLength);
+  descLabel.appendChild(descCounter);
+
   descriptionDiv.appendChild(descLabel);
   descriptionDiv.appendChild(descInput);
 
@@ -82,6 +117,9 @@ function createDescriptionInputEdit(type, taskObj) {
   descInput.name = inputName;
   descInput.id = inputName;
   descInput.value = taskObj.description;
+
+  const descCounter = createCounter(descInput, descInput.maxLength);
+  descLabel.appendChild(descCounter);
 
   descriptionDiv.appendChild(descLabel);
   descriptionDiv.appendChild(descInput);

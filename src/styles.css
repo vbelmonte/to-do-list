@@ -291,7 +291,9 @@ label {
     text-transform: uppercase;
     color: var(--gray);
 
-    display: block;
+    /*display: block;*/
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 0.25rem;
 }
 

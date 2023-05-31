@@ -86,7 +86,7 @@ function createTaskIconsDiv(colorClass, taskObj) {
     const modal = document.getElementsByClassName('modal')[0];
     modal.style.display = 'flex';
     let editModal;
-    if (taskObj.associatedProject !== null) {
+    if (taskObj.associatedProject !== undefined) {
       editModal = createEditForm(`Edit Project ${taskObj.classname}`, taskObj);
     } else {
       editModal = createEditForm(`Edit ${taskObj.classname}`, taskObj);

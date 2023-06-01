@@ -1,4 +1,5 @@
 import './styles.css';
+import './media-queries.css';
 import { addItemsToLocalArrays } from './localstorage';
 
 import loadInbox from './inbox';

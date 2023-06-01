@@ -510,9 +510,6 @@ footer p {
 
 
 
-
-
-
 /** DONT KNOW WHAT TO DO WITH THIS YET **/
 
 .module-container {
@@ -528,7 +525,7 @@ footer p {
     flex-direction: column;
     gap: 1.5rem;
 
-    margin-left: 2rem;
+    /*margin-left: 2rem;*/
 }
 
 .task-list {
@@ -751,4 +748,15 @@ footer p {
 .modal-form h3 {
   font-size: 1.5rem;
   color: var(--blue)
+}
+
+
+
+
+
+/** MOBILE STYLES **/
+
+/* NAVIGATION */
+nav.mobile {
+  display: none;
 }

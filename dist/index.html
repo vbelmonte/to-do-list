@@ -96,92 +96,6 @@
         </div>
         <main>
             <div id="main-content">
-                <!-- <div class="page-name">
-                    <h1>Inbox</h1>
-                </div>
-                <div class="module-container" id="my-tasks">
-                    <div>
-                        <h3>My Tasks</h3>
-                    </div>
-                    <div class="task-container">
-                        <div id="add-button">
-                            <button class="btn-solid btn-plus"><img src="../src/assets/img/plus-solid.svg"></button>
-                        </div>
-
-                        <div class="form" id="task-form">
-                            <form>
-                              <div class="inputs">
-                                    <div class="left">
-                                        <div>
-                                            <label for="name" class="required">Task Name</label>
-                                            <input type="text" id="name" name="name" placeholder="Task Name" required>
-                                        </div>
-                                        <div>
-                                            <label for="description">Task Description</label>
-                                            <input type="text" id="description" name="description" maxlength="100" placeholder="Task Description">
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <div>
-                                            <label for="due-date" class="required">Due Date</label>
-                                            <input type="date" id="due-date" name="due-date" required>
-                                        </div>
-                                        <div>
-                                            <label for="priority" class="required">Priority Level</label>
-                                            <select name="priority" id="priority" required>
-                                                <option value="" disabled selected>Priority Level</option>
-                                                <option value="low">Low</option>
-                                                <option value="medium">Medium</option>
-                                                <option value="high">High</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                              </div>
-                              <div class="buttons">
-                                    <button class="btn-outline">Cancel</button>
-                                    <input class="button btn-solid" type="submit" value="Add">
-                              </div>
-                            </form>
-                        </div>
-
-                        <div class="task-list" id="empty-list">
-                            <div id="empty-img">
-                                <img src="../src/assets/img/no-tasks-yet.svg">
-                            </div>
-                        </div>
-                        <div class="task-list">
-                            <div class="task low-p">
-                                <div>
-                                    <div class="checkbox-container">
-                                        <div class="round">
-                                            <input type="checkbox" checked id="checkbox" />
-                                            <label for="checkbox"></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="task-info">
-                                    <div class="name-priority">
-                                        <div class="task-name">
-                                            <h4>Task Name</h4>
-                                        </div>
-                                        <div>
-                                            <img src="../src/assets/img/priority-low.svg">
-                                        </div>
-                                    </div>
-                                    <div class="deadline">
-                                        <h5>12/12/2020</h5>
-                                    </div>
-                                    <div class="description">
-                                        <p>This is a description, not another 'lorem ipsum' sentence.</p>
-                                    </div>
-                                </div>
-                                <div class="edit">
-                                    <img class="edit-icon" src="../src/assets/img/ellipsis-vertical-solid.svg">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
             <footer>
                 <img src="../src/assets/img/github-icon.svg" class="footer-icon">
@@ -191,7 +105,40 @@
     </div>
     <div class="modal">
     </div>
-
+    <nav class="mobile">
+        <ul>
+            <li class="link" id="inbox">
+                <div class="nav-link">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="nav-icon"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M121 32C91.6 32 66 52 58.9 80.5L1.9 308.4C.6 313.5 0 318.7 0 323.9V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V323.9c0-5.2-.6-10.4-1.9-15.5l-57-227.9C446 52 420.4 32 391 32H121zm0 64H391l48 192H387.8c-12.1 0-23.2 6.8-28.6 17.7l-14.3 28.6c-5.4 10.8-16.5 17.7-28.6 17.7H195.8c-12.1 0-23.2-6.8-28.6-17.7l-14.3-28.6c-5.4-10.8-16.5-17.7-28.6-17.7H73L121 96z"/></svg>                             
+                                </div>
+                                <div>
+                                    <h6>Inbox</h6>
+                                </div>
+                            </div>
+            </li>
+            <li class="link" id="today">
+                <div class="nav-link">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" class="nav-icon"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm80 64c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h96c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80z"/></svg>
+                    </div>
+                    <div>
+                        <h6>Today</h6>
+                    </div>
+                </div>
+            </li>
+            <li class="link" id="week">
+                <div class="nav-link">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" class="nav-icon"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm80 64c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16H368c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80z"/></svg>
+                    </div>
+                    <div>
+                        <h6>Week</h6>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
     <script src='main.js'></script>
 </body>
 </html>

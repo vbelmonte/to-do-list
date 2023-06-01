@@ -20,6 +20,19 @@ function loadTasksToday() {
   taskContainerDiv.appendChild(tasksListDiv);
 }
 
+function loadAll() {
+  const allListDiv = createTaskList(dueTodayArray, 'today');
+  const taskContainerDiv = document.getElementsByClassName('task-container')[0];
+
+  taskContainerDiv.innerHTML = '';
+  taskContainerDiv.appendChild(allListDiv);
+}
+
+function loadInitial(div) {
+  loadAll();
+  div.classList.add('active');
+}
+
 export default function loadToday() {
   clearMainContent();
 
@@ -28,17 +41,21 @@ export default function loadToday() {
   const moduleContainerDiv = createModuleContainer('today');
   const projectsDiv = createModuleTitle('Projects');
   const tasksDiv = createModuleTitle('Tasks');
+  const allDiv = createModuleTitle('All');
   const taskContainerDiv = createTaskContainer();
   const taskListDiv = createTaskList(dueTodayArray, 'today');
 
   projectsDiv.classList.add('category');
   tasksDiv.classList.add('category');
+  allDiv.classList.add('category');
 
+  allDiv.addEventListener('click', loadAll);
   projectsDiv.addEventListener('click', loadProjectsToday);
   tasksDiv.addEventListener('click', loadTasksToday);
 
   const categoriesDiv = document.createElement('div');
   categoriesDiv.classList.add('categories');
+  categoriesDiv.appendChild(allDiv);
   categoriesDiv.appendChild(projectsDiv);
   categoriesDiv.appendChild(tasksDiv);
   moduleContainerDiv.appendChild(categoriesDiv);
@@ -65,4 +82,6 @@ export default function loadToday() {
       });
     }
   }());
+
+  loadInitial(allDiv);
 }

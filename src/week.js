@@ -20,6 +20,19 @@ function loadTasksWeek() {
   taskContainerDiv.appendChild(tasksListDiv);
 }
 
+function loadAll() {
+  const allListDiv = createTaskList(dueThisWeekArray, 'week');
+  const taskContainerDiv = document.getElementsByClassName('task-container')[0];
+
+  taskContainerDiv.innerHTML = '';
+  taskContainerDiv.appendChild(allListDiv);
+}
+
+function loadInitial(div) {
+  loadAll();
+  div.classList.add('active');
+}
+
 export default function loadWeek() {
   clearMainContent();
 
@@ -28,16 +41,20 @@ export default function loadWeek() {
   const moduleContainerDiv = createModuleContainer('week');
   const projectsDiv = createModuleTitle('Projects');
   const tasksDiv = createModuleTitle('Tasks');
+  const allDiv = createModuleTitle('All');
   const taskContainerDiv = createTaskContainer();
   const taskListDiv = createTaskList(dueThisWeekArray, 'week');
 
   projectsDiv.classList.add('category');
   tasksDiv.classList.add('category');
+  allDiv.classList.add('category');
 
+  allDiv.addEventListener('click', loadAll);
   projectsDiv.addEventListener('click', loadProjectsWeek);
   tasksDiv.addEventListener('click', loadTasksWeek);
 
   const categoriesDiv = document.createElement('div');
+  categoriesDiv.appendChild(allDiv);
   categoriesDiv.classList.add('categories');
   categoriesDiv.appendChild(projectsDiv);
   categoriesDiv.appendChild(tasksDiv);
@@ -65,4 +82,6 @@ export default function loadWeek() {
       });
     }
   }());
+
+  loadInitial(allDiv);
 }

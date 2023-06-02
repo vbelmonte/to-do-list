@@ -733,6 +733,7 @@ footer p {
   border-radius: 0.25rem;
   padding: 2rem;
   flex-basis: 20rem;
+  margin: 1rem;
 }
 
 .modal-form .bottom {

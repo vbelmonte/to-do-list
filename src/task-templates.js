@@ -74,7 +74,6 @@ function createTaskIconsDiv(colorClass, taskObj) {
   trashIconImg.classList.add('task-icon');
   trashIconImg.classList.add(colorClass);
   trashIconDiv.appendChild(trashIconImg);
-  trashIconDiv.classList.add('desktop');
 
   const editIconDiv = document.createElement('div');
   editIconDiv.classList.add(taskObj.itemTag);
@@ -95,19 +94,9 @@ function createTaskIconsDiv(colorClass, taskObj) {
     modal.appendChild(editModal);
     console.log('you click the edit button!');
   });
-  editIconDiv.classList.add('desktop');
-
-  const dotIconDiv = document.createElement('div');
-  const dotIconImg = document.createElement('img');
-  dotIconImg.src = '../src/assets/img/ellipsis-vertical-solid.svg';
-  dotIconImg.classList.add('task-icon');
-  dotIconImg.classList.add(colorClass);
-  dotIconDiv.appendChild(dotIconImg);
-  dotIconDiv.classList.add('mobile');
 
   iconsDiv.appendChild(trashIconDiv);
   iconsDiv.appendChild(editIconDiv);
-  iconsDiv.appendChild(dotIconDiv);
   iconsDiv.classList.add('icons');
 
   return iconsDiv;

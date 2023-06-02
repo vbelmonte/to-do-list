@@ -31,16 +31,30 @@ import loadProjects, { loadProjectsNavList } from './projectsfolder';
   }());
 
   const inboxDesktop = document.getElementById('inbox');
-  const today = document.getElementById('today');
-  const week = document.getElementById('week');
-  const completed = document.getElementById('completed');
-  const projects = document.getElementById('projects');
-  const logo = document.getElementsByClassName('logo')[0];
+  const todayDesktop = document.getElementById('today');
+  const weekDesktop = document.getElementById('week');
+  const completedDesktop = document.getElementById('completed');
+  const projectsDesktop = document.getElementById('projects');
+  const logoDesktop = document.getElementsByClassName('logo')[0];
 
-  logo.addEventListener('click', loadInbox);
+  logoDesktop.addEventListener('click', loadInbox);
   inboxDesktop.addEventListener('click', loadInbox);
-  today.addEventListener('click', loadToday);
-  week.addEventListener('click', loadWeek);
-  completed.addEventListener('click', loadCompleted);
-  projects.addEventListener('click', loadProjects);
+  todayDesktop.addEventListener('click', loadToday);
+  weekDesktop.addEventListener('click', loadWeek);
+  completedDesktop.addEventListener('click', loadCompleted);
+  projectsDesktop.addEventListener('click', loadProjects);
+
+  const inboxMobile = document.getElementById('inbox-mobile');
+  const todayMobile = document.getElementById('today-mobile');
+  const weekMobile = document.getElementById('week-mobile');
+  const completedMobile = document.getElementById('completed-mobile');
+  const projectsMobile = document.getElementById('projects-mobile');
+  const logoMobile = document.getElementsByClassName('logo')[0];
+
+  logoMobile.addEventListener('click', loadInbox);
+  inboxMobile.addEventListener('click', loadInbox);
+  todayMobile.addEventListener('click', loadToday);
+  weekMobile.addEventListener('click', loadWeek);
+  completedMobile.addEventListener('click', loadCompleted);
+  projectsMobile.addEventListener('click', loadProjects);
 }());

@@ -26,6 +26,7 @@
         padding: 1rem;
 
         color: var(--gray);
+        background-color: var(--white);
     }
 
     nav.mobile {
@@ -40,5 +41,39 @@
     nav.mobile li .nav-link {
         flex-direction: column;
         gap: 0.25rem;
+    }
+
+    nav.mobile h6 {
+        font-size: 0.75rem;
+    }
+
+
+
+    /** ADD TASK/PROJECT FORM PROPERTIES **/
+    form div.bottom {
+        flex-direction: column;
+    }
+
+
+
+    /** TASK MODULE PROPERTIES **/
+    .task .icons .mobile {
+        display: block;
+    }
+
+    .task .icons .desktop {
+        display: none;
+    }
+
+    .task .priority {
+        display: none;
+    }
+
+    .task .task-top-row {
+        gap: 0.5rem;
+    }
+
+    .task .task-bottom-row {
+        margin-left: 1.5rem;
     }
 }

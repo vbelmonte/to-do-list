@@ -610,6 +610,10 @@ footer p {
     height: 1rem;
   }
 
+  .task .icons .mobile {
+    display: none;
+  }
+
   .task-top-row {
     display: flex;
     gap: 1rem;

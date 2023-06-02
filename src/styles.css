@@ -381,6 +381,15 @@ main {
 }
 
 
+/** HEADER PROPERTIES **/
+header {
+  background-color: var(--blue);
+  padding: 0.5rem 1rem;
+
+  display: none;
+}
+
+
 
 /** FOOTER PROPERTIES **/
 

@@ -11,6 +11,17 @@
     }
 
 
+
+    /** HEADER PROPERTIES **/
+    header.mobile {
+        display: block;
+    }
+
+    header .logo {
+        height: 3rem;
+    }
+
+
     
     /** NAVIGATION PROPERTIES **/
     #side-column {

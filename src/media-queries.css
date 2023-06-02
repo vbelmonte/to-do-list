@@ -91,4 +91,11 @@
     .task .task-bottom-row {
         margin-left: 1.5rem;
     }
+
+
+
+    /** TASK LIST PROPERTIES **/
+    #empty-list img {
+        height: 20rem;
+    }
 }

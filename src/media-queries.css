@@ -36,6 +36,39 @@
     form div.bottom {
         flex-direction: column;
     }
+
+
+    /** TASK MODULE PROPERTIES **/
+    .task .icons .mobile {
+        display: block;
+    }
+
+    .task .icons .desktop {
+        display: none;
+    }
+
+    .task .priority {
+        display: none;
+    }
+
+    .task .task-top-row {
+        gap: 0.5rem;
+    }
+
+    .task .top-row-right {
+        gap: 1rem;
+    }
+
+    .task .task-bottom-row {
+        margin-left: 1.5rem;
+    }
+
+
+
+    /** TASK LIST PROPERTIES **/
+    #empty-list img {
+        height: 20rem;
+    }
 }
 
 @media screen and (max-width: 425px) {
@@ -96,39 +129,5 @@
 
     nav.mobile h6 {
         font-size: 0.75rem;
-    }
-
-
-
-    /** TASK MODULE PROPERTIES **/
-    .task .icons .mobile {
-        display: block;
-    }
-
-    .task .icons .desktop {
-        display: none;
-    }
-
-    .task .priority {
-        display: none;
-    }
-
-    .task .task-top-row {
-        gap: 0.5rem;
-    }
-
-    .task .top-row-right {
-        gap: 1rem;
-    }
-
-    .task .task-bottom-row {
-        margin-left: 1.5rem;
-    }
-
-
-
-    /** TASK LIST PROPERTIES **/
-    #empty-list img {
-        height: 20rem;
     }
 }

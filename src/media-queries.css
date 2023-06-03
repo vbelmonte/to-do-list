@@ -97,7 +97,7 @@
     }
 
     header .nav-icon {
-        fill: var(--uranian-blue);
+        fill: var(--gray);
         width: 1.5rem;
     }
 
@@ -117,7 +117,7 @@
         padding: 1rem;
 
         color: var(--gray);
-        background-color: var(--white);
+        background-color: var(--black);
     }
 
     nav.mobile {

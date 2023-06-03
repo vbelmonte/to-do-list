@@ -51,6 +51,7 @@ table {
 
 :root {
     --black: #222222;
+    --shadow-black: #0C0C0C;
     --modal-black: rgba(0,0,0,0.4);
     --white: #F2F2F2;
     --ultra-white: #FFFFFF;
@@ -61,6 +62,7 @@ table {
     --blue: #0062F4;
     --dark-blue: #004ec4;
     --dodger-blue: #379FFF;
+    --cornflower-blue: #579AFF;
     --uranian-blue: #BDDFFF;
     --light-blue: #D0E0EF;
     --green: #72B01D;
@@ -383,7 +385,7 @@ main {
 
 /** HEADER PROPERTIES **/
 header {
-  background-color: var(--blue);
+  background-color: var(--black);
   padding: 0.5rem 1rem;
 
   display: none;
@@ -427,7 +429,7 @@ footer p {
 /** SIDE COLUMN PROPERTIES **/
 
 #side-column {
-    background-color: var(--titanium);
+    background-color: var(--black);
     color: var(--gray);
     padding: 2rem;
 
@@ -453,12 +455,8 @@ footer p {
 
 #side-column svg.nav-menu {
   width: 1rem;
-  fill: var(--gray);
+  fill: var(--white);
   transition: fill 0.1s linear;
-}
-
-#side-column svg.nav-menu:hover {
-  fill: var(--black);
 }
 
 #side-column .logo {
@@ -520,12 +518,12 @@ footer p {
 }
 
 .nav-link:hover {
-    color: var(--black);
+    color: var(--mid-gray);
     cursor: default;
 }
 
 .nav-link.active {
-    color: var(--blue);
+    color: var(--white);
 }
 
 .link {
@@ -727,7 +725,7 @@ footer p {
 .notification {
   border-radius: 2rem;
   padding: 0.25rem 0.5rem;
-  background-color: var(--mid-gray);
+  background-color: var(--shadow-black);
   color: var(--white);
 }
 

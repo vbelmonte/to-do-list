@@ -218,6 +218,14 @@ export function removeItemFromProjectNavColumn(obj) {
   }
 }
 
+export function toggleSideMenu() {
+  const navContent = document.querySelector('.nav-content');
+  const sideColumn = document.getElementById('side-column');
+
+  navContent.classList.toggle('visible');
+  sideColumn.classList.toggle('full-width');
+}
+
 /** BUTTON TEMPLATES * */
 
 function createSolidTextButton(text) {

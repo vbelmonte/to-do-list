@@ -1,3 +1,43 @@
+@media screen and (max-width: 784px) {
+    /** MAIN CONTAINER PROPERTIES **/
+    main {
+        margin-left: 5rem;
+    }
+
+
+
+    /** NAVIGATION PROPERTIES **/
+    #side-column {
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+    }
+
+    #side-column .nav-content {
+        display: none;
+        flex: 1;
+    }
+
+    #side-column .nav-content.visible {
+        display: flex;
+    }
+
+    #side-column.full-width {
+        width: 100%;
+    }
+
+    #side-column .hamburger-menu {
+        display: block;
+    }
+
+
+
+    /** ADD TASK/PROJECT FORM PROPERTIES **/
+    form div.bottom {
+        flex-direction: column;
+    }
+}
+
 @media screen and (max-width: 425px) {
     
     /** GENERAL PROPERTIES **/
@@ -56,13 +96,6 @@
 
     nav.mobile h6 {
         font-size: 0.75rem;
-    }
-
-
-
-    /** ADD TASK/PROJECT FORM PROPERTIES **/
-    form div.bottom {
-        flex-direction: column;
     }
 
 

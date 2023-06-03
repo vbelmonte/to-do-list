@@ -433,16 +433,32 @@ footer p {
 
     /** ATTEMPT A FIXED SIDE COLUMN **/
     position: fixed;
-    width: 20rem;
     box-sizing: border-box;
     height: 100%;
     z-index: 1;
 }
 
-#side-column {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+#side-column .nav-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  height: 100%;
+  width: 16rem;
+}
+
+#side-column .hamburger-menu {
+  display: none;
+  height: fit-content;
+}
+
+#side-column svg.nav-menu {
+  width: 1rem;
+  fill: var(--gray);
+  transition: fill 0.1s linear;
+}
+
+#side-column svg.nav-menu:hover {
+  fill: var(--black);
 }
 
 #side-column .logo {
@@ -453,7 +469,7 @@ footer p {
     cursor: pointer;
 }
 
-#side-column nav {
+#side-column .nav-content nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;

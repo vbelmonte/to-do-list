@@ -7,6 +7,7 @@ import loadToday from './today';
 import loadWeek from './week';
 import loadCompleted from './completed';
 import loadProjects, { loadProjectsNavList } from './projectsfolder';
+import { toggleSideMenu } from './templates';
 
 (function runPage() {
   addItemsToLocalArrays();
@@ -57,4 +58,8 @@ import loadProjects, { loadProjectsNavList } from './projectsfolder';
   weekMobile.addEventListener('click', loadWeek);
   completedMobile.addEventListener('click', loadCompleted);
   projectsMobile.addEventListener('click', loadProjects);
+
+  const hamburgerMenu = document.querySelector('.hamburger-menu');
+
+  hamburgerMenu.addEventListener('click', toggleSideMenu);
 }());

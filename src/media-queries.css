@@ -87,11 +87,18 @@
 
     /** HEADER PROPERTIES **/
     header.mobile {
-        display: block;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     header .logo {
         height: 3rem;
+    }
+
+    header .nav-icon {
+        fill: var(--uranian-blue);
+        width: 1.5rem;
     }
 
 

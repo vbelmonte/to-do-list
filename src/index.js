@@ -8,6 +8,7 @@ import loadWeek from './week';
 import loadCompleted from './completed';
 import loadProjects, { loadProjectsNavList } from './projectsfolder';
 import { toggleSideMenu } from './templates';
+import loadAbout from './about';
 
 (function runPage() {
   addItemsToLocalArrays();
@@ -36,6 +37,7 @@ import { toggleSideMenu } from './templates';
   const weekDesktop = document.getElementById('week');
   const completedDesktop = document.getElementById('completed');
   const projectsDesktop = document.getElementById('projects');
+  const aboutDesktop = document.getElementById('about');
   const logoDesktop = document.getElementsByClassName('logo')[0];
 
   logoDesktop.addEventListener('click', loadInbox);
@@ -44,12 +46,14 @@ import { toggleSideMenu } from './templates';
   weekDesktop.addEventListener('click', loadWeek);
   completedDesktop.addEventListener('click', loadCompleted);
   projectsDesktop.addEventListener('click', loadProjects);
+  aboutDesktop.addEventListener('click', loadAbout);
 
   const inboxMobile = document.getElementById('inbox-mobile');
   const todayMobile = document.getElementById('today-mobile');
   const weekMobile = document.getElementById('week-mobile');
   const completedMobile = document.getElementById('completed-mobile');
   const projectsMobile = document.getElementById('projects-mobile');
+  const aboutMobile = document.getElementById('about-mobile');
   const logoMobile = document.getElementsByClassName('logo')[0];
 
   logoMobile.addEventListener('click', loadInbox);
@@ -58,6 +62,7 @@ import { toggleSideMenu } from './templates';
   weekMobile.addEventListener('click', loadWeek);
   completedMobile.addEventListener('click', loadCompleted);
   projectsMobile.addEventListener('click', loadProjects);
+  aboutMobile.addEventListener('click', loadAbout);
 
   const hamburgerMenu = document.querySelector('.hamburger-menu');
 

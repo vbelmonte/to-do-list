@@ -507,6 +507,14 @@ footer p {
     margin-left: 2rem;
 }
 
+#side-column #projects-chevron {
+  transition: fill 0.1s linear;
+}
+
+#side-column #projects-chevron:hover {
+  fill: var(--mid-gray);
+}
+
 .nav-icon {
     width: 1rem;
     height: 1rem;

@@ -356,6 +356,7 @@ main {
     flex-direction: column;
     gap: 3rem;
 
+    max-width: 50rem;
     min-height: calc(100vh - 140px);
     padding: 2rem;
 }
@@ -540,8 +541,6 @@ footer p {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-
-    max-width: 50rem;
 }
 
 .task-container {

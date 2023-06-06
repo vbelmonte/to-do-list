@@ -218,6 +218,14 @@ export function removeItemFromProjectNavColumn(obj) {
   }
 }
 
+export function toggleSideMenu() {
+  const navContent = document.querySelector('.nav-content');
+  const sideColumn = document.getElementById('side-column');
+
+  navContent.classList.toggle('visible');
+  sideColumn.classList.toggle('full-width');
+}
+
 /** BUTTON TEMPLATES * */
 
 function createSolidTextButton(text) {
@@ -251,10 +259,10 @@ function createSolidPlusButton() {
 
 /** NOTIFICATION TEMPLATES * */
 
-function createTaskCounterButton(type, number) {
+function createTaskCounterButtonDesktop(type, number) {
   const notification = document.createElement('div');
   notification.classList.add('notification');
-  notification.id = `${type}-notification`;
+  notification.id = `${type}-notification-desktop`;
 
   if (type === 'today') {
     notification.classList.add('urgent');
@@ -262,7 +270,7 @@ function createTaskCounterButton(type, number) {
 
   const counter = document.createElement('h5');
   counter.classList.add('counter');
-  counter.id = `${type}-counter`;
+  counter.id = `${type}-counter-desktop`;
 
   counter.innerHTML = number;
   notification.appendChild(counter);
@@ -271,23 +279,54 @@ function createTaskCounterButton(type, number) {
   typeDiv.appendChild(notification);
 }
 
+function createTaskCounterButtonMobile(type, number) {
+  const notification = document.createElement('div');
+  notification.classList.add('notification');
+  notification.id = `${type}-notification-mobile`;
+
+  if (type === 'today') {
+    notification.classList.add('urgent');
+  }
+
+  const counter = document.createElement('h5');
+  counter.classList.add('counter');
+  counter.id = `${type}-counter-mobile`;
+
+  counter.innerHTML = number;
+  notification.appendChild(counter);
+
+  const typeDiv = document.getElementById(`${type}-mobile`);
+  typeDiv.appendChild(notification);
+}
+
+function createTaskCounterButton(type, number) {
+  createTaskCounterButtonDesktop(type, number);
+  createTaskCounterButtonMobile(type, number);
+}
+
 function removeTaskCounterButton(type) {
-  const notification = document.getElementById(`${type}-notification`);
-  notification.remove();
+  const notificationDesktop = document.getElementById(`${type}-notification-desktop`);
+  const notificationMobile = document.getElementById(`${type}-notification-mobile`);
+  notificationDesktop.remove();
+  notificationMobile.remove();
 }
 
 function incrementCounterButton(type, number) {
-  const counter = document.getElementById(`${type}-counter`);
+  const counterDesktop = document.getElementById(`${type}-counter-desktop`);
+  const counterMobile = document.getElementById(`${type}-counter-mobile`);
 
   switch (type) {
     case 'today':
-      counter.innerHTML = number;
+      counterDesktop.innerHTML = number;
+      counterMobile.innerHTML = number;
       break;
     case 'week':
-      counter.innerHTML = number;
+      counterDesktop.innerHTML = number;
+      counterMobile.innerHTML = number;
       break;
     case 'inbox':
-      counter.innerHTML = number;
+      counterDesktop.innerHTML = number;
+      counterMobile.innerHTML = number;
       break;
     default:
       break;
@@ -295,7 +334,7 @@ function incrementCounterButton(type, number) {
 }
 
 export function updateTaskCounterButton(type, number) {
-  if (document.getElementById(`${type}-counter`) === null || document.getElementById(`${type}-counter`) === undefined) {
+  if (document.getElementById(`${type}-counter-desktop`) === null || document.getElementById(`${type}-counter-desktop`) === undefined) {
     if (number !== 0) {
       createTaskCounterButton(type, number);
       return 'increment';

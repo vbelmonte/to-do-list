@@ -114,6 +114,7 @@ function createPriority(taskPriority) {
   const priorityDiv = document.createElement('div');
   const priorityImg = assignPriorityImage(taskPriority);
   priorityDiv.innerHTML = `${priorityImg}`;
+  priorityDiv.classList.add('priority');
 
   return priorityDiv;
 }

@@ -373,11 +373,6 @@ main {
 
 
 
-/** ABOUT PAGE PROPERTIES **/
-#about 
-
-
-
 /** EMPTY TASKS PROPERTIES **/
 
 #empty-list img {
@@ -664,7 +659,7 @@ footer p {
 
   .task-icon {
     height: 1rem;
-    transition: 0.1s linear;
+    transition: filter 0.1s linear;
   }
 
   .icons {

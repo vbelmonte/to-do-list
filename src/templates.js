@@ -97,6 +97,14 @@ function createProjectListItem(taskObj) {
   projectNameDiv.appendChild(h6);
   li.appendChild(projectNameDiv);
 
+  li.addEventListener('click', () => {
+    const navLinks = document.getElementsByClassName('nav-link');
+    for (let i = 0; i < navLinks.length; i += 1) {
+      navLinks[i].classList.remove('active');
+    }
+    li.classList.add('active');
+  });
+
   return li;
 }
 

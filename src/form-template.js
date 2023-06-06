@@ -131,10 +131,13 @@ function createDueDateInput() {
   const dueDateDiv = document.createElement('div');
   const inputName = 'due-date';
 
+  const dueDateSpan = document.createElement('span');
+  dueDateSpan.classList.add('required');
+  dueDateSpan.innerHTML = 'Due Date';
+
   const dueDateLabel = document.createElement('label');
-  dueDateLabel.classList.add('required');
   dueDateLabel.htmlFor = inputName;
-  dueDateLabel.innerHTML = 'Due Date';
+  dueDateLabel.appendChild(dueDateSpan);
 
   const dueDateInput = document.createElement('input');
   dueDateInput.setAttribute('type', 'date');
@@ -155,10 +158,13 @@ function createDueDateInputEdit(taskObj) {
   const dueDateDiv = document.createElement('div');
   const inputName = 'due-date-edit';
 
+  const dueDateSpan = document.createElement('span');
+  dueDateSpan.classList.add('required');
+  dueDateSpan.innerHTML = 'Due Date';
+
   const dueDateLabel = document.createElement('label');
-  dueDateLabel.classList.add('required');
   dueDateLabel.htmlFor = inputName;
-  dueDateLabel.innerHTML = 'Due Date';
+  dueDateLabel.appendChild(dueDateSpan);
 
   const dueDateInput = document.createElement('input');
   dueDateInput.setAttribute('type', 'date');
@@ -180,10 +186,13 @@ function createPriorityInput() {
   const priorityDiv = document.createElement('div');
   const inputName = 'priority';
 
+  const prioritySpan = document.createElement('span');
+  prioritySpan.classList.add('required');
+  prioritySpan.innerHTML = 'Priority Level';
+
   const priorityLabel = document.createElement('label');
-  priorityLabel.classList.add('required');
   priorityLabel.htmlFor = inputName;
-  priorityLabel.innerHTML = 'Priority Level';
+  priorityLabel.appendChild(prioritySpan);
 
   const priorityInput = document.createElement('select');
   priorityInput.name = inputName;
@@ -216,10 +225,13 @@ function createPriorityInputEdit(taskObj) {
   const priorityDiv = document.createElement('div');
   const inputName = 'priority-edit';
 
+  const prioritySpan = document.createElement('span');
+  prioritySpan.classList.add('required');
+  prioritySpan.innerHTML = 'Priority Level';
+
   const priorityLabel = document.createElement('label');
-  priorityLabel.classList.add('required');
   priorityLabel.htmlFor = inputName;
-  priorityLabel.innerHTML = 'Priority Level';
+  priorityLabel.appendChild(prioritySpan);
 
   const priorityInput = document.createElement('select');
   priorityInput.name = inputName;

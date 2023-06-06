@@ -129,6 +129,11 @@
         justify-content: space-between;
     }
 
+    nav.mobile li.link {
+        position: relative;
+        padding: 0.25rem;
+    }
+
     nav.mobile li .nav-link {
         flex-direction: column;
         gap: 0.25rem;
@@ -136,5 +141,11 @@
 
     nav.mobile h6 {
         font-size: 0.75rem;
+    }
+
+    nav.mobile .notification {
+        position: absolute;
+        top: -0.5rem;
+        right: -0.5rem;
     }
 }

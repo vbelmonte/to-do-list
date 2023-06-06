@@ -235,6 +235,7 @@ button img {
   border-radius: 2rem;
   padding: 0.25rem 0.5rem;
   color: var(--gray);
+  transition: color 0.1s linear;
 }
 
 .category:hover {
@@ -245,6 +246,7 @@ button img {
 .category.active {
   background-color: var(--blue);
   color: var(--white);
+  transition: background-color 0.1s linear;
 }
 
 .category.active:hover {

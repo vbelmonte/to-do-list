@@ -356,14 +356,16 @@ function createButtonsEditDiv() {
 function createWarningMessage(obj) {
   const div = document.createElement('div');
   const message = document.createElement('p');
+
+  if (obj.classname === 'Project') {
+    const addition = document.createElement('p');
+    addition.innerHTML = 'The item you are deleting is a Project and contains its own tasks. Deleting this project will also delete these tasks.';
+    message.appendChild(addition);
+  }
+
   const warning = document.createElement('b');
   warning.innerHTML = 'This action cannot be undone.';
   message.appendChild(warning);
-
-  if (obj.classname === 'Project') {
-    const addition = 'The item you are deleting is a Project and contains its own tasks. Deleting this project will also delete these tasks.';
-    message.appendChild(addition);
-  }
 
   div.appendChild(message);
 
@@ -411,11 +413,11 @@ function assignFormMethod(form, type, projectObj) {
     };
   } else if (type === 'Delete Project') {
     form.onsubmit = function (event) {
-
+      closeFormModal(event);
     };
   } else {
     form.onsubmit = function (event) {
-
+      closeFormModal(event);
     };
   }
 }

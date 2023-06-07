@@ -825,7 +825,7 @@ img.warning {
   background-color: var(--lightest-gray);
   border-radius: 0.25rem;
   padding: 2rem;
-  flex-basis: fit-content;
+  flex-basis: 37rem;
   margin: 1rem;
 }
 

@@ -1,5 +1,6 @@
 import { closeForm, closeFormModal } from './templates';
 import {
+  processDeleteTaskForm,
   processModifyProjectForm, processModifyProjectTaskForm, processModifyTaskForm, processProjectForm, processProjectTaskForm, processTaskForm,
 } from './form-processor';
 
@@ -318,6 +319,16 @@ function createModifyButton() {
   return modifyButton;
 }
 
+function createDeleteButton() {
+  const deleteButton = document.createElement('input');
+  deleteButton.classList.add('button');
+  deleteButton.classList.add('btn-orange');
+  deleteButton.setAttribute('type', 'submit');
+  deleteButton.value = 'Delete';
+
+  return deleteButton;
+}
+
 function createButtonsDiv() {
   const div = document.createElement('div');
   const cancel = createCancelButton();
@@ -338,6 +349,23 @@ function createButtonsEditDiv() {
   div.classList.add('buttons');
   div.appendChild(cancel);
   div.appendChild(modify);
+
+  return div;
+}
+
+function createWarningMessage(obj) {
+  const div = document.createElement('div');
+  const message = document.createElement('p');
+  const warning = document.createElement('b');
+  warning.innerHTML = 'This action cannot be undone.';
+  message.appendChild(warning);
+
+  if (obj.classname === 'Project') {
+    const addition = 'The item you are deleting is a Project and contains its own tasks. Deleting this project will also delete these tasks.';
+    message.appendChild(addition);
+  }
+
+  div.appendChild(message);
 
   return div;
 }
@@ -371,10 +399,23 @@ function assignFormMethod(form, type, projectObj) {
       processModifyProjectForm(event, projectObj);
       closeFormModal(event);
     };
-  } else {
+  } else if (type === 'Edit Project Task') {
     form.onsubmit = function (event) {
       processModifyProjectTaskForm(event, projectObj);
       closeFormModal(event);
+    };
+  } else if (type === 'Delete Task') {
+    form.onsubmit = function (event) {
+      processDeleteTaskForm(event, projectObj);
+      closeFormModal(event);
+    };
+  } else if (type === 'Delete Project') {
+    form.onsubmit = function (event) {
+
+    };
+  } else {
+    form.onsubmit = function (event) {
+
     };
   }
 }
@@ -453,6 +494,52 @@ export function createEditForm(type, projectObj) {
   fieldset.appendChild(buttonsDiv);
 
   form.appendChild(fieldset);
+  formDiv.appendChild(form);
+
+  return formDiv;
+}
+
+export function createDeleteForm(type, obj) {
+  const warningImg = document.createElement('img');
+  warningImg.src = '../src/assets/img/triangle-exclamation-solid.svg';
+  warningImg.classList.add('warning');
+
+  const warningImgDiv = document.createElement('div');
+  warningImgDiv.appendChild(warningImg);
+
+  const warningQuestion = document.createElement('h5');
+  warningQuestion.innerHTML = `Are you sure you want to delete this <b>${obj.classname.toUpperCase()}</b>?`;
+
+  const warningQuestionDiv = document.createElement('div');
+  warningQuestionDiv.appendChild(warningQuestion);
+
+  const warningHeadline = document.createElement('div');
+  warningHeadline.appendChild(warningImgDiv);
+  warningHeadline.appendChild(warningQuestionDiv);
+  warningHeadline.classList.add('flex');
+
+  const warningMessage = createWarningMessage(obj);
+
+  const cancelButton = createCancelButtonEdit();
+  cancelButton.classList.add('btn-orange-outline');
+  cancelButton.classList.remove('btn-outline');
+
+  const deleteButton = createDeleteButton();
+
+  const buttonsDiv = document.createElement('div');
+  buttonsDiv.appendChild(cancelButton);
+  buttonsDiv.appendChild(deleteButton);
+  buttonsDiv.classList.add('buttons');
+
+  const form = document.createElement('form');
+  assignFormMethod(form, type, obj);
+  form.appendChild(warningHeadline);
+  form.appendChild(warningMessage);
+  form.appendChild(buttonsDiv);
+
+  const formDiv = document.createElement('div');
+  formDiv.classList.add('modal-form');
+  formDiv.classList.add('warning-modal');
   formDiv.appendChild(form);
 
   return formDiv;

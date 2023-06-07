@@ -107,3 +107,7 @@ export function processModifyProjectTaskForm(event, taskObj) {
 
   updateTaskListEdit(editedSubTask, updateResultArray);
 }
+
+export function processDeleteTaskForm(event, taskObj) {
+  updateTaskListEdit
+}

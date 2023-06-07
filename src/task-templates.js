@@ -1,6 +1,6 @@
 import { format, parseISO } from 'date-fns';
 import { markAsComplete } from './localstorage';
-import { createEditForm } from './form-template';
+import { createEditForm, createDeleteForm } from './form-template';
 
 function assignPriorityClass(priority) {
   if (priority === 'low') {
@@ -74,6 +74,17 @@ function createTaskIconsDiv(colorClass, taskObj) {
   trashIconImg.classList.add('task-icon');
   trashIconImg.classList.add(colorClass);
   trashIconDiv.appendChild(trashIconImg);
+  trashIconDiv.addEventListener('click', () => {
+    const modal = document.getElementsByClassName('modal')[0];
+    modal.style.display = 'flex';
+    let deleteModal;
+    if (taskObj.associatedProject !== undefined) {
+      deleteModal = createDeleteForm(`Delete Project ${taskObj.classname}`, taskObj);
+    } else {
+      deleteModal = createDeleteForm(`Delete ${taskObj.classname}`, taskObj);
+    }
+    modal.appendChild(deleteModal);
+  });
 
   const editIconDiv = document.createElement('div');
   editIconDiv.classList.add(taskObj.itemTag);

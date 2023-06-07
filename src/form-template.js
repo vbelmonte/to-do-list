@@ -1,5 +1,7 @@
 import { closeForm, closeFormModal } from './templates';
 import {
+  processDeleteProjectForm,
+  processDeleteProjectTaskForm,
   processDeleteTaskForm,
   processModifyProjectForm, processModifyProjectTaskForm, processModifyTaskForm, processProjectForm, processProjectTaskForm, processTaskForm,
 } from './form-processor';
@@ -413,10 +415,12 @@ function assignFormMethod(form, type, projectObj) {
     };
   } else if (type === 'Delete Project') {
     form.onsubmit = function (event) {
+      processDeleteProjectForm(event, projectObj);
       closeFormModal(event);
     };
   } else {
     form.onsubmit = function (event) {
+      processDeleteProjectTaskForm(event, projectObj);
       closeFormModal(event);
     };
   }

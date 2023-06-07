@@ -183,6 +183,48 @@ function updateLocalStorage(obj) {
   localStorage.setItem(keyName, jsonObj);
 }
 
+function removeFromLocalStorage(obj) {
+  const keyName = obj.itemTag;
+  localStorage.removeItem(keyName);
+}
+
+function removeSubTasksFromArrays(obj) {
+  if (obj.classname === 'Project') {
+    const inProgress = obj.inProgressTaskArray;
+    const completed = obj.completedTaskArray;
+
+    for (let i = 0; i < inProgress.length; i += 1) {
+      const tagID = inProgress[i].itemTag;
+      removeItemFromAllArrays(tagID);
+      removeFromLocalStorage(inProgress[i]);
+    }
+    for (let k = 0; k < completed.length; k += 1) {
+      const tagID = completed[k].itemTag;
+      removeItemFromAllArrays(tagID);
+      removeFromLocalStorage(completed[k]);
+    }
+  }
+}
+
+function removeSubTaskFromProject(obj) {
+  if (obj.associatedProject !== undefined) {
+    const index = projectArray.map((i) => i.itemTag).indexOf(obj.associatedProject);
+    const inProgress = projectArray[index].inProgressTaskArray;
+    const completed = projectArray[index].completedTaskArray;
+    const indexInProgress = inProgress.map((i) => i.itemTag).indexOf(obj.itemTag);
+    const indexCompleted = completed.map((i) => i.itemTag).indexOf(obj.itemTag);
+
+    if (indexInProgress >= 0) {
+      projectArray[index].inProgressTaskArray.splice(indexInProgress, 1)[0];
+    }
+    if (indexCompleted >= 0) {
+      projectArray[index].completedTaskArray.splice(indexCompleted, 1)[0];
+    }
+
+    updateLocalStorage(projectArray[index]);
+  }
+}
+
 function removeItemFromProjectInProgressArray(obj) {
   const associatedProjectTag = obj.associatedProject;
   const indexOfProject = projectArray.map((i) => i.itemTag).indexOf(associatedProjectTag);
@@ -431,6 +473,16 @@ export function updateItemToStorage(object) {
   const updateResultArray = updateWeekOrDay(object);
 
   return updateResultArray;
+}
+
+export function deleteItemFromStorage(object) {
+  const tagID = object.itemTag;
+
+  removeItemFromAllArrays(tagID);
+  removeSubTasksFromArrays(object);
+  removeSubTaskFromProject(object);
+  removeItemFromProjectNavColumn(object);
+  removeFromLocalStorage(object);
 }
 
 export default function addItemToStorage(object) {

@@ -1,7 +1,7 @@
 import Task from './tasks';
 import Project from './projects';
-import addItemToStorage, { assignItemName, updateProjectItem, updateItemToStorage } from './localstorage';
-import { updateTaskList, updateTaskListEdit, updateProjectList, updateProjectNavColumn, removeItemFromTaskList } from './templates';
+import addItemToStorage, { assignItemName, updateProjectItem, updateItemToStorage, deleteItemFromStorage } from './localstorage';
+import { updateTaskList, updateTaskListEdit, updateProjectList, updateProjectNavColumn, removeItemFromTaskList, deleteItem } from './templates';
 
 export function processTaskForm(event) {
   event.preventDefault();
@@ -109,5 +109,22 @@ export function processModifyProjectTaskForm(event, taskObj) {
 }
 
 export function processDeleteTaskForm(event, taskObj) {
-  updateTaskListEdit
+  event.preventDefault();
+
+  deleteItem(taskObj);
+  deleteItemFromStorage(taskObj);
+}
+
+export function processDeleteProjectForm(event, projObj) {
+  event.preventDefault();
+
+  deleteItem(projObj);
+  deleteItemFromStorage(projObj);
+}
+
+export function processDeleteProjectTaskForm(event, subTaskObj) {
+  event.preventDefault();
+
+  deleteItem(subTaskObj);
+  deleteItemFromStorage(subTaskObj);
 }

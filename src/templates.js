@@ -205,6 +205,11 @@ export function updateProjectList(projectObj) {
   taskListDiv.appendChild(project);
 }
 
+export function deleteItem(obj) {
+  removeItemFromTaskList(obj);
+  addOrRemoveEmptyImg();
+}
+
 export function updateProjectNavColumn(projectObj) {
   const projectItem = createProjectListItem(projectObj);
   const projectsList = document.getElementById('projects-list');

@@ -114,7 +114,6 @@ function createTaskIconsDiv(colorClass, taskObj) {
       editModal = createEditForm(`Edit ${taskObj.classname}`, taskObj);
     }
     modal.appendChild(editModal);
-    console.log('you click the edit button!');
   });
 
   iconsDiv.appendChild(trashIconDiv);

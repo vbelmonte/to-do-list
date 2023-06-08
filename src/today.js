@@ -1,5 +1,5 @@
 import {
-  createPageHeadline, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createSolidPlusButton, createTaskList, showForm,
+  createPageHeadline, clearMainContent, createModuleTitle, createModuleContainer, createTaskContainer, createTaskList,
 } from './templates';
 
 import { dueTodayArray, projectsDueTodayArray, tasksDueTodayArray } from './localstorage';

@@ -180,7 +180,6 @@ export function updateTaskListEdit(obj, array) {
   const currentPage = document.getElementsByClassName('module-container')[0].id;
 
   if (currentPage === 'inbox' || currentPage === 'my-projects' || currentPage === 'project-page') {
-    // dont remove or add, just modify
     removeItemFromTaskList(obj);
     updateTaskList(obj);
   } else if (currentPage === 'today') {
@@ -248,26 +247,6 @@ export function toggleSideMenu() {
 
   navContent.classList.toggle('visible');
   sideColumn.classList.toggle('full-width');
-}
-
-/** BUTTON TEMPLATES * */
-
-function createSolidTextButton(text) {
-  const button = document.createElement('button');
-
-  button.classList.add('btn-solid');
-  button.textContent = text;
-
-  return button;
-}
-
-function createOutlineTextButton(text) {
-  const button = document.createElement('button');
-
-  button.classList.add('btn-outline');
-  button.textContent = text;
-
-  return button;
 }
 
 function createSolidPlusButton() {
@@ -364,7 +343,6 @@ export function updateTaskCounterButton(type, number) {
       return 'increment';
     }
   } else if (number === 0) {
-    // remove the counter
     removeTaskCounterButton(type);
     return 'decrement';
   } else {

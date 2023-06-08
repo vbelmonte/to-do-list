@@ -100,15 +100,6 @@ function removeItemFromProjects(tag) {
   }
 }
 
-function removeItemFromAssociatedProject(tag) {
-  const indexA = allItemsArray.map((i) => i.itemTag).indexOf(tag);
-  const taskObject = allItemsArray[indexA];
-
-  const associatedProjectTag = taskObject.associatedProject;
-
-  const indexB = projectArray.map((i) => i.itemTag).indexOf(associatedProjectTag);
-}
-
 function removeItemFromTodayArrays(tag) {
   const todayArrays = [projectsDueTodayArray, tasksDueTodayArray, dueTodayArray];
 
@@ -152,14 +143,10 @@ function removeItemFromAllArrays(tag) {
   const taskType = determineTaskType(tag);
 
   if (taskType === 'inbox') {
-    /* return removeItemFromInbox(tag); */
     removeItemFromInbox(tag);
     taskSubject.updateDecrement('inbox', inboxTaskArray);
   } else if (taskType === 'project') {
-    /* return removeItemFromProjects(tag); */
     removeItemFromProjects(tag);
-  } else {
-    removeItemFromAssociatedProject(tag);
   }
 }
 
@@ -297,11 +284,12 @@ export function assignItemName() {
 
 function addItemToLocalStorage(object) {
   if (storageAvailable('localStorage')) {
-    /* const itemName = assignItemName(); */
     const jsonObj = JSON.stringify(object);
 
     localStorage.setItem(object.itemTag, jsonObj);
   } else {
+    alert(storageAvailable('localStorage'));
+
     // eslint-disable-next-line no-console
     console.log('Error! No local storage available.');
   }
@@ -436,9 +424,7 @@ function addItemToLocalArray(object) {
 
     if (object.classname === 'Project') {
       projectArray.push(object);
-      console.log(`projectArray: ${projectArray}`);
     } else if (object.classname === 'Task') {
-      /* inboxTaskArray.push(object); */
       if (object.associatedProject === undefined) {
         inboxTaskArray.push(object);
         taskSubject.updateIncrement('inbox', inboxTaskArray);
@@ -447,6 +433,8 @@ function addItemToLocalArray(object) {
       completedArray.push(object);
     }
   } else {
+    alert(storageAvailable('localStorage'));
+
     // eslint-disable-next-line no-console
     console.log('Error! No local storage available.');
   }

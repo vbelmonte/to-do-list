@@ -1,4 +1,4 @@
-import createTaskDiv from './task-templates';
+import { createTaskDiv, createProjectDiv } from './task-templates';
 import loadProjectPage from './project-page';
 
 function createPageHeadline(pageName) {
@@ -74,7 +74,12 @@ function createTaskList(taskArray, page) {
     taskListDiv.appendChild(imgDiv);
   } else {
     for (let i = 0; i < taskArray.length; i += 1) {
-      const task = createTaskDiv(taskArray[i]);
+      let task;
+      if (taskArray[i].classname === 'Task') {
+        task = createTaskDiv(taskArray[i]);
+      } else {
+        task = createProjectDiv(taskArray[i]);
+      }
       taskListDiv.appendChild(task);
     }
   }
@@ -151,7 +156,13 @@ function addOrRemoveEmptyImg() {
 
 function updateTaskList(taskObj) {
   const taskListDiv = document.getElementsByClassName('task-list')[0];
-  const task = createTaskDiv(taskObj);
+
+  let task;
+  if (taskObj.classname === 'Task') {
+    task = createTaskDiv(taskObj);
+  } else {
+    task = createProjectDiv(taskObj);
+  }
 
   taskListDiv.appendChild(task);
 
@@ -194,7 +205,7 @@ export function updateTaskListEdit(obj, array) {
 
 export function updateProjectList(projectObj) {
   const taskListDiv = document.getElementsByClassName('task-list')[0];
-  const project = createTaskDiv(projectObj);
+  const project = createProjectDiv(projectObj);
 
   if (taskListDiv.id === 'empty-list') {
     taskListDiv.removeAttribute('id');

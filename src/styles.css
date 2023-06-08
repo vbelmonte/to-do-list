@@ -66,6 +66,7 @@ table {
     --uranian-blue: #BDDFFF;
     --light-blue: #D0E0EF;
     --green: #72B01D;
+    --red: #D62828;
     --orange: #F77F00;
     --dark-orange: #DA7000;
     --light-green: #DFECD4;
@@ -637,6 +638,18 @@ footer p {
 
   .high-p {
     background-color: var(--light-red);
+  }
+
+  .low-p-project {
+    border: 0.0625rem solid var(--light-blue);
+  }
+
+  .med-p-project {
+    border: 0.0625rem solid var(--orange);
+  }
+
+  .high-p-project {
+    border: 0.0625rem solid var(--red);
   }
 
   .task-blue {

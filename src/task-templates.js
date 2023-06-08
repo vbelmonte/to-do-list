@@ -2,7 +2,7 @@ import { format, parseISO } from 'date-fns';
 import { markAsComplete } from './localstorage';
 import { createEditForm, createDeleteForm } from './form-template';
 
-function assignPriorityClass(priority) {
+function assignPriorityClassTask(priority) {
   if (priority === 'low') {
     return 'low-p';
   }
@@ -11,6 +11,17 @@ function assignPriorityClass(priority) {
   }
 
   return 'high-p';
+}
+
+function assignPriorityClassProject(priority) {
+  if (priority === 'low') {
+    return 'low-p-project';
+  }
+  if (priority === 'medium') {
+    return 'med-p-project';
+  }
+
+  return 'high-p-project';
 }
 
 function assignPriorityImage(priority) {
@@ -245,11 +256,29 @@ function createBottomRowTaskDiv(taskObject, colorClass) {
   return bottomDiv;
 }
 
-export default function createTaskDiv(taskObject) {
+export function createProjectDiv(projObject) {
+  const projectDiv = document.createElement('div');
+  const projectTag = projObject.itemTag;
+  projectDiv.classList.add('task');
+  projectDiv.classList.add(assignPriorityClassProject(projObject.priority));
+  projectDiv.classList.add(projectTag);
+
+  const colorClass = assignPriorityColorClass(projObject.priority);
+
+  const topRow = createTopRowTaskDiv(projObject, colorClass);
+  projectDiv.appendChild(topRow);
+
+  const bottomRow = createBottomRowTaskDiv(projObject, colorClass);
+  projectDiv.appendChild(bottomRow);
+
+  return projectDiv;
+}
+
+export function createTaskDiv(taskObject) {
   const taskDiv = document.createElement('div');
   const taskTag = taskObject.itemTag;
   taskDiv.classList.add('task');
-  taskDiv.classList.add(assignPriorityClass(taskObject.priority));
+  taskDiv.classList.add(assignPriorityClassTask(taskObject.priority));
   taskDiv.classList.add(taskTag);
 
   const colorClass = assignPriorityColorClass(taskObject.priority);

@@ -87,8 +87,4 @@ export default class Project {
     const index = this.inProgressTaskArray.map().indexOf(task.itemTag);
     this.inProgressTaskArray[index] = task;
   }
-
-  retrieveProjectSubTask(itemTag) {
-    
-  }
 }

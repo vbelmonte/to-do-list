@@ -66,6 +66,9 @@ table {
     --uranian-blue: #BDDFFF;
     --light-blue: #D0E0EF;
     --green: #72B01D;
+    --red: #D62828;
+    --orange: #F77F00;
+    --dark-orange: #DA7000;
     --light-green: #DFECD4;
     --light-orange: #FFDCB8;
     --light-red: #FFDDDD;
@@ -218,6 +221,28 @@ button, .button {
     color: var(--dark-blue);
 }
 
+.btn-orange-outline {
+  background-color: transparent;
+  color: var(--orange);
+
+  border: 1px solid var(--orange);
+  border-width: 0.0625rem;
+}
+
+.btn-orange-outline:hover {
+  border: 1px solid var(--dark-orange);
+  color: var(--dark-orange);
+}
+
+.btn-orange {
+  background-color: var(--orange);
+  color: var(--white);
+}
+
+.btn-orange:hover {
+  background-color: var(--dark-orange);
+}
+
 .btn-plus {
     padding: 1rem;
     width: 100%;
@@ -233,9 +258,14 @@ button img {
 /** CATEGORY PROPERTIES **/
 .category {
   border-radius: 2rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 0.75rem;
   color: var(--gray);
   transition: color 0.1s linear;
+}
+
+.category h3 {
+  font-family: 'Inter Medium';
+  line-height: 1rem;
 }
 
 .category:hover {
@@ -545,7 +575,7 @@ footer p {
 
 
 
-/** DONT KNOW WHAT TO DO WITH THIS YET **/
+/** PAGE TEMPLATE PROPERTIES **/
 
 .module-container {
     display: flex;
@@ -613,6 +643,18 @@ footer p {
 
   .high-p {
     background-color: var(--light-red);
+  }
+
+  .low-p-project {
+    border: 0.0625rem solid var(--light-blue);
+  }
+
+  .med-p-project {
+    border: 0.0625rem solid var(--orange);
+  }
+
+  .high-p-project {
+    border: 0.0625rem solid var(--red);
   }
 
   .task-blue {
@@ -788,6 +830,41 @@ footer p {
   color: var(--blue)
 }
 
+
+
+
+/** WARNING MODAL PROPERTIES **/
+img.warning {
+  height: 2rem;
+  filter: invert(59%) sepia(22%) saturate(6223%) hue-rotate(1deg) brightness(95%) contrast(106%);
+}
+
+.warning-modal {
+  background-color: var(--lightest-gray);
+  border-radius: 0.25rem;
+  padding: 2rem;
+  flex-basis: 37rem;
+  margin: 1rem;
+}
+
+.warning-modal form {
+  gap: 2rem;
+}
+
+.warning-modal h5 {
+  font-size: 1.5rem;
+  color: var(--black);
+}
+
+.warning-modal .flex {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.warning-modal b {
+  font-weight: bold;
+}
 
 
 

@@ -100,15 +100,6 @@ function removeItemFromProjects(tag) {
   }
 }
 
-function removeItemFromAssociatedProject(tag) {
-  const indexA = allItemsArray.map((i) => i.itemTag).indexOf(tag);
-  const taskObject = allItemsArray[indexA];
-
-  const associatedProjectTag = taskObject.associatedProject;
-
-  const indexB = projectArray.map((i) => i.itemTag).indexOf(associatedProjectTag);
-}
-
 function removeItemFromTodayArrays(tag) {
   const todayArrays = [projectsDueTodayArray, tasksDueTodayArray, dueTodayArray];
 
@@ -152,14 +143,10 @@ function removeItemFromAllArrays(tag) {
   const taskType = determineTaskType(tag);
 
   if (taskType === 'inbox') {
-    /* return removeItemFromInbox(tag); */
     removeItemFromInbox(tag);
     taskSubject.updateDecrement('inbox', inboxTaskArray);
   } else if (taskType === 'project') {
-    /* return removeItemFromProjects(tag); */
     removeItemFromProjects(tag);
-  } else {
-    removeItemFromAssociatedProject(tag);
   }
 }
 
@@ -181,6 +168,48 @@ function updateLocalStorage(obj) {
   const jsonObj = JSON.stringify(obj);
 
   localStorage.setItem(keyName, jsonObj);
+}
+
+function removeFromLocalStorage(obj) {
+  const keyName = obj.itemTag;
+  localStorage.removeItem(keyName);
+}
+
+function removeSubTasksFromArrays(obj) {
+  if (obj.classname === 'Project') {
+    const inProgress = obj.inProgressTaskArray;
+    const completed = obj.completedTaskArray;
+
+    for (let i = 0; i < inProgress.length; i += 1) {
+      const tagID = inProgress[i].itemTag;
+      removeItemFromAllArrays(tagID);
+      removeFromLocalStorage(inProgress[i]);
+    }
+    for (let k = 0; k < completed.length; k += 1) {
+      const tagID = completed[k].itemTag;
+      removeItemFromAllArrays(tagID);
+      removeFromLocalStorage(completed[k]);
+    }
+  }
+}
+
+function removeSubTaskFromProject(obj) {
+  if (obj.associatedProject !== undefined) {
+    const index = projectArray.map((i) => i.itemTag).indexOf(obj.associatedProject);
+    const inProgress = projectArray[index].inProgressTaskArray;
+    const completed = projectArray[index].completedTaskArray;
+    const indexInProgress = inProgress.map((i) => i.itemTag).indexOf(obj.itemTag);
+    const indexCompleted = completed.map((i) => i.itemTag).indexOf(obj.itemTag);
+
+    if (indexInProgress >= 0) {
+      projectArray[index].inProgressTaskArray.splice(indexInProgress, 1)[0];
+    }
+    if (indexCompleted >= 0) {
+      projectArray[index].completedTaskArray.splice(indexCompleted, 1)[0];
+    }
+
+    updateLocalStorage(projectArray[index]);
+  }
 }
 
 function removeItemFromProjectInProgressArray(obj) {
@@ -255,11 +284,12 @@ export function assignItemName() {
 
 function addItemToLocalStorage(object) {
   if (storageAvailable('localStorage')) {
-    /* const itemName = assignItemName(); */
     const jsonObj = JSON.stringify(object);
 
     localStorage.setItem(object.itemTag, jsonObj);
   } else {
+    alert(storageAvailable('localStorage'));
+
     // eslint-disable-next-line no-console
     console.log('Error! No local storage available.');
   }
@@ -394,9 +424,7 @@ function addItemToLocalArray(object) {
 
     if (object.classname === 'Project') {
       projectArray.push(object);
-      console.log(`projectArray: ${projectArray}`);
     } else if (object.classname === 'Task') {
-      /* inboxTaskArray.push(object); */
       if (object.associatedProject === undefined) {
         inboxTaskArray.push(object);
         taskSubject.updateIncrement('inbox', inboxTaskArray);
@@ -405,6 +433,8 @@ function addItemToLocalArray(object) {
       completedArray.push(object);
     }
   } else {
+    alert(storageAvailable('localStorage'));
+
     // eslint-disable-next-line no-console
     console.log('Error! No local storage available.');
   }
@@ -431,6 +461,16 @@ export function updateItemToStorage(object) {
   const updateResultArray = updateWeekOrDay(object);
 
   return updateResultArray;
+}
+
+export function deleteItemFromStorage(object) {
+  const tagID = object.itemTag;
+
+  removeItemFromAllArrays(tagID);
+  removeSubTasksFromArrays(object);
+  removeSubTaskFromProject(object);
+  removeItemFromProjectNavColumn(object);
+  removeFromLocalStorage(object);
 }
 
 export default function addItemToStorage(object) {

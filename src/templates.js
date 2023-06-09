@@ -1,4 +1,4 @@
-import createTaskDiv from './task-templates';
+import { createTaskDiv, createProjectDiv } from './task-templates';
 import loadProjectPage from './project-page';
 
 function createPageHeadline(pageName) {
@@ -74,7 +74,12 @@ function createTaskList(taskArray, page) {
     taskListDiv.appendChild(imgDiv);
   } else {
     for (let i = 0; i < taskArray.length; i += 1) {
-      const task = createTaskDiv(taskArray[i]);
+      let task;
+      if (taskArray[i].classname === 'Task') {
+        task = createTaskDiv(taskArray[i]);
+      } else {
+        task = createProjectDiv(taskArray[i]);
+      }
       taskListDiv.appendChild(task);
     }
   }
@@ -151,7 +156,13 @@ function addOrRemoveEmptyImg() {
 
 function updateTaskList(taskObj) {
   const taskListDiv = document.getElementsByClassName('task-list')[0];
-  const task = createTaskDiv(taskObj);
+
+  let task;
+  if (taskObj.classname === 'Task') {
+    task = createTaskDiv(taskObj);
+  } else {
+    task = createProjectDiv(taskObj);
+  }
 
   taskListDiv.appendChild(task);
 
@@ -169,7 +180,6 @@ export function updateTaskListEdit(obj, array) {
   const currentPage = document.getElementsByClassName('module-container')[0].id;
 
   if (currentPage === 'inbox' || currentPage === 'my-projects' || currentPage === 'project-page') {
-    // dont remove or add, just modify
     removeItemFromTaskList(obj);
     updateTaskList(obj);
   } else if (currentPage === 'today') {
@@ -194,7 +204,7 @@ export function updateTaskListEdit(obj, array) {
 
 export function updateProjectList(projectObj) {
   const taskListDiv = document.getElementsByClassName('task-list')[0];
-  const project = createTaskDiv(projectObj);
+  const project = createProjectDiv(projectObj);
 
   if (taskListDiv.id === 'empty-list') {
     taskListDiv.removeAttribute('id');
@@ -203,6 +213,11 @@ export function updateProjectList(projectObj) {
   }
 
   taskListDiv.appendChild(project);
+}
+
+export function deleteItem(obj) {
+  removeItemFromTaskList(obj);
+  addOrRemoveEmptyImg();
 }
 
 export function updateProjectNavColumn(projectObj) {
@@ -232,26 +247,6 @@ export function toggleSideMenu() {
 
   navContent.classList.toggle('visible');
   sideColumn.classList.toggle('full-width');
-}
-
-/** BUTTON TEMPLATES * */
-
-function createSolidTextButton(text) {
-  const button = document.createElement('button');
-
-  button.classList.add('btn-solid');
-  button.textContent = text;
-
-  return button;
-}
-
-function createOutlineTextButton(text) {
-  const button = document.createElement('button');
-
-  button.classList.add('btn-outline');
-  button.textContent = text;
-
-  return button;
 }
 
 function createSolidPlusButton() {
@@ -348,7 +343,6 @@ export function updateTaskCounterButton(type, number) {
       return 'increment';
     }
   } else if (number === 0) {
-    // remove the counter
     removeTaskCounterButton(type);
     return 'decrement';
   } else {

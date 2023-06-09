@@ -1,4 +1,5 @@
 @media screen and (max-width: 784px) {
+
     /** MAIN CONTAINER PROPERTIES **/
     main {
         margin-left: 5rem;
@@ -38,6 +39,7 @@
     }
 
 
+
     /** TASK MODULE PROPERTIES **/
     .task .icons .mobile {
         display: block;
@@ -70,6 +72,8 @@
         height: 20rem;
     }
 }
+
+
 
 @media screen and (max-width: 425px) {
     

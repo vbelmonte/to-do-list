@@ -258,9 +258,14 @@ button img {
 /** CATEGORY PROPERTIES **/
 .category {
   border-radius: 2rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 0.75rem;
   color: var(--gray);
   transition: color 0.1s linear;
+}
+
+.category h3 {
+  font-family: 'Inter Medium';
+  line-height: 1rem;
 }
 
 .category:hover {

@@ -5,11 +5,21 @@ import {
 import createForm from './form-template';
 
 import { projectArray } from './localstorage';
+import loadProjectPage from './project-page';
 
 export function loadProjectsNavList() {
   clearProjectsNavList();
 
   populateProjectsNavList(projectArray);
+}
+
+export function updateProjectLink(projectObj) {
+  const index = projectArray.map((i) => i.itemTag).indexOf(projectObj.itemTag);
+  const link = document.getElementById(`nav-${projectObj.itemTag}`);
+
+  link.addEventListener('click', () => {
+    loadProjectPage(projectArray[index]);
+  });
 }
 
 export default function loadProjects() {

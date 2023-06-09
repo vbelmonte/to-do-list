@@ -6,6 +6,7 @@ import addItemToStorage, {
 import {
   updateTaskList, updateTaskListEdit, updateProjectList, updateProjectNavColumn, deleteItem,
 } from './templates';
+import { updateProjectLink } from './projectsfolder';
 
 export function processTaskForm(event) {
   event.preventDefault();
@@ -88,6 +89,7 @@ export function processModifyProjectForm(event, projObj) {
   const updateResultArray = updateItemToStorage(editedProjectObj);
 
   updateTaskListEdit(editedProjectObj, updateResultArray);
+  updateProjectLink(editedProjectObj);
 }
 
 export function processModifyProjectTaskForm(event, taskObj) {
